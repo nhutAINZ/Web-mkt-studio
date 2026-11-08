@@ -1,0 +1,13 @@
+{
+  "name": "toy-ai-animation-agency",
+  "displayName": "Toy AI Animation Agency",
+  "version": "1.0.0",
+  "description": "Hệ thống Studio AI Agency làm phim hoạt hình quảng cáo đồ chơi trọn gói: 3 phòng ban (Marketing, Sales, IT), 49 Agents chuyên sâu và quy trình tự động hóa tích hợp.",
+  "author": "ToyStudio AI Orchestrator",
+  "suggestedPrompts": [
+    "Kích hoạt workflow make-clip sản xuất phim hoạt hình đồ chơi 3D",
+    "Kích hoạt workflow close-deal tạo proposal và chốt deal khách hàng đồ chơi",
+    "Khởi chạy công cụ ToyStudio AI Hub để quản lý phân cảnh và duyệt video"
+  ]
+}
+

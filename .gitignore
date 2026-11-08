@@ -1,0 +1,11 @@
+# Ignore upstream temp repository
+agency-agents-upstream/
+
+# Environment and secrets
+.env
+*.env
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db

@@ -1,0 +1,57 @@
+# MARKETING & CLIP AI
+content-creator
+visual-storyteller
+image-prompt-engineer
+brand-guardian
+whimsy-injector
+narrative-designer
+technical-artist
+tiktok-strategist
+instagram-curator
+social-media-strategist
+video-optimization-specialist
+short-video-editing-coach
+carousel-growth-engine
+paid-social-strategist
+ad-creative-strategist
+focus-music-architect
+legal-compliance-checker
+
+# SALES
+outbound-strategist
+offer-lead-gen-strategist
+discovery-coach
+deal-strategist
+proposal-strategist
+pricing-analyst
+pipeline-analyst
+account-strategist
+customer-success-manager
+
+# IT
+software-architect
+frontend-developer
+backend-architect
+rapid-prototyper
+ui-designer
+ux-architect
+ux-researcher
+workflow-architect
+ai-engineer
+video-streaming-engineer
+data-visualization-engineer
+mcp-builder
+automation-governance-architect
+devops-automator
+technical-writer
+code-reviewer
+ai-generated-code-security-auditor
+evidence-collector
+reality-checker
+senior-project-manager
+
+# ĐIỀU PHỐI
+agents-orchestrator
+studio-producer
+project-shepherd
+
