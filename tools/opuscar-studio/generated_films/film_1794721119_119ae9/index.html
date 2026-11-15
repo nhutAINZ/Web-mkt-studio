@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>tạo video 60s quảng cáo lego - Lemo OpusCar Film</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #070709; color: #fff; overflow: hidden; display: flex; align-items: center; justify-content: center; width: 100vw; height: 100vh; font-family: monospace; }
+    canvas { width: 100%; height: 100%; object-contain: contain; }
+    #hud { position: absolute; top: 16px; left: 16px; background: rgba(0,0,0,0.7); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.1); font-size: 12px; pointer-events: none; }
+  </style>
+</head>
+<body>
+  <div id="hud">
+    <div style="color: #f59e0b; font-weight: bold;">OPUSCAR RENDER: BRICK-TOY</div>
+    <div id="tc" style="opacity: 0.8;">TC: 00:00.00</div>
+  </div>
+  <canvas id="c" width="1920" height="1080"></canvas>
+  <script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    const tc = document.getElementById('tc');
+
+    window.DUR = 30;
+    window.READY = true;
+
+    window.render = function(t) {
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+
+      // Dark background with gradient
+      const grad = ctx.createRadialGradient(w/2, h/2, 50, w/2, h/2, 800);
+      grad.addColorStop(0, '#16161f');
+      grad.addColorStop(1, '#070709');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      const style = "brick-toy";
+      const p = (t % 5) / 5;
+
+      if (style === 'brick-toy') {
+        // Three.js simulated Lego bricks stop motion
+        ctx.save();
+        ctx.translate(w/2, h/2);
+        for (let i = 0; i < 16; i++) {
+          const ang = (i / 16) * Math.PI * 2 + p * Math.PI;
+          const rad = 180 + Math.sin(t * 3 + i) * 60;
+          const x = Math.cos(ang) * rad;
+          const y = Math.sin(ang) * rad;
+          ctx.fillStyle = i % 2 === 0 ? '#ef4444' : (i % 3 === 0 ? '#3b82f6' : '#f59e0b');
+          ctx.fillRect(x - 45, y - 30, 90, 60);
+          ctx.fillStyle = 'rgba(255,255,255,0.4)';
+          ctx.beginPath();
+          ctx.arc(x - 22, y - 15, 10, 0, Math.PI * 2);
+          ctx.arc(x + 22, y - 15, 10, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      } else if (style === 'teardown' || style === 'blueprint') {
+        // Exploded CAD view wireframe
+        ctx.save();
+        ctx.translate(w/2, h/2);
+        ctx.strokeStyle = '#f59e0b';
+        ctx.lineWidth = 3;
+        ctx.rotate(t * 0.4);
+        ctx.strokeRect(-180, -180, 360, 360);
+        ctx.strokeRect(-260, -90, 520, 180);
+        ctx.beginPath();
+        ctx.arc(0, 0, 140, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.fillStyle = '#f59e0b';
+        ctx.font = '24px monospace';
+        ctx.fillText('CAD EXPLODED: PRECISION TOLERANCE 0.01mm', -250, 240);
+        ctx.restore();
+      } else {
+        // Geometric dynamic motion
+        ctx.save();
+        ctx.translate(w/2, h/2);
+        ctx.fillStyle = '#f59e0b';
+        ctx.beginPath();
+        ctx.arc(0, 0, 150 + Math.sin(t * 4) * 30, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+
+      // Title overlay
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 36px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText("tạo video 60s quảng cáo lego", w/2, h - 80);
+
+      // Timecode
+      const m = Math.floor(t / 60);
+      const s = Math.floor(t % 60);
+      const ms = Math.floor((t % 1) * 100);
+      tc.innerText = `TC: ${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}.${String(ms).padStart(2,'0')} / 30s`;
+    };
+
+    // Auto-loop preview inside browser
+    let start = performance.now();
+    function loop() {
+      const now = performance.now();
+      const elapsed = ((now - start) / 1000) % window.DUR;
+      window.render(elapsed);
+      requestAnimationFrame(loop);
+    }
+    loop();
+  </script>
+</body>
+</html>

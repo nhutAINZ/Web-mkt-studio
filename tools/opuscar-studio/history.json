@@ -1,5 +1,149 @@
 [
   {
+    "id": "film_1794721482_e30762",
+    "title": "tạo video 60s quảng cáo lego",
+    "prompt": "tạo video 60s quảng cáo lego",
+    "style": "brick-toy",
+    "aspect": "16:9",
+    "duration": 60,
+    "draft": false,
+    "material": "",
+    "filmUrl": "/generated_films/film_1794721482_e30762/index.html",
+    "renderCmd": "cd ~/lemo-opuscar\nnode core/render/still.mjs \"films/film_1794721482_e30762\" 1.5 3 --style \"brick-toy\" --ar \"16:9\"\n./build.sh --fps 30 --crf 18 --output \"films/film_1794721482_e30762/output_brick-toy_16x9.mp4\"",
+    "shots": [
+      {
+        "num": 1,
+        "title": "Shot 1: Mở Đầu Đại Cảnh (Establishing Shot)",
+        "time": "00:00 - 00:05",
+        "camera": "Dolly In 4K",
+        "visual_prompt": "cinematic wide establishing shot of lego toy set in sunny bright living room, photorealistic 8k commercial, depth of field",
+        "vo": "Nữ truyền cảm: Mỗi buổi sáng, một thế giới diệu kỳ đang chờ bé khám phá...",
+        "img": "https://image.pollinations.ai/prompt/cinematic%20wide%20establishing%20shot%20of%20lego%20toy%20set%20in%20sunny%20bright%20living%20room%2C%20photorealistic%208k%20commercial%2C%20depth%20of%20field?width=1280&height=720&nologo=true&seed=73560",
+        "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80"
+      },
+      {
+        "num": 2,
+        "title": "Shot 2: Cơ Chế Cơ Khí & Biến Hình (Mechanism)",
+        "time": "00:05 - 00:10",
+        "camera": "Orbit 360° Macro",
+        "visual_prompt": "macro shot of lego toy mechanism assembling and transforming in mid-air, studio lighting, plastic reflection 8k",
+        "vo": "Nữ truyền cảm: Tự động bung cánh lượn biến hình thành chiến binh mạnh mẽ...",
+        "img": "https://image.pollinations.ai/prompt/macro%20shot%20of%20lego%20toy%20mechanism%20assembling%20and%20transforming%20in%20mid-air%2C%20studio%20lighting%2C%20plastic%20reflection%208k?width=1280&height=720&nologo=true&seed=73561",
+        "fallback_img": "https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=1280&q=80"
+      },
+      {
+        "num": 3,
+        "title": "Shot 3: Hành Động Tốc Độ (Dynamic Action)",
+        "time": "00:10 - 00:18",
+        "camera": "Dutch Tilt 124 BPM",
+        "visual_prompt": "high speed dynamic action shot of lego racing through futuristic obstacle course, glowing tracks, motion blur 8k",
+        "vo": "Âm nhạc: Trống snare dồn dập, tiếng vút gió sound design sinh động...",
+        "img": "https://image.pollinations.ai/prompt/high%20speed%20dynamic%20action%20shot%20of%20lego%20racing%20through%20futuristic%20obstacle%20course%2C%20glowing%20tracks%2C%20motion%20blur%208k?width=1280&height=720&nologo=true&seed=73562",
+        "fallback_img": "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=1280&q=80"
+      },
+      {
+        "num": 4,
+        "title": "Shot 4: Cảm Xúc Em Bé & Phụ Huynh (Reaction)",
+        "time": "00:18 - 00:22",
+        "camera": "Medium Close-up Warm",
+        "visual_prompt": "joyful 6 year old child playing happily with lego toy next to smiling parents, warm natural lighting, cinematic portrait 8k",
+        "vo": "Nữ truyền cảm: Nuôi dưỡng trí tưởng tượng không giới hạn cho thiên tài nhí...",
+        "img": "https://image.pollinations.ai/prompt/joyful%206%20year%20old%20child%20playing%20happily%20with%20lego%20toy%20next%20to%20smiling%20parents%2C%20warm%20natural%20lighting%2C%20cinematic%20portrait%208k?width=1280&height=720&nologo=true&seed=73563",
+        "fallback_img": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=1280&q=80"
+      },
+      {
+        "num": 5,
+        "title": "Shot 5: Chi Tiết Phụ Kiện & An Toàn (Showcase)",
+        "time": "00:22 - 00:26",
+        "camera": "Top-down Flatlay",
+        "visual_prompt": "flatlay top down view of lego accessories packaging box and parts, product photography, certified safe clean 8k",
+        "vo": "Nữ tự tin: Chất liệu nhựa nguyên sinh ABS an toàn 100% không BPA đạt chuẩn quốc tế...",
+        "img": "https://image.pollinations.ai/prompt/flatlay%20top%20down%20view%20of%20lego%20accessories%20packaging%20box%20and%20parts%2C%20product%20photography%2C%20certified%20safe%20clean%208k?width=1280&height=720&nologo=true&seed=73564",
+        "fallback_img": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1280&q=80"
+      },
+      {
+        "num": 6,
+        "title": "Shot 6: Kêu Gọi Mua Hàng & Khuyến Mãi (CTA)",
+        "time": "00:26 - 00:30",
+        "camera": "Hero Center Glow",
+        "visual_prompt": "hero product shot of complete lego toy standing on glossy display pedestal, glowing neon logo, commercial poster 8k",
+        "vo": "Nữ tự tin: Đặt hàng ngay hôm nay nhận ưu đãi giảm 30% và quà tặng hấp dẫn!",
+        "img": "https://image.pollinations.ai/prompt/hero%20product%20shot%20of%20complete%20lego%20toy%20standing%20on%20glossy%20display%20pedestal%2C%20glowing%20neon%20logo%2C%20commercial%20poster%208k?width=1280&height=720&nologo=true&seed=73565",
+        "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80"
+      }
+    ],
+    "timestamp": "2026-11-15 12:44:42"
+  },
+  {
+    "id": "film_1794721119_119ae9",
+    "title": "tạo video 60s quảng cáo lego",
+    "prompt": "tạo video 60s quảng cáo lego",
+    "style": "brick-toy",
+    "aspect": "16:9",
+    "duration": 30,
+    "draft": false,
+    "material": null,
+    "filmUrl": "/generated_films/film_1794721119_119ae9/index.html",
+    "renderCmd": "cd ~/lemo-opuscar\nnode core/render/still.mjs \"films/film_1794721119_119ae9\" 1.5 3 --style \"brick-toy\" --ar \"16:9\"\n./build.sh --fps 30 --crf 18 --output \"films/film_1794721119_119ae9/output_brick-toy_16x9.mp4\"",
+    "shots": [
+      {
+        "num": 1,
+        "title": "Shot 1: Mở Đầu Đại Cảnh (Establishing Shot)",
+        "time": "00:00 - 00:05",
+        "camera": "Dolly In 4K",
+        "desc": "Bối cảnh rực rỡ ánh sáng, tạo video 60s quảng cáo lego... xuất hiện ấn tượng.",
+        "vo": "Nữ truyền cảm: Mỗi buổi sáng là một cuộc phiêu lưu kỳ thú...",
+        "img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "num": 2,
+        "title": "Shot 2: Cơ Chế Cơ Khí & Biến Hình (Mechanism)",
+        "time": "00:05 - 00:10",
+        "camera": "Orbit 360° Macro",
+        "desc": "Các mảnh ghép chuyển động nổ tung, tự động lắp ghép ăn khớp nhịp giật stop-motion.",
+        "vo": "Nữ truyền cảm: Tự động bung cánh lượn biến hình thành chiến binh...",
+        "img": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "num": 3,
+        "title": "Shot 3: Hành Động Tốc Độ (Dynamic Action)",
+        "time": "00:10 - 00:18",
+        "camera": "Dutch Tilt 124 BPM",
+        "desc": "Lướt qua các chướng ngại vật mạo hiểm, ánh đèn LED rực rỡ xé toạc màn sương.",
+        "vo": "Âm thanh: Tiếng động cơ phản lực dồn dập, tiếng vút gió sinh động.",
+        "img": "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "num": 4,
+        "title": "Shot 4: Biểu Cảm Em Bé & Phụ Huynh (Emotion Reaction)",
+        "time": "00:18 - 00:22",
+        "camera": "Medium Close-up Warm",
+        "desc": "Bé 6 tuổi reo hò vỗ tay mừng rỡ, ánh mắt lấp lánh nụ cười rạng rỡ.",
+        "vo": "Nữ truyền cảm: Kích hoạt trí tưởng tượng vô hạn của con bạn.",
+        "img": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "num": 5,
+        "title": "Shot 5: Chi Tiết Sản Phẩm & An Toàn (Safety Showcase)",
+        "time": "00:22 - 00:26",
+        "camera": "Top-down Flatlay",
+        "desc": "Vật liệu nhựa nguyên sinh ABS chứng nhận CARU & COPPA an toàn 100%.",
+        "vo": "Nữ tự tin: Tiêu chuẩn an toàn Châu Âu và Mỹ nghiêm ngặt nhất.",
+        "img": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "num": 6,
+        "title": "Shot 6: Kêu Gọi Mua Hàng & Affiliate (Call To Action)",
+        "time": "00:26 - 00:30",
+        "camera": "Hero Center Glow",
+        "desc": "Sản phẩm tạo dáng anh hùng, logo và đường link mua hàng giảm giá 30%.",
+        "vo": "Nữ tự tin: Khám phá ngay trên TikTok Shop & Amazon với ưu đãi hôm nay!",
+        "img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "timestamp": "2026-11-15 12:38:39"
+  },
+  {
     "id": "film_1794720808_c206d0",
     "title": "Xe dua bien hinh robot lego",
     "prompt": "Xe dua bien hinh robot lego",

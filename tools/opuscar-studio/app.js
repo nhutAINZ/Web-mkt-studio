@@ -212,7 +212,7 @@ async function submitGenerateVideo() {
   const feed = document.getElementById('generation-feed');
   feed.style.display = 'flex';
 
-  // Inject User Message
+  // Inject User Message Card
   const userCardId = `user-msg-${Date.now()}`;
   feed.insertAdjacentHTML('beforeend', `
     <div id="${userCardId}" class="user-msg-card">
@@ -233,9 +233,9 @@ async function submitGenerateVideo() {
       <div class="ai-card" style="padding: 14px 18px;">
         <div style="display: flex; align-items: center; gap: 8px; font-size: 12px; font-family: monospace; color: #d1d1dc;">
           <span style="color: var(--accent-green); font-size: 14px;">⚙️</span>
-          <span>Gemini CLI & Lemo-OpusCar đang khởi tạo kịch bản & Three.js shaders...</span>
+          <span>Đang tìm kiếm & tạo hình ảnh cho 6 phân cảnh, ghép nối video...</span>
         </div>
-        <div style="width: 100%; height: 4px; background: #08080b; border-radius: 4px; overflow: hidden;">
+        <div style="width: 100%; height: 4px; background: #08080b; border-radius: 4px; overflow: hidden; margin-top: 6px;">
           <div style="width: 60%; height: 100%; background: var(--accent-green); animation: pulse 1s infinite alternate;"></div>
         </div>
       </div>
@@ -297,7 +297,7 @@ function renderCompletedFilmCard(film) {
           <div>
             <div class="ai-card-title">${film.title}</div>
             <div class="ai-card-meta">
-              Style: <strong style="color: var(--accent-green);">${film.style}</strong> &bull; ${film.duration}s (${film.aspect}) &bull; Gemini Verified
+              Style: <strong style="color: var(--accent-green);">${film.style}</strong> &bull; ${film.duration}s (${film.aspect}) &bull; AI Images Stitched
             </div>
           </div>
           <a href="${film.filmUrl}" target="_blank" class="btn-fullscreen">
@@ -305,20 +305,21 @@ function renderCompletedFilmCard(film) {
           </a>
         </div>
 
-        <!-- Interactive Lemo-OpusCar Canvas Viewport Player -->
+        <!-- Interactive Stitched Video Viewport Player -->
         <div class="video-viewport-frame" style="${film.aspect === '9:16' ? 'max-width: 280px; aspect-ratio: 9/16; margin: 0 auto;' : ''}">
           <iframe src="${film.filmUrl}"></iframe>
         </div>
 
-        <!-- 6 Cinematic Shots Breakdown -->
+        <!-- 6 Cinematic Shots Breakdown with Image Click to Replace -->
         <div style="display: flex; flex-direction: column; gap: 8px;">
-          <div style="font-size: 11px; font-weight: 700; color: #8e8e9f; font-family: monospace; text-transform: uppercase;">
-            6 Cinematic Shots (Kịch Bản Kỹ Thuật)
+          <div style="display: flex; align-items: center; justify-content: space-between; font-size: 11px; font-weight: 700; color: #8e8e9f; font-family: monospace; text-transform: uppercase;">
+            <span>6 Cinematic Shots (Nhấp vào ảnh để đổi ảnh bạn muốn)</span>
+            <span style="color: var(--accent-green); font-size: 10px;">Click to replace image</span>
           </div>
           <div class="shots-grid">
             ${film.shots.map(s => `
-              <div class="shot-card">
-                <img src="${s.img}" class="shot-img">
+              <div class="shot-card" onclick="replaceShotImage('${film.id}', ${s.num})" style="cursor: pointer;" title="Nhấp để tải ảnh khác thay thế cho Shot ${s.num}">
+                <img src="${s.img}" class="shot-img" id="shot-img-${film.id}-${s.num}">
                 <div class="shot-info">
                   <div class="shot-name">${s.title}</div>
                   <div class="shot-cam">${s.camera} &bull; ${s.time}</div>
@@ -343,6 +344,38 @@ function renderCompletedFilmCard(film) {
 
   const viewport = document.getElementById('center-viewport');
   viewport.scrollTo({ top: viewport.scrollHeight, behavior: 'smooth' });
+}
+
+// User can click on any shot to replace its image
+function replaceShotImage(filmId, shotNum) {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.onchange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = async (ev) => {
+      const dataUrl = ev.target.result;
+      const imgEl = document.getElementById(`shot-img-${filmId}-${shotNum}`);
+      if (imgEl) imgEl.src = dataUrl;
+
+      try {
+        await fetch('/api/update-shot-image', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ filmId, shotNum, img: dataUrl })
+        });
+        // Reload video player iframe
+        const iframe = document.querySelector(`#film-${filmId} iframe`);
+        if (iframe) iframe.src = iframe.src.split('?')[0] + '?t=' + Date.now();
+      } catch (err) {
+        alert('Lỗi cập nhật ảnh: ' + err.message);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+  input.click();
 }
 
 function showErrorCard(msg) {
