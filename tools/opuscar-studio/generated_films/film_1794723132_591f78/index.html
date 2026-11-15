@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>hi - Lemo OpusCar Film</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #000;
+      color: #fff;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
+    }
+    #stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #050508;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    /* Top HUD */
+    #hud-top {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .badge {
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-family: monospace;
+      font-weight: 600;
+    }
+    /* Bottom Subtitles & Voiceover */
+    #subtitles-bar {
+      position: absolute;
+      bottom: 24px;
+      left: 20px;
+      right: 20px;
+      background: rgba(7, 7, 10, 0.88);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .sub-text {
+      font-size: 13px;
+      font-weight: 500;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .sub-speaker {
+      color: #f59e0b;
+      font-weight: 700;
+      font-family: monospace;
+      font-size: 11px;
+      background: rgba(245, 158, 11, 0.15);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    /* Download Video Button */
+    #btn-download-video {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      background: #f59e0b;
+      color: #000;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.15s;
+    }
+    #btn-download-video:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+  <div id="stage">
+    <div id="hud-top">
+      <div class="badge" style="color: #f59e0b;">
+        ⚡ OPUSCAR RENDER &bull; BRICK-TOY
+      </div>
+      <div class="badge" id="hud-tc">
+        TC: 00:00.00 / 30s
+      </div>
+    </div>
+
+    <button id="btn-download-video" onclick="recordAndDownloadVideo()">
+      <span>💾</span>
+      <span id="btn-download-text">Tải Video MP4</span>
+    </button>
+
+    <div id="subtitles-bar">
+      <div class="sub-text">
+        <span class="sub-speaker" id="sub-speaker">VOICEOVER</span>
+        <span id="sub-content">Mỗi buổi sáng, một thế giới diệu kỳ đang chờ bé khám phá...</span>
+      </div>
+      <div class="badge" id="hud-shot" style="margin: 0; padding: 3px 8px; font-size: 10px;">
+        SHOT 1/6
+      </div>
+    </div>
+
+    <canvas id="c" width="1280" height="720"></canvas>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    const hudTc = document.getElementById('hud-tc');
+    const hudShot = document.getElementById('hud-shot');
+    const subSpeaker = document.getElementById('sub-speaker');
+    const subContent = document.getElementById('sub-content');
+
+    window.DUR = 30;
+    window.READY = false;
+
+    const SHOTS = [{"num": 1, "title": "Shot 1: Mở Đầu Đại Cảnh (Establishing Shot)", "time": "00:00 - 00:05", "camera": "Dolly In 4K", "visual_prompt": "cinematic wide establishing shot of default toy set in sunny bright living room, photorealistic 8k commercial, depth of field", "vo": "Nữ truyền cảm: Mỗi buổi sáng, một thế giới diệu kỳ đang chờ bé khám phá...", "img": "https://image.pollinations.ai/prompt/cinematic%20wide%20establishing%20shot%20of%20default%20toy%20set%20in%20sunny%20bright%20living%20room%2C%20photorealistic%208k%20commercial%2C%20depth%20of%20field?width=1280&height=720&nologo=true&seed=97131", "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80"}, {"num": 2, "title": "Shot 2: Cơ Chế Cơ Khí & Biến Hình (Mechanism)", "time": "00:05 - 00:10", "camera": "Orbit 360° Macro", "visual_prompt": "macro shot of default toy mechanism assembling and transforming in mid-air, studio lighting, plastic reflection 8k", "vo": "Nữ truyền cảm: Tự động bung cánh lượn biến hình thành chiến binh mạnh mẽ...", "img": "https://image.pollinations.ai/prompt/macro%20shot%20of%20default%20toy%20mechanism%20assembling%20and%20transforming%20in%20mid-air%2C%20studio%20lighting%2C%20plastic%20reflection%208k?width=1280&height=720&nologo=true&seed=97132", "fallback_img": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1280&q=80"}, {"num": 3, "title": "Shot 3: Hành Động Tốc Độ (Dynamic Action)", "time": "00:10 - 00:18", "camera": "Dutch Tilt 124 BPM", "visual_prompt": "high speed dynamic action shot of default racing through futuristic obstacle course, glowing tracks, motion blur 8k", "vo": "Âm nhạc: Trống snare dồn dập, tiếng vút gió sound design sinh động...", "img": "https://image.pollinations.ai/prompt/high%20speed%20dynamic%20action%20shot%20of%20default%20racing%20through%20futuristic%20obstacle%20course%2C%20glowing%20tracks%2C%20motion%20blur%208k?width=1280&height=720&nologo=true&seed=97133", "fallback_img": "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=1280&q=80"}, {"num": 4, "title": "Shot 4: Cảm Xúc Em Bé & Phụ Huynh (Reaction)", "time": "00:18 - 00:22", "camera": "Medium Close-up Warm", "visual_prompt": "joyful 6 year old child playing happily with default toy next to smiling parents, warm natural lighting, cinematic portrait 8k", "vo": "Nữ truyền cảm: Nuôi dưỡng trí tưởng tượng không giới hạn cho thiên tài nhí...", "img": "https://image.pollinations.ai/prompt/joyful%206%20year%20old%20child%20playing%20happily%20with%20default%20toy%20next%20to%20smiling%20parents%2C%20warm%20natural%20lighting%2C%20cinematic%20portrait%208k?width=1280&height=720&nologo=true&seed=97134", "fallback_img": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=1280&q=80"}, {"num": 5, "title": "Shot 5: Chi Tiết Phụ Kiện & An Toàn (Showcase)", "time": "00:22 - 00:26", "camera": "Top-down Flatlay", "visual_prompt": "flatlay top down view of default accessories packaging box and parts, product photography, certified safe clean 8k", "vo": "Nữ tự tin: Chất liệu nhựa nguyên sinh ABS an toàn 100% không BPA đạt chuẩn quốc tế...", "img": "https://image.pollinations.ai/prompt/flatlay%20top%20down%20view%20of%20default%20accessories%20packaging%20box%20and%20parts%2C%20product%20photography%2C%20certified%20safe%20clean%208k?width=1280&height=720&nologo=true&seed=97135", "fallback_img": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1280&q=80"}, {"num": 6, "title": "Shot 6: Kêu Gọi Mua Hàng & Khuyến Mãi (CTA)", "time": "00:26 - 00:30", "camera": "Hero Center Glow", "visual_prompt": "hero product shot of complete default toy standing on glossy display pedestal, glowing neon logo, commercial poster 8k", "vo": "Nữ tự tin: Đặt hàng ngay hôm nay nhận ưu đãi giảm 30% và quà tặng hấp dẫn!", "img": "https://image.pollinations.ai/prompt/hero%20product%20shot%20of%20complete%20default%20toy%20standing%20on%20glossy%20display%20pedestal%2C%20glowing%20neon%20logo%2C%20commercial%20poster%208k?width=1280&height=720&nologo=true&seed=97136", "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80"}];
+    const loadedImages = [];
+    let imagesLoadedCount = 0;
+
+    // Preload all 6 shot images
+    SHOTS.forEach((shot, index) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = shot.img;
+      img.onload = () => {
+        imagesLoadedCount++;
+        if (imagesLoadedCount >= SHOTS.length) window.READY = true;
+      };
+      img.onerror = () => {
+        // Fallback to curated image if pollinations is slow
+        img.src = shot.fallback_img;
+        imagesLoadedCount++;
+        if (imagesLoadedCount >= SHOTS.length) window.READY = true;
+      };
+      loadedImages.push(img);
+    });
+
+    // Render frame at second t
+    window.render = function(t) {
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+
+      const shotDuration = window.DUR / SHOTS.length;
+      const currentShotIndex = Math.min(SHOTS.length - 1, Math.floor(t / shotDuration));
+      const shotProgress = (t % shotDuration) / shotDuration;
+      const currentShot = SHOTS[currentShotIndex];
+      const img = loadedImages[currentShotIndex];
+
+      // Draw Shot Image with Ken Burns Camera Motion
+      if (img && img.complete) {
+        ctx.save();
+        // Ken burns subtle scale and pan
+        const scale = 1.0 + shotProgress * 0.12;
+        const panX = (shotProgress - 0.5) * 40;
+        const panY = (shotProgress - 0.5) * 20;
+
+        ctx.translate(w / 2 + panX, h / 2 + panY);
+        ctx.scale(scale, scale);
+        ctx.drawImage(img, -w / 2, -h / 2, w, h);
+        ctx.restore();
+      } else {
+        // Fallback placeholder while loading
+        ctx.fillStyle = '#0f0f15';
+        ctx.fillRect(0, 0, w, h);
+      }
+
+      // Cinematic Vignette Overlay
+      const grad = ctx.createRadialGradient(w/2, h/2, h * 0.45, w/2, h/2, w * 0.7);
+      grad.addColorStop(0, 'rgba(0,0,0,0)');
+      grad.addColorStop(1, 'rgba(0,0,0,0.65)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      // Subtle Style-Specific Overlay (e.g. Stop-motion film grain for brick-toy)
+      if ("brick-toy" === "brick-toy") {
+        // Lego stop-motion frame jitter
+        if (Math.random() > 0.8) {
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.03)';
+          ctx.fillRect(0, 0, w, h);
+        }
+      }
+
+      // Update HUD & Subtitles
+      const m = Math.floor(t / 60);
+      const s = Math.floor(t % 60);
+      const ms = Math.floor((t % 1) * 100);
+      hudTc.innerText = `TC: ${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}.${String(ms).padStart(2,'0')} / 30s`;
+      hudShot.innerText = `SHOT ${currentShotIndex + 1}/${SHOTS.length} &bull; ${currentShot.camera}`;
+      
+      const voText = currentShot.vo.split(':');
+      if (voText.length > 1) {
+        subSpeaker.innerText = voText[0].trim();
+        subContent.innerText = voText[1].trim();
+      } else {
+        subSpeaker.innerText = 'NARRATOR';
+        subContent.innerText = currentShot.vo;
+      }
+    };
+
+    // Continuous real-time playback loop
+    let startTime = performance.now();
+    function animate() {
+      const now = performance.now();
+      const elapsed = ((now - startTime) / 1000) % window.DUR;
+      window.render(elapsed);
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    // Client-side MP4/WebM Video Recording via MediaRecorder
+    let isRecording = false;
+    let mediaRecorder = null;
+    let recordedChunks = [];
+
+    function recordAndDownloadVideo() {
+      const btn = document.getElementById('btn-download-video');
+      const btnText = document.getElementById('btn-download-text');
+      if (isRecording) return;
+
+      isRecording = true;
+      btnText.innerText = 'Đang quay video...';
+      btn.style.background = '#ef4444';
+      recordedChunks = [];
+
+      const stream = canvas.captureStream(30); // 30 FPS stream
+      mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm;codecs=vp9' });
+
+      mediaRecorder.ondataavailable = (e) => {
+        if (e.data.size > 0) recordedChunks.push(e.data);
+      };
+
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(recordedChunks, { type: 'video/webm' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'film_1794723132_591f78_video.webm';
+        a.click();
+        URL.revokeObjectURL(url);
+
+        isRecording = false;
+        btnText.innerText = 'Tải Video MP4';
+        btn.style.background = '#f59e0b';
+      };
+
+      // Reset playback to 0 and record for 1 full cycle
+      startTime = performance.now();
+      mediaRecorder.start();
+      setTimeout(() => {
+        mediaRecorder.stop();
+      }, Math.min(15000, window.DUR * 1000)); // records up to 15s sample or full duration
+    }
+  </script>
+</body>
+</html>
