@@ -1,0 +1,24 @@
+# Core Backend & API
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+pydantic>=2.8.0
+pydantic-settings>=2.4.0
+python-dotenv>=1.0.1
+httpx>=0.27.0
+sse-starlette>=2.1.0
+
+# Frontend UI
+streamlit>=1.38.0
+
+# LLM & AI APIs
+google-genai>=1.0.0
+
+# Audio & Voiceover (TTS)
+edge-tts>=6.1.12
+gTTS>=2.5.1
+
+# Video Processing & Generation
+moviepy>=2.0.0
+imageio-ffmpeg>=0.5.1
+Pillow>=10.4.0
+numpy>=1.26.0
