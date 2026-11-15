@@ -1,0 +1,9 @@
+{
+  "name": "Robo-X Max",
+  "description": "Người máy chiến binh màu xanh dương viền vàng",
+  "reference_image": "https://image.pollinations.ai/prompt/blue%20gold%20toy%20robot?width=512&height=512",
+  "locked_traits": [
+    "Màu xanh viền vàng",
+    "Biểu tượng ngôi sao ở ngực"
+  ]
+}

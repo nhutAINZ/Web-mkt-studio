@@ -1,3 +1,7 @@
+# Dependencies
+node_modules/
+tools/opuscar-studio/node_modules/
+
 # Ignore upstream temp repository
 agency-agents-upstream/
 

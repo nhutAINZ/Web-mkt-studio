@@ -1,0 +1,15 @@
+{
+  "name": "opuscar-studio",
+  "version": "1.0.0",
+  "description": "Ứng dụng UX Studio đồ họa chuyên sâu được thiết kế chuẩn mực **Unslop Craft** (không màu tím gradient lòe loẹt, giao diện tĩnh lặng tập trung, màn hình canvas sáng duy nhất ở trung tâm) tích hợp thư viện **Lemo-OpusCar** (99 phong cách điện ảnh kết xuất bằng mã nguồn Three.js/Canvas) kết nối trực tiếp với **Gemini CLI** và **Antigravity**.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "zod": "^4.6.7"
+  }
+}

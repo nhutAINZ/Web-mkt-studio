@@ -1,5 +1,368 @@
 [
   {
+    "id": "film_1794724311_1ca3f9",
+    "title": "Tạo video 30s hoạt hình 3D về siêu nhân ",
+    "prompt": "Tạo video 30s hoạt hình 3D về siêu nhân robot giải cứu thành phố lego đồ chơi",
+    "style_lock": "3d-disney",
+    "aspect": "16:9",
+    "duration": 30,
+    "character_bible": {
+      "name": "Robo-X Max",
+      "description": "Người máy chiến binh màu xanh dương viền vàng bóng bẩy",
+      "reference_image": "https://image.pollinations.ai/prompt/blue%20gold%20toy%20robot%20hero?width=512&height=512",
+      "locked_traits": [
+        "Màu xanh viền vàng",
+        "Biểu tượng ngôi sao ở ngực",
+        "Mắt phát sáng led xanh"
+      ]
+    },
+    "shots": [
+      {
+        "num": 1,
+        "title": "Shot 1: Mở Đầu Đại Cảnh (Establishing Shot)",
+        "time": "00:00 - 00:05",
+        "camera": "Dolly In 4K",
+        "visual_prompt": "stunning 3D Pixar Disney style CGI animation, subsurface scattering, soft ambient lighting, high fidelity octane render 8k, wide establishing shot of [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng bóng bẩy, Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực, Mắt phát sáng led xanh] in bright modern living room, cinematic lighting",
+        "vo": "Nữ truyền cảm: Mỗi buổi sáng, một thế giới diệu kỳ đang chờ bé khám phá...",
+        "img": "https://image.pollinations.ai/prompt/stunning%203D%20Pixar%20Disney%20style%20CGI%20animation%2C%20subsurface%20scattering%2C%20soft%20ambient%20lighting%2C%20high%20fidelity%20octane%20render%208k%2C%20wide%20establishing%20shot%20of%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng%20b%C3%B3ng%20b%E1%BA%A9y%2C%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%2C%20M%E1%BA%AFt%20ph%C3%A1t%20s%C3%A1ng%20led%20xanh%5D%20in%20bright%20modern%20living%20room%2C%20cinematic%20lighting?width=1280&height=720&nologo=true&seed=114183",
+        "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 2,
+        "title": "Shot 2: Cơ Chế Cơ Khí & Biến Hình (Mechanism)",
+        "time": "00:05 - 00:10",
+        "camera": "Orbit 360° Macro",
+        "visual_prompt": "stunning 3D Pixar Disney style CGI animation, subsurface scattering, soft ambient lighting, high fidelity octane render 8k, macro shot of [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng bóng bẩy, Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực, Mắt phát sáng led xanh] transforming and assembling mechanical gears in mid-air",
+        "vo": "Nữ truyền cảm: Tự động bung cánh lượn biến hình thành chiến binh mạnh mẽ...",
+        "img": "https://image.pollinations.ai/prompt/stunning%203D%20Pixar%20Disney%20style%20CGI%20animation%2C%20subsurface%20scattering%2C%20soft%20ambient%20lighting%2C%20high%20fidelity%20octane%20render%208k%2C%20macro%20shot%20of%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng%20b%C3%B3ng%20b%E1%BA%A9y%2C%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%2C%20M%E1%BA%AFt%20ph%C3%A1t%20s%C3%A1ng%20led%20xanh%5D%20transforming%20and%20assembling%20mechanical%20gears%20in%20mid-air?width=1280&height=720&nologo=true&seed=13722",
+        "fallback_img": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 3,
+        "title": "Shot 3: Hành Động Kịch Tính (Dynamic Action)",
+        "time": "00:10 - 00:18",
+        "camera": "Dutch Tilt 124 BPM",
+        "visual_prompt": "stunning 3D Pixar Disney style CGI animation, subsurface scattering, soft ambient lighting, high fidelity octane render 8k, high speed dynamic action shot of [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng bóng bẩy, Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực, Mắt phát sáng led xanh] racing through futuristic obstacle track, motion blur",
+        "vo": "Âm nhạc: Trống snare dồn dập, tiếng vút gió sound design sinh động...",
+        "img": "https://image.pollinations.ai/prompt/stunning%203D%20Pixar%20Disney%20style%20CGI%20animation%2C%20subsurface%20scattering%2C%20soft%20ambient%20lighting%2C%20high%20fidelity%20octane%20render%208k%2C%20high%20speed%20dynamic%20action%20shot%20of%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng%20b%C3%B3ng%20b%E1%BA%A9y%2C%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%2C%20M%E1%BA%AFt%20ph%C3%A1t%20s%C3%A1ng%20led%20xanh%5D%20racing%20through%20futuristic%20obstacle%20track%2C%20motion%20blur?width=1280&height=720&nologo=true&seed=13723",
+        "fallback_img": "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 4,
+        "title": "Shot 4: Biểu Cảm Em Bé & Tương Tác (Reaction)",
+        "time": "00:18 - 00:22",
+        "camera": "Medium Close-up Warm",
+        "visual_prompt": "stunning 3D Pixar Disney style CGI animation, subsurface scattering, soft ambient lighting, high fidelity octane render 8k, joyful cute child smiling happily playing with [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng bóng bẩy, Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực, Mắt phát sáng led xanh], warm soft golden hour lighting",
+        "vo": "Nữ truyền cảm: Nuôi dưỡng trí tưởng tượng không giới hạn cho thiên tài nhí...",
+        "img": "https://image.pollinations.ai/prompt/stunning%203D%20Pixar%20Disney%20style%20CGI%20animation%2C%20subsurface%20scattering%2C%20soft%20ambient%20lighting%2C%20high%20fidelity%20octane%20render%208k%2C%20joyful%20cute%20child%20smiling%20happily%20playing%20with%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng%20b%C3%B3ng%20b%E1%BA%A9y%2C%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%2C%20M%E1%BA%AFt%20ph%C3%A1t%20s%C3%A1ng%20led%20xanh%5D%2C%20warm%20soft%20golden%20hour%20lighting?width=1280&height=720&nologo=true&seed=13724",
+        "fallback_img": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 5,
+        "title": "Shot 5: Chi Tiết Phụ Kiện & An Toàn (Showcase)",
+        "time": "00:22 - 00:26",
+        "camera": "Top-down Flatlay",
+        "visual_prompt": "stunning 3D Pixar Disney style CGI animation, subsurface scattering, soft ambient lighting, high fidelity octane render 8k, flatlay top down view of [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng bóng bẩy, Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực, Mắt phát sáng led xanh] accessories, packaging box, certified clean design",
+        "vo": "Nữ tự tin: Chất liệu nhựa nguyên sinh ABS an toàn 100% không BPA đạt chuẩn quốc tế...",
+        "img": "https://image.pollinations.ai/prompt/stunning%203D%20Pixar%20Disney%20style%20CGI%20animation%2C%20subsurface%20scattering%2C%20soft%20ambient%20lighting%2C%20high%20fidelity%20octane%20render%208k%2C%20flatlay%20top%20down%20view%20of%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng%20b%C3%B3ng%20b%E1%BA%A9y%2C%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%2C%20M%E1%BA%AFt%20ph%C3%A1t%20s%C3%A1ng%20led%20xanh%5D%20accessories%2C%20packaging%20box%2C%20certified%20clean%20design?width=1280&height=720&nologo=true&seed=13725",
+        "fallback_img": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 6,
+        "title": "Shot 6: Kêu Gọi Mua Hàng & Khuyến Mãi (CTA)",
+        "time": "00:26 - 00:30",
+        "camera": "Hero Center Glow",
+        "visual_prompt": "stunning 3D Pixar Disney style CGI animation, subsurface scattering, soft ambient lighting, high fidelity octane render 8k, hero product pose of complete [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng bóng bẩy, Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực, Mắt phát sáng led xanh] standing on glossy pedestal, glowing logo",
+        "vo": "Nữ tự tin: Đặt hàng ngay hôm nay nhận ưu đãi giảm 30% và quà tặng hấp dẫn!",
+        "img": "https://image.pollinations.ai/prompt/stunning%203D%20Pixar%20Disney%20style%20CGI%20animation%2C%20subsurface%20scattering%2C%20soft%20ambient%20lighting%2C%20high%20fidelity%20octane%20render%208k%2C%20hero%20product%20pose%20of%20complete%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng%20b%C3%B3ng%20b%E1%BA%A9y%2C%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%2C%20M%E1%BA%AFt%20ph%C3%A1t%20s%C3%A1ng%20led%20xanh%5D%20standing%20on%20glossy%20pedestal%2C%20glowing%20logo?width=1280&height=720&nologo=true&seed=13726",
+        "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      }
+    ],
+    "version": 1,
+    "history": [],
+    "filmUrl": "/generated_films/film_1794724311_1ca3f9/index.html",
+    "renderCmd": "cd ~/lemo-opuscar\nnode core/render/still.mjs \"films/film_1794724311_1ca3f9\" 1.5 3 --style \"3d-disney\" --ar \"16:9\"\n./build.sh --fps 30 --crf 18 --output \"films/film_1794724311_1ca3f9/output_3d-disney_16x9.mp4\"",
+    "timestamp": "2026-11-15 13:31:51"
+  },
+  {
+    "id": "film_1794724252_65562d",
+    "title": "Tạo video 30s hoạt hình 3D về siêu nhân ",
+    "prompt": "Tạo video 30s hoạt hình 3D về siêu nhân robot giải cứu thành phố lego đồ chơi",
+    "style_lock": "3d-disney",
+    "aspect": "16:9",
+    "duration": 30,
+    "character_bible": {
+      "name": "Nhân Vật Chính",
+      "description": "Mô hình đồ chơi thông minh",
+      "reference_image": null,
+      "locked_traits": [
+        "Vỏ kim loại bóng",
+        "Mắt kính LED xanh",
+        "Thiết kế cơ khí hiện đại"
+      ]
+    },
+    "shots": [
+      {
+        "num": 1,
+        "title": "Shot 1: Mở Đầu Đại Cảnh (Establishing Shot)",
+        "time": "00:00 - 00:05",
+        "camera": "Dolly In 4K",
+        "visual_prompt": "stunning 3D Pixar Disney style CGI animation, subsurface scattering, soft ambient lighting, high fidelity octane render 8k, wide establishing shot of [Character: Nhân Vật Chính, Mô hình đồ chơi thông minh, Vỏ kim loại bóng, Mắt kính LED xanh, Thiết kế cơ khí hiện đại] in bright modern living room, cinematic lighting",
+        "vo": "Nữ truyền cảm: Mỗi buổi sáng, một thế giới diệu kỳ đang chờ bé khám phá...",
+        "img": "https://image.pollinations.ai/prompt/stunning%203D%20Pixar%20Disney%20style%20CGI%20animation%2C%20subsurface%20scattering%2C%20soft%20ambient%20lighting%2C%20high%20fidelity%20octane%20render%208k%2C%20wide%20establishing%20shot%20of%20%5BCharacter%3A%20Nh%C3%A2n%20V%E1%BA%ADt%20Ch%C3%ADnh%2C%20M%C3%B4%20h%C3%ACnh%20%C4%91%E1%BB%93%20ch%C6%A1i%20th%C3%B4ng%20minh%2C%20V%E1%BB%8F%20kim%20lo%E1%BA%A1i%20b%C3%B3ng%2C%20M%E1%BA%AFt%20k%C3%ADnh%20LED%20xanh%2C%20Thi%E1%BA%BFt%20k%E1%BA%BF%20c%C6%A1%20kh%C3%AD%20hi%E1%BB%87n%20%C4%91%E1%BA%A1i%5D%20in%20bright%20modern%20living%20room%2C%20cinematic%20lighting?width=1280&height=720&nologo=true&seed=55450",
+        "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 2,
+        "title": "Shot 2: Cơ Chế Cơ Khí & Biến Hình (Mechanism)",
+        "time": "00:05 - 00:10",
+        "camera": "Orbit 360° Macro",
+        "visual_prompt": "stunning 3D Pixar Disney style CGI animation, subsurface scattering, soft ambient lighting, high fidelity octane render 8k, macro shot of [Character: Nhân Vật Chính, Mô hình đồ chơi thông minh, Vỏ kim loại bóng, Mắt kính LED xanh, Thiết kế cơ khí hiện đại] transforming and assembling mechanical gears in mid-air",
+        "vo": "Nữ truyền cảm: Tự động bung cánh lượn biến hình thành chiến binh mạnh mẽ...",
+        "img": "https://image.pollinations.ai/prompt/stunning%203D%20Pixar%20Disney%20style%20CGI%20animation%2C%20subsurface%20scattering%2C%20soft%20ambient%20lighting%2C%20high%20fidelity%20octane%20render%208k%2C%20macro%20shot%20of%20%5BCharacter%3A%20Nh%C3%A2n%20V%E1%BA%ADt%20Ch%C3%ADnh%2C%20M%C3%B4%20h%C3%ACnh%20%C4%91%E1%BB%93%20ch%C6%A1i%20th%C3%B4ng%20minh%2C%20V%E1%BB%8F%20kim%20lo%E1%BA%A1i%20b%C3%B3ng%2C%20M%E1%BA%AFt%20k%C3%ADnh%20LED%20xanh%2C%20Thi%E1%BA%BFt%20k%E1%BA%BF%20c%C6%A1%20kh%C3%AD%20hi%E1%BB%87n%20%C4%91%E1%BA%A1i%5D%20transforming%20and%20assembling%20mechanical%20gears%20in%20mid-air?width=1280&height=720&nologo=true&seed=36166",
+        "fallback_img": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 3,
+        "title": "Shot 3: Hành Động Kịch Tính (Dynamic Action)",
+        "time": "00:10 - 00:18",
+        "camera": "Dutch Tilt 124 BPM",
+        "visual_prompt": "stunning 3D Pixar Disney style CGI animation, subsurface scattering, soft ambient lighting, high fidelity octane render 8k, high speed dynamic action shot of [Character: Nhân Vật Chính, Mô hình đồ chơi thông minh, Vỏ kim loại bóng, Mắt kính LED xanh, Thiết kế cơ khí hiện đại] racing through futuristic obstacle track, motion blur",
+        "vo": "Âm nhạc: Trống snare dồn dập, tiếng vút gió sound design sinh động...",
+        "img": "https://image.pollinations.ai/prompt/stunning%203D%20Pixar%20Disney%20style%20CGI%20animation%2C%20subsurface%20scattering%2C%20soft%20ambient%20lighting%2C%20high%20fidelity%20octane%20render%208k%2C%20high%20speed%20dynamic%20action%20shot%20of%20%5BCharacter%3A%20Nh%C3%A2n%20V%E1%BA%ADt%20Ch%C3%ADnh%2C%20M%C3%B4%20h%C3%ACnh%20%C4%91%E1%BB%93%20ch%C6%A1i%20th%C3%B4ng%20minh%2C%20V%E1%BB%8F%20kim%20lo%E1%BA%A1i%20b%C3%B3ng%2C%20M%E1%BA%AFt%20k%C3%ADnh%20LED%20xanh%2C%20Thi%E1%BA%BFt%20k%E1%BA%BF%20c%C6%A1%20kh%C3%AD%20hi%E1%BB%87n%20%C4%91%E1%BA%A1i%5D%20racing%20through%20futuristic%20obstacle%20track%2C%20motion%20blur?width=1280&height=720&nologo=true&seed=36167",
+        "fallback_img": "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 4,
+        "title": "Shot 4: Biểu Cảm Em Bé & Tương Tác (Reaction)",
+        "time": "00:18 - 00:22",
+        "camera": "Medium Close-up Warm",
+        "visual_prompt": "stunning 3D Pixar Disney style CGI animation, subsurface scattering, soft ambient lighting, high fidelity octane render 8k, joyful cute child smiling happily playing with [Character: Nhân Vật Chính, Mô hình đồ chơi thông minh, Vỏ kim loại bóng, Mắt kính LED xanh, Thiết kế cơ khí hiện đại], warm soft golden hour lighting",
+        "vo": "Nữ truyền cảm: Nuôi dưỡng trí tưởng tượng không giới hạn cho thiên tài nhí...",
+        "img": "https://image.pollinations.ai/prompt/stunning%203D%20Pixar%20Disney%20style%20CGI%20animation%2C%20subsurface%20scattering%2C%20soft%20ambient%20lighting%2C%20high%20fidelity%20octane%20render%208k%2C%20joyful%20cute%20child%20smiling%20happily%20playing%20with%20%5BCharacter%3A%20Nh%C3%A2n%20V%E1%BA%ADt%20Ch%C3%ADnh%2C%20M%C3%B4%20h%C3%ACnh%20%C4%91%E1%BB%93%20ch%C6%A1i%20th%C3%B4ng%20minh%2C%20V%E1%BB%8F%20kim%20lo%E1%BA%A1i%20b%C3%B3ng%2C%20M%E1%BA%AFt%20k%C3%ADnh%20LED%20xanh%2C%20Thi%E1%BA%BFt%20k%E1%BA%BF%20c%C6%A1%20kh%C3%AD%20hi%E1%BB%87n%20%C4%91%E1%BA%A1i%5D%2C%20warm%20soft%20golden%20hour%20lighting?width=1280&height=720&nologo=true&seed=36168",
+        "fallback_img": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 5,
+        "title": "Shot 5: Chi Tiết Phụ Kiện & An Toàn (Showcase)",
+        "time": "00:22 - 00:26",
+        "camera": "Top-down Flatlay",
+        "visual_prompt": "stunning 3D Pixar Disney style CGI animation, subsurface scattering, soft ambient lighting, high fidelity octane render 8k, flatlay top down view of [Character: Nhân Vật Chính, Mô hình đồ chơi thông minh, Vỏ kim loại bóng, Mắt kính LED xanh, Thiết kế cơ khí hiện đại] accessories, packaging box, certified clean design",
+        "vo": "Nữ tự tin: Chất liệu nhựa nguyên sinh ABS an toàn 100% không BPA đạt chuẩn quốc tế...",
+        "img": "https://image.pollinations.ai/prompt/stunning%203D%20Pixar%20Disney%20style%20CGI%20animation%2C%20subsurface%20scattering%2C%20soft%20ambient%20lighting%2C%20high%20fidelity%20octane%20render%208k%2C%20flatlay%20top%20down%20view%20of%20%5BCharacter%3A%20Nh%C3%A2n%20V%E1%BA%ADt%20Ch%C3%ADnh%2C%20M%C3%B4%20h%C3%ACnh%20%C4%91%E1%BB%93%20ch%C6%A1i%20th%C3%B4ng%20minh%2C%20V%E1%BB%8F%20kim%20lo%E1%BA%A1i%20b%C3%B3ng%2C%20M%E1%BA%AFt%20k%C3%ADnh%20LED%20xanh%2C%20Thi%E1%BA%BFt%20k%E1%BA%BF%20c%C6%A1%20kh%C3%AD%20hi%E1%BB%87n%20%C4%91%E1%BA%A1i%5D%20accessories%2C%20packaging%20box%2C%20certified%20clean%20design?width=1280&height=720&nologo=true&seed=36169",
+        "fallback_img": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 6,
+        "title": "Shot 6: Kêu Gọi Mua Hàng & Khuyến Mãi (CTA)",
+        "time": "00:26 - 00:30",
+        "camera": "Hero Center Glow",
+        "visual_prompt": "stunning 3D Pixar Disney style CGI animation, subsurface scattering, soft ambient lighting, high fidelity octane render 8k, hero product pose of complete [Character: Nhân Vật Chính, Mô hình đồ chơi thông minh, Vỏ kim loại bóng, Mắt kính LED xanh, Thiết kế cơ khí hiện đại] standing on glossy pedestal, glowing logo",
+        "vo": "Nữ tự tin: Đặt hàng ngay hôm nay nhận ưu đãi giảm 30% và quà tặng hấp dẫn!",
+        "img": "https://image.pollinations.ai/prompt/stunning%203D%20Pixar%20Disney%20style%20CGI%20animation%2C%20subsurface%20scattering%2C%20soft%20ambient%20lighting%2C%20high%20fidelity%20octane%20render%208k%2C%20hero%20product%20pose%20of%20complete%20%5BCharacter%3A%20Nh%C3%A2n%20V%E1%BA%ADt%20Ch%C3%ADnh%2C%20M%C3%B4%20h%C3%ACnh%20%C4%91%E1%BB%93%20ch%C6%A1i%20th%C3%B4ng%20minh%2C%20V%E1%BB%8F%20kim%20lo%E1%BA%A1i%20b%C3%B3ng%2C%20M%E1%BA%AFt%20k%C3%ADnh%20LED%20xanh%2C%20Thi%E1%BA%BFt%20k%E1%BA%BF%20c%C6%A1%20kh%C3%AD%20hi%E1%BB%87n%20%C4%91%E1%BA%A1i%5D%20standing%20on%20glossy%20pedestal%2C%20glowing%20logo?width=1280&height=720&nologo=true&seed=36170",
+        "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      }
+    ],
+    "version": 1,
+    "history": [],
+    "filmUrl": "/generated_films/film_1794724252_65562d/index.html",
+    "renderCmd": "cd ~/lemo-opuscar\nnode core/render/still.mjs \"films/film_1794724252_65562d\" 1.5 3 --style \"3d-disney\" --ar \"16:9\"\n./build.sh --fps 30 --crf 18 --output \"films/film_1794724252_65562d/output_3d-disney_16x9.mp4\"",
+    "timestamp": "2026-11-15 13:30:52"
+  },
+  {
+    "id": "film_1794724209_1d4b63",
+    "title": "làm clip đồ chơi",
+    "prompt": "làm clip đồ chơi",
+    "style_lock": "brick-toy",
+    "aspect": "16:9",
+    "duration": 30,
+    "character_bible": {
+      "name": "Nhân Vật Chính",
+      "description": "Mô hình đồ chơi thông minh",
+      "reference_image": null,
+      "locked_traits": [
+        "Vỏ kim loại bóng",
+        "Mắt kính LED xanh",
+        "Thiết kế cơ khí hiện đại"
+      ]
+    },
+    "shots": [
+      {
+        "num": 1,
+        "title": "Shot 1: Mở Đầu Đại Cảnh (Establishing Shot)",
+        "time": "00:00 - 00:05",
+        "camera": "Dolly In 4K",
+        "visual_prompt": "Lego stop-motion brickfilm style, glossy ABS plastic toy blocks, realistic miniature studio lighting, depth of field 12fps aesthetic 8k, wide establishing shot of [Character: Nhân Vật Chính, Mô hình đồ chơi thông minh, Vỏ kim loại bóng, Mắt kính LED xanh, Thiết kế cơ khí hiện đại] in bright modern living room, cinematic lighting",
+        "vo": "Nữ truyền cảm: Mỗi buổi sáng, một thế giới diệu kỳ đang chờ bé khám phá...",
+        "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20glossy%20ABS%20plastic%20toy%20blocks%2C%20realistic%20miniature%20studio%20lighting%2C%20depth%20of%20field%2012fps%20aesthetic%208k%2C%20wide%20establishing%20shot%20of%20%5BCharacter%3A%20Nh%C3%A2n%20V%E1%BA%ADt%20Ch%C3%ADnh%2C%20M%C3%B4%20h%C3%ACnh%20%C4%91%E1%BB%93%20ch%C6%A1i%20th%C3%B4ng%20minh%2C%20V%E1%BB%8F%20kim%20lo%E1%BA%A1i%20b%C3%B3ng%2C%20M%E1%BA%AFt%20k%C3%ADnh%20LED%20xanh%2C%20Thi%E1%BA%BFt%20k%E1%BA%BF%20c%C6%A1%20kh%C3%AD%20hi%E1%BB%87n%20%C4%91%E1%BA%A1i%5D%20in%20bright%20modern%20living%20room%2C%20cinematic%20lighting?width=1280&height=720&nologo=true&seed=22228",
+        "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 2,
+        "title": "Shot 2: Cơ Chế Cơ Khí & Biến Hình (Mechanism)",
+        "time": "00:05 - 00:10",
+        "camera": "Orbit 360° Macro",
+        "visual_prompt": "Lego stop-motion brickfilm style, glossy ABS plastic toy blocks, realistic miniature studio lighting, depth of field 12fps aesthetic 8k, macro shot of [Character: Nhân Vật Chính, Mô hình đồ chơi thông minh, Vỏ kim loại bóng, Mắt kính LED xanh, Thiết kế cơ khí hiện đại] transforming and assembling mechanical gears in mid-air",
+        "vo": "Nữ truyền cảm: Tự động bung cánh lượn biến hình thành chiến binh mạnh mẽ...",
+        "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20glossy%20ABS%20plastic%20toy%20blocks%2C%20realistic%20miniature%20studio%20lighting%2C%20depth%20of%20field%2012fps%20aesthetic%208k%2C%20macro%20shot%20of%20%5BCharacter%3A%20Nh%C3%A2n%20V%E1%BA%ADt%20Ch%C3%ADnh%2C%20M%C3%B4%20h%C3%ACnh%20%C4%91%E1%BB%93%20ch%C6%A1i%20th%C3%B4ng%20minh%2C%20V%E1%BB%8F%20kim%20lo%E1%BA%A1i%20b%C3%B3ng%2C%20M%E1%BA%AFt%20k%C3%ADnh%20LED%20xanh%2C%20Thi%E1%BA%BFt%20k%E1%BA%BF%20c%C6%A1%20kh%C3%AD%20hi%E1%BB%87n%20%C4%91%E1%BA%A1i%5D%20transforming%20and%20assembling%20mechanical%20gears%20in%20mid-air?width=1280&height=720&nologo=true&seed=22229",
+        "fallback_img": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 3,
+        "title": "Shot 3: Hành Động Kịch Tính (Dynamic Action)",
+        "time": "00:10 - 00:18",
+        "camera": "Dutch Tilt 124 BPM",
+        "visual_prompt": "Lego stop-motion brickfilm style, glossy ABS plastic toy blocks, realistic miniature studio lighting, depth of field 12fps aesthetic 8k, high speed dynamic action shot of [Character: Nhân Vật Chính, Mô hình đồ chơi thông minh, Vỏ kim loại bóng, Mắt kính LED xanh, Thiết kế cơ khí hiện đại] racing through futuristic obstacle track, motion blur",
+        "vo": "Âm nhạc: Trống snare dồn dập, tiếng vút gió sound design sinh động...",
+        "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20glossy%20ABS%20plastic%20toy%20blocks%2C%20realistic%20miniature%20studio%20lighting%2C%20depth%20of%20field%2012fps%20aesthetic%208k%2C%20high%20speed%20dynamic%20action%20shot%20of%20%5BCharacter%3A%20Nh%C3%A2n%20V%E1%BA%ADt%20Ch%C3%ADnh%2C%20M%C3%B4%20h%C3%ACnh%20%C4%91%E1%BB%93%20ch%C6%A1i%20th%C3%B4ng%20minh%2C%20V%E1%BB%8F%20kim%20lo%E1%BA%A1i%20b%C3%B3ng%2C%20M%E1%BA%AFt%20k%C3%ADnh%20LED%20xanh%2C%20Thi%E1%BA%BFt%20k%E1%BA%BF%20c%C6%A1%20kh%C3%AD%20hi%E1%BB%87n%20%C4%91%E1%BA%A1i%5D%20racing%20through%20futuristic%20obstacle%20track%2C%20motion%20blur?width=1280&height=720&nologo=true&seed=22230",
+        "fallback_img": "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 4,
+        "title": "Shot 4: Biểu Cảm Em Bé & Tương Tác (Reaction)",
+        "time": "00:18 - 00:22",
+        "camera": "Medium Close-up Warm",
+        "visual_prompt": "Lego stop-motion brickfilm style, glossy ABS plastic toy blocks, realistic miniature studio lighting, depth of field 12fps aesthetic 8k, joyful cute child smiling happily playing with [Character: Nhân Vật Chính, Mô hình đồ chơi thông minh, Vỏ kim loại bóng, Mắt kính LED xanh, Thiết kế cơ khí hiện đại], warm soft golden hour lighting",
+        "vo": "Nữ truyền cảm: Nuôi dưỡng trí tưởng tượng không giới hạn cho thiên tài nhí...",
+        "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20glossy%20ABS%20plastic%20toy%20blocks%2C%20realistic%20miniature%20studio%20lighting%2C%20depth%20of%20field%2012fps%20aesthetic%208k%2C%20joyful%20cute%20child%20smiling%20happily%20playing%20with%20%5BCharacter%3A%20Nh%C3%A2n%20V%E1%BA%ADt%20Ch%C3%ADnh%2C%20M%C3%B4%20h%C3%ACnh%20%C4%91%E1%BB%93%20ch%C6%A1i%20th%C3%B4ng%20minh%2C%20V%E1%BB%8F%20kim%20lo%E1%BA%A1i%20b%C3%B3ng%2C%20M%E1%BA%AFt%20k%C3%ADnh%20LED%20xanh%2C%20Thi%E1%BA%BFt%20k%E1%BA%BF%20c%C6%A1%20kh%C3%AD%20hi%E1%BB%87n%20%C4%91%E1%BA%A1i%5D%2C%20warm%20soft%20golden%20hour%20lighting?width=1280&height=720&nologo=true&seed=22231",
+        "fallback_img": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 5,
+        "title": "Shot 5: Chi Tiết Phụ Kiện & An Toàn (Showcase)",
+        "time": "00:22 - 00:26",
+        "camera": "Top-down Flatlay",
+        "visual_prompt": "Lego stop-motion brickfilm style, glossy ABS plastic toy blocks, realistic miniature studio lighting, depth of field 12fps aesthetic 8k, flatlay top down view of [Character: Nhân Vật Chính, Mô hình đồ chơi thông minh, Vỏ kim loại bóng, Mắt kính LED xanh, Thiết kế cơ khí hiện đại] accessories, packaging box, certified clean design",
+        "vo": "Nữ tự tin: Chất liệu nhựa nguyên sinh ABS an toàn 100% không BPA đạt chuẩn quốc tế...",
+        "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20glossy%20ABS%20plastic%20toy%20blocks%2C%20realistic%20miniature%20studio%20lighting%2C%20depth%20of%20field%2012fps%20aesthetic%208k%2C%20flatlay%20top%20down%20view%20of%20%5BCharacter%3A%20Nh%C3%A2n%20V%E1%BA%ADt%20Ch%C3%ADnh%2C%20M%C3%B4%20h%C3%ACnh%20%C4%91%E1%BB%93%20ch%C6%A1i%20th%C3%B4ng%20minh%2C%20V%E1%BB%8F%20kim%20lo%E1%BA%A1i%20b%C3%B3ng%2C%20M%E1%BA%AFt%20k%C3%ADnh%20LED%20xanh%2C%20Thi%E1%BA%BFt%20k%E1%BA%BF%20c%C6%A1%20kh%C3%AD%20hi%E1%BB%87n%20%C4%91%E1%BA%A1i%5D%20accessories%2C%20packaging%20box%2C%20certified%20clean%20design?width=1280&height=720&nologo=true&seed=22232",
+        "fallback_img": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 6,
+        "title": "Shot 6: Kêu Gọi Mua Hàng & Khuyến Mãi (CTA)",
+        "time": "00:26 - 00:30",
+        "camera": "Hero Center Glow",
+        "visual_prompt": "Lego stop-motion brickfilm style, glossy ABS plastic toy blocks, realistic miniature studio lighting, depth of field 12fps aesthetic 8k, hero product pose of complete [Character: Nhân Vật Chính, Mô hình đồ chơi thông minh, Vỏ kim loại bóng, Mắt kính LED xanh, Thiết kế cơ khí hiện đại] standing on glossy pedestal, glowing logo",
+        "vo": "Nữ tự tin: Đặt hàng ngay hôm nay nhận ưu đãi giảm 30% và quà tặng hấp dẫn!",
+        "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20glossy%20ABS%20plastic%20toy%20blocks%2C%20realistic%20miniature%20studio%20lighting%2C%20depth%20of%20field%2012fps%20aesthetic%208k%2C%20hero%20product%20pose%20of%20complete%20%5BCharacter%3A%20Nh%C3%A2n%20V%E1%BA%ADt%20Ch%C3%ADnh%2C%20M%C3%B4%20h%C3%ACnh%20%C4%91%E1%BB%93%20ch%C6%A1i%20th%C3%B4ng%20minh%2C%20V%E1%BB%8F%20kim%20lo%E1%BA%A1i%20b%C3%B3ng%2C%20M%E1%BA%AFt%20k%C3%ADnh%20LED%20xanh%2C%20Thi%E1%BA%BFt%20k%E1%BA%BF%20c%C6%A1%20kh%C3%AD%20hi%E1%BB%87n%20%C4%91%E1%BA%A1i%5D%20standing%20on%20glossy%20pedestal%2C%20glowing%20logo?width=1280&height=720&nologo=true&seed=22233",
+        "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      }
+    ],
+    "version": 1,
+    "history": [],
+    "filmUrl": "/generated_films/film_1794724209_1d4b63/index.html",
+    "renderCmd": "cd ~/lemo-opuscar\nnode core/render/still.mjs \"films/film_1794724209_1d4b63\" 1.5 3 --style \"brick-toy\" --ar \"16:9\"\n./build.sh --fps 30 --crf 18 --output \"films/film_1794724209_1d4b63/output_brick-toy_16x9.mp4\"",
+    "timestamp": "2026-11-15 13:30:09"
+  },
+  {
+    "id": "film_1794724013_3cde32",
+    "title": "tạo video 60s anime chú mèo chiến binh p",
+    "style_lock": "anime",
+    "aspect": "16:9",
+    "duration": 60,
+    "character_bible": {
+      "name": "Nhân Vật Chính",
+      "description": "Mô hình đồ chơi thông minh",
+      "reference_image": null,
+      "locked_traits": [
+        "Vỏ kim loại bóng",
+        "Mắt kính LED xanh",
+        "Thiết kế cơ khí hiện đại"
+      ]
+    },
+    "shots": [
+      {
+        "num": 1,
+        "title": "Shot 1: Mở Đầu Đại Cảnh (Establishing Shot)",
+        "time": "00:00 - 00:05",
+        "camera": "Dolly In 4K",
+        "visual_prompt": "breathtaking Japanese anime art style by Makoto Shinkai and Studio Ghibli, lush skies, dramatic lens flares, intricate details 8k, wide establishing shot of [Character: Nhân Vật Chính, Mô hình đồ chơi thông minh, Vỏ kim loại bóng, Mắt kính LED xanh, Thiết kế cơ khí hiện đại] in bright modern living room, cinematic lighting",
+        "vo": "Nữ truyền cảm: Mỗi buổi sáng, một thế giới diệu kỳ đang chờ bé khám phá...",
+        "img": "https://image.pollinations.ai/prompt/breathtaking%20Japanese%20anime%20art%20style%20by%20Makoto%20Shinkai%20and%20Studio%20Ghibli%2C%20lush%20skies%2C%20dramatic%20lens%20flares%2C%20intricate%20details%208k%2C%20wide%20establishing%20shot%20of%20%5BCharacter%3A%20Nh%C3%A2n%20V%E1%BA%ADt%20Ch%C3%ADnh%2C%20M%C3%B4%20h%C3%ACnh%20%C4%91%E1%BB%93%20ch%C6%A1i%20th%C3%B4ng%20minh%2C%20V%E1%BB%8F%20kim%20lo%E1%BA%A1i%20b%C3%B3ng%2C%20M%E1%BA%AFt%20k%C3%ADnh%20LED%20xanh%2C%20Thi%E1%BA%BFt%20k%E1%BA%BF%20c%C6%A1%20kh%C3%AD%20hi%E1%BB%87n%20%C4%91%E1%BA%A1i%5D%20in%20bright%20modern%20living%20room%2C%20cinematic%20lighting?width=1280&height=720&nologo=true&seed=76165",
+        "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 2,
+        "title": "Shot 2: Cơ Chế Cơ Khí & Biến Hình (Mechanism)",
+        "time": "00:05 - 00:10",
+        "camera": "Orbit 360° Macro",
+        "visual_prompt": "breathtaking Japanese anime art style by Makoto Shinkai and Studio Ghibli, lush skies, dramatic lens flares, intricate details 8k, macro shot of [Character: Nhân Vật Chính, Mô hình đồ chơi thông minh, Vỏ kim loại bóng, Mắt kính LED xanh, Thiết kế cơ khí hiện đại] transforming and assembling mechanical gears in mid-air",
+        "vo": "Nữ truyền cảm: Tự động bung cánh lượn biến hình thành chiến binh mạnh mẽ...",
+        "img": "https://image.pollinations.ai/prompt/breathtaking%20Japanese%20anime%20art%20style%20by%20Makoto%20Shinkai%20and%20Studio%20Ghibli%2C%20lush%20skies%2C%20dramatic%20lens%20flares%2C%20intricate%20details%208k%2C%20macro%20shot%20of%20%5BCharacter%3A%20Nh%C3%A2n%20V%E1%BA%ADt%20Ch%C3%ADnh%2C%20M%C3%B4%20h%C3%ACnh%20%C4%91%E1%BB%93%20ch%C6%A1i%20th%C3%B4ng%20minh%2C%20V%E1%BB%8F%20kim%20lo%E1%BA%A1i%20b%C3%B3ng%2C%20M%E1%BA%AFt%20k%C3%ADnh%20LED%20xanh%2C%20Thi%E1%BA%BFt%20k%E1%BA%BF%20c%C6%A1%20kh%C3%AD%20hi%E1%BB%87n%20%C4%91%E1%BA%A1i%5D%20transforming%20and%20assembling%20mechanical%20gears%20in%20mid-air?width=1280&height=720&nologo=true&seed=76166",
+        "fallback_img": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 3,
+        "title": "Shot 3: Hành Động Kịch Tính (Dynamic Action)",
+        "time": "00:10 - 00:18",
+        "camera": "Dutch Tilt 124 BPM",
+        "visual_prompt": "breathtaking Japanese anime art style by Makoto Shinkai and Studio Ghibli, lush skies, dramatic lens flares, intricate details 8k, high speed dynamic action shot of [Character: Nhân Vật Chính, Mô hình đồ chơi thông minh, Vỏ kim loại bóng, Mắt kính LED xanh, Thiết kế cơ khí hiện đại] racing through futuristic obstacle track, motion blur",
+        "vo": "Âm nhạc: Trống snare dồn dập, tiếng vút gió sound design sinh động...",
+        "img": "https://image.pollinations.ai/prompt/breathtaking%20Japanese%20anime%20art%20style%20by%20Makoto%20Shinkai%20and%20Studio%20Ghibli%2C%20lush%20skies%2C%20dramatic%20lens%20flares%2C%20intricate%20details%208k%2C%20high%20speed%20dynamic%20action%20shot%20of%20%5BCharacter%3A%20Nh%C3%A2n%20V%E1%BA%ADt%20Ch%C3%ADnh%2C%20M%C3%B4%20h%C3%ACnh%20%C4%91%E1%BB%93%20ch%C6%A1i%20th%C3%B4ng%20minh%2C%20V%E1%BB%8F%20kim%20lo%E1%BA%A1i%20b%C3%B3ng%2C%20M%E1%BA%AFt%20k%C3%ADnh%20LED%20xanh%2C%20Thi%E1%BA%BFt%20k%E1%BA%BF%20c%C6%A1%20kh%C3%AD%20hi%E1%BB%87n%20%C4%91%E1%BA%A1i%5D%20racing%20through%20futuristic%20obstacle%20track%2C%20motion%20blur?width=1280&height=720&nologo=true&seed=76167",
+        "fallback_img": "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 4,
+        "title": "Shot 4: Biểu Cảm Em Bé & Tương Tác (Reaction)",
+        "time": "00:18 - 00:22",
+        "camera": "Medium Close-up Warm",
+        "visual_prompt": "breathtaking Japanese anime art style by Makoto Shinkai and Studio Ghibli, lush skies, dramatic lens flares, intricate details 8k, joyful cute child smiling happily playing with [Character: Nhân Vật Chính, Mô hình đồ chơi thông minh, Vỏ kim loại bóng, Mắt kính LED xanh, Thiết kế cơ khí hiện đại], warm soft golden hour lighting",
+        "vo": "Nữ truyền cảm: Nuôi dưỡng trí tưởng tượng không giới hạn cho thiên tài nhí...",
+        "img": "https://image.pollinations.ai/prompt/breathtaking%20Japanese%20anime%20art%20style%20by%20Makoto%20Shinkai%20and%20Studio%20Ghibli%2C%20lush%20skies%2C%20dramatic%20lens%20flares%2C%20intricate%20details%208k%2C%20joyful%20cute%20child%20smiling%20happily%20playing%20with%20%5BCharacter%3A%20Nh%C3%A2n%20V%E1%BA%ADt%20Ch%C3%ADnh%2C%20M%C3%B4%20h%C3%ACnh%20%C4%91%E1%BB%93%20ch%C6%A1i%20th%C3%B4ng%20minh%2C%20V%E1%BB%8F%20kim%20lo%E1%BA%A1i%20b%C3%B3ng%2C%20M%E1%BA%AFt%20k%C3%ADnh%20LED%20xanh%2C%20Thi%E1%BA%BFt%20k%E1%BA%BF%20c%C6%A1%20kh%C3%AD%20hi%E1%BB%87n%20%C4%91%E1%BA%A1i%5D%2C%20warm%20soft%20golden%20hour%20lighting?width=1280&height=720&nologo=true&seed=76168",
+        "fallback_img": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 5,
+        "title": "Shot 5: Chi Tiết Phụ Kiện & An Toàn (Showcase)",
+        "time": "00:22 - 00:26",
+        "camera": "Top-down Flatlay",
+        "visual_prompt": "breathtaking Japanese anime art style by Makoto Shinkai and Studio Ghibli, lush skies, dramatic lens flares, intricate details 8k, flatlay top down view of [Character: Nhân Vật Chính, Mô hình đồ chơi thông minh, Vỏ kim loại bóng, Mắt kính LED xanh, Thiết kế cơ khí hiện đại] accessories, packaging box, certified clean design",
+        "vo": "Nữ tự tin: Chất liệu nhựa nguyên sinh ABS an toàn 100% không BPA đạt chuẩn quốc tế...",
+        "img": "https://image.pollinations.ai/prompt/breathtaking%20Japanese%20anime%20art%20style%20by%20Makoto%20Shinkai%20and%20Studio%20Ghibli%2C%20lush%20skies%2C%20dramatic%20lens%20flares%2C%20intricate%20details%208k%2C%20flatlay%20top%20down%20view%20of%20%5BCharacter%3A%20Nh%C3%A2n%20V%E1%BA%ADt%20Ch%C3%ADnh%2C%20M%C3%B4%20h%C3%ACnh%20%C4%91%E1%BB%93%20ch%C6%A1i%20th%C3%B4ng%20minh%2C%20V%E1%BB%8F%20kim%20lo%E1%BA%A1i%20b%C3%B3ng%2C%20M%E1%BA%AFt%20k%C3%ADnh%20LED%20xanh%2C%20Thi%E1%BA%BFt%20k%E1%BA%BF%20c%C6%A1%20kh%C3%AD%20hi%E1%BB%87n%20%C4%91%E1%BA%A1i%5D%20accessories%2C%20packaging%20box%2C%20certified%20clean%20design?width=1280&height=720&nologo=true&seed=76169",
+        "fallback_img": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      },
+      {
+        "num": 6,
+        "title": "Shot 6: Kêu Gọi Mua Hàng & Khuyến Mãi (CTA)",
+        "time": "00:26 - 00:30",
+        "camera": "Hero Center Glow",
+        "visual_prompt": "breathtaking Japanese anime art style by Makoto Shinkai and Studio Ghibli, lush skies, dramatic lens flares, intricate details 8k, hero product pose of complete [Character: Nhân Vật Chính, Mô hình đồ chơi thông minh, Vỏ kim loại bóng, Mắt kính LED xanh, Thiết kế cơ khí hiện đại] standing on glossy pedestal, glowing logo",
+        "vo": "Nữ tự tin: Đặt hàng ngay hôm nay nhận ưu đãi giảm 30% và quà tặng hấp dẫn!",
+        "img": "https://image.pollinations.ai/prompt/breathtaking%20Japanese%20anime%20art%20style%20by%20Makoto%20Shinkai%20and%20Studio%20Ghibli%2C%20lush%20skies%2C%20dramatic%20lens%20flares%2C%20intricate%20details%208k%2C%20hero%20product%20pose%20of%20complete%20%5BCharacter%3A%20Nh%C3%A2n%20V%E1%BA%ADt%20Ch%C3%ADnh%2C%20M%C3%B4%20h%C3%ACnh%20%C4%91%E1%BB%93%20ch%C6%A1i%20th%C3%B4ng%20minh%2C%20V%E1%BB%8F%20kim%20lo%E1%BA%A1i%20b%C3%B3ng%2C%20M%E1%BA%AFt%20k%C3%ADnh%20LED%20xanh%2C%20Thi%E1%BA%BFt%20k%E1%BA%BF%20c%C6%A1%20kh%C3%AD%20hi%E1%BB%87n%20%C4%91%E1%BA%A1i%5D%20standing%20on%20glossy%20pedestal%2C%20glowing%20logo?width=1280&height=720&nologo=true&seed=76170",
+        "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80",
+        "status": "ready"
+      }
+    ],
+    "version": 1,
+    "history": [],
+    "filmUrl": "/generated_films/film_1794724013_3cde32/index.html",
+    "renderCmd": "cd ~/lemo-opuscar\nnode core/render/still.mjs \"films/film_1794724013_3cde32\" 1.5 3 --style \"anime\" --ar \"16:9\"\n./build.sh --fps 30 --crf 18 --output \"films/film_1794724013_3cde32/output_anime_16x9.mp4\"",
+    "timestamp": "2026-11-15 13:26:53"
+  },
+  {
     "id": "film_1794723132_591f78",
     "title": "hi",
     "prompt": "hi",
@@ -18,7 +381,7 @@
         "camera": "Dolly In 4K",
         "visual_prompt": "cinematic wide establishing shot of default toy set in sunny bright living room, photorealistic 8k commercial, depth of field",
         "vo": "Nữ truyền cảm: Mỗi buổi sáng, một thế giới diệu kỳ đang chờ bé khám phá...",
-        "img": "https://image.pollinations.ai/prompt/cinematic%20wide%20establishing%20shot%20of%20default%20toy%20set%20in%20sunny%20bright%20living%20room%2C%20photorealistic%208k%20commercial%2C%20depth%20of%20field?width=1280&height=720&nologo=true&seed=97131",
+        "img": "https://image.pollinations.ai/prompt/cinematic%20wide%20establishing%20shot%20of%20default%20toy%20set%20in%20sunny%20bright%20living%20room%2C%20photorealistic%208k%20commercial%2C%20depth%20of%20field?width=1280&height=720&nologo=true&seed=556765",
         "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80"
       },
       {

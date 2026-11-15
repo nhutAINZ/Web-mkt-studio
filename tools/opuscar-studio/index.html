@@ -305,7 +305,7 @@
     .center-workspace {
       flex: 1;
       overflow-y: auto;
-      padding: 20px 24px 280px 24px;
+      padding: 20px 24px 340px 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -476,14 +476,74 @@
       align-items: center;
       gap: 10px;
     }
-    .shot-img {
-      width: 60px;
-      height: 42px;
-      object-fit: cover;
+    .shot-thumb-wrapper {
+      position: relative;
+      width: 64px;
+      height: 44px;
       border-radius: 6px;
+      overflow: hidden;
       background: #181822;
       flex-shrink: 0;
     }
+    .shot-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: opacity 0.2s;
+    }
+    .shot-img.loading {
+      opacity: 0;
+    }
+    .shot-thumb-skeleton {
+      position: absolute;
+      inset: 0;
+      background: #1a1a24;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    .shot-thumb-skeleton.hidden {
+      display: none;
+    }
+    .shot-thumb-error {
+      position: absolute;
+      inset: 0;
+      background: rgba(30, 10, 10, 0.95);
+      border: 1px solid #7f1d1d;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2px;
+      gap: 2px;
+      z-index: 5;
+    }
+    .btn-shot-retry {
+      background: #ef4444;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 9px;
+      font-family: monospace;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .btn-shot-retry:hover {
+      background: #dc2626;
+    }
+    .spinner-small {
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255,255,255,0.2);
+      border-top-color: var(--accent-green);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
     .shot-info { overflow: hidden; }
     .shot-name { font-size: 11.5px; font-weight: 700; color: #e1e1ea; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .shot-cam { font-size: 10px; color: var(--text-dim); font-family: monospace; margin-top: 2px; }
@@ -912,6 +972,10 @@
       <button class="btn-login">Login</button>
 
       <div class="header-pills">
+        <button class="header-pill" onclick="toggleCharacterBibleModal(true)">
+          <span>👥</span>
+          <span>Nhân Vật</span>
+        </button>
         <button class="header-pill" onclick="showExploreAlert()">
           <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
           <span>Explore</span>
@@ -929,7 +993,7 @@
       <!-- HERO EMPTY STATE -->
       <div id="hero-empty-state" class="hero-title-box">
         <h1 class="hero-title">Light Up Your Creation With Lumina</h1>
-        <p class="hero-subtitle">Lemo-OpusCar 99 Film Styles Engine &bull; Gemini CLI Video Pipeline</p>
+        <p class="hero-subtitle">Lemo-OpusCar 99 Film Styles Engine • Gemini CLI Video Pipeline</p>
       </div>
 
       <!-- CHAT / GENERATION FEED (Shown when generating) -->
@@ -1061,6 +1125,54 @@
       </div>
       <div class="modal-body" id="history-items-list">
         <!-- Rendered by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 5. CHARACTER BIBLE DRAWER MODAL            -->
+  <!-- ========================================== -->
+  <div id="character-bible-modal" class="modal-drawer hidden" onclick="toggleCharacterBibleModal(false)">
+    <div class="modal-pane" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <span style="font-size: 14px; font-weight: 700; color: #fff;">👥 Character Bible (Nhất Quán Nhân Vật)</span>
+        <button class="icon-btn" onclick="toggleCharacterBibleModal(false)">✕</button>
+      </div>
+      <div class="modal-body" style="gap: 14px;">
+        <p style="font-size: 11.5px; color: #8e8e9f; line-height: 1.4;">
+          Nạp hình ảnh và khóa các đặc điểm nhân vật. Lumina sẽ tự động đưa nhân vật này vào xuyên suốt cả 6 phân cảnh video.
+        </p>
+
+        <!-- Reference Image Upload Box -->
+        <div onclick="document.getElementById('char-file-upload').click()" style="border: 1px dashed #383848; border-radius: 12px; padding: 14px; text-align: center; cursor: pointer; background: #181822;">
+          <input type="file" id="char-file-upload" style="display: none;" accept="image/*" onchange="handleCharImageUpload(event)">
+          <img id="char-preview-thumb" src="" style="width: 80px; height: 80px; object-fit: cover; border-radius: 10px; margin: 0 auto 8px auto; display: none; border: 1px solid var(--accent-green);">
+          <div id="char-upload-text">
+            <span style="font-size: 20px;">🖼️</span>
+            <div style="font-size: 12px; color: #d1d1dc; font-weight: 600;">Tải ảnh nhân vật tham chiếu</div>
+            <div style="font-size: 10px; color: #666; margin-top: 2px;">PNG, JPG, WebP</div>
+          </div>
+        </div>
+
+        <div>
+          <label style="font-size: 11px; font-mono; color: #8e8e9f; display: block; margin-bottom: 4px;">Tên Nhân Vật</label>
+          <input id="char-name-input" type="text" placeholder="vd: Robot Titan X" style="width: 100%; background: #181822; border: 1px solid #282836; border-radius: 8px; padding: 8px 10px; color: #fff; font-size: 12px; outline: none;">
+        </div>
+
+        <div>
+          <label style="font-size: 11px; font-mono; color: #8e8e9f; display: block; margin-bottom: 4px;">Mô Tả & Tính Cách</label>
+          <textarea id="char-desc-input" rows="2" placeholder="vd: Siêu robot chiến binh biến hình từ xe đua, dũng cảm và nhanh nhẹn" style="width: 100%; background: #181822; border: 1px solid #282836; border-radius: 8px; padding: 8px 10px; color: #fff; font-size: 12px; outline: none; resize: none;"></textarea>
+        </div>
+
+        <div>
+          <label style="font-size: 11px; font-mono; color: #8e8e9f; display: block; margin-bottom: 4px;">Đặc Điểm Bắt Buộc Khóa (Locked Traits)</label>
+          <input id="char-traits-input" type="text" placeholder="vd: Vỏ kim loại đỏ bóng, mắt kính LED xanh, cánh lượn sau lưng" style="width: 100%; background: #181822; border: 1px solid #282836; border-radius: 8px; padding: 8px 10px; color: #fff; font-size: 12px; outline: none;">
+        </div>
+
+        <button onclick="saveCharacterBible()" class="btn-submit-generate" style="width: 100%; justify-content: center; margin-top: 10px;">
+          <span>🔒</span>
+          <span>Khóa & Dùng Cho Mọi Shot</span>
+        </button>
       </div>
     </div>
   </div>
