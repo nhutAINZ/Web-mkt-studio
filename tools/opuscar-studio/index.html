@@ -1,178 +1,889 @@
 <!DOCTYPE html>
-<html lang="vi" class="dark">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lumina - AI Video Production Studio (Lemo-OpusCar & Gemini CLI)</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Inter & JetBrains Mono -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-            mono: ['"JetBrains Mono"', 'monospace'],
-          },
-          colors: {
-            brand: {
-              bg: '#000000',
-              sidebar: '#070709',
-              dock: '#131318',
-              dockBorder: '#26262e',
-              dockInner: '#1a1a22',
-              pill: '#1e1e26',
-              pillHover: '#2a2a36',
-              accent: '#10b981', // Lumina teal/green
-              accentHover: '#059669',
-              orange: '#f97316',
-              cyan: '#06b6d4'
-            }
-          }
-        }
-      }
-    }
-  </script>
+  
+  <!-- Standalone Robust CSS (Zero External CDN Dependency Failure) -->
   <style>
-    /* Custom clean dark scrollbar */
-    ::-webkit-scrollbar { width: 5px; height: 5px; }
-    ::-webkit-scrollbar-track { background: #000000; }
-    ::-webkit-scrollbar-thumb { background: #22222a; border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: #33333f; }
-
-    /* New feature gradient card */
-    .glow-feature-card {
-      background: radial-gradient(circle at 100% 0%, rgba(6, 182, 212, 0.25) 0%, rgba(16, 185, 129, 0.08) 50%, rgba(19, 19, 24, 0.95) 100%);
-      border: 1px solid rgba(6, 182, 212, 0.35);
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    :root {
+      --bg-black: #000000;
+      --bg-sidebar: #09090c;
+      --bg-dock: #121216;
+      --border-dock: #26262f;
+      --bg-inner: #191920;
+      --bg-pill: #1e1e27;
+      --bg-pill-hover: #2a2a38;
+      --accent-green: #10b981;
+      --accent-green-hover: #059669;
+      --accent-orange: #f97316;
+      --accent-cyan: #06b6d4;
+      --text-main: #f4f4f7;
+      --text-muted: #8e8e9f;
+      --text-dim: #555566;
     }
 
-    .modal-backdrop-blur {
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+    body {
+      background-color: var(--bg-black);
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      display: flex;
+    }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg-black); }
+    ::-webkit-scrollbar-thumb { background: #26262f; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #383848; }
+
+    /* SVGs must never blow up */
+    svg {
+      display: inline-block;
+      vertical-align: middle;
+      flex-shrink: 0;
+      max-width: 100%;
+      max-height: 100%;
+    }
+
+    /* SIDEBAR */
+    #sidebar {
+      width: 240px;
+      height: 100vh;
+      background: var(--bg-sidebar);
+      border-right: 1px solid #1c1c24;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex-shrink: 0;
+      z-index: 40;
+      transition: width 0.25s ease, padding 0.25s ease;
+      user-select: none;
+    }
+
+    #sidebar.collapsed {
+      width: 0px;
+      padding: 0;
+      overflow: hidden;
+      border-right: none;
+    }
+
+    .sidebar-top { padding: 16px 14px; display: flex; flex-direction: column; gap: 18px; }
+
+    .brand-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+
+    .brand-logo span {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+    }
+
+    .icon-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.15s, color 0.15s;
+    }
+    .icon-btn:hover { background: #1c1c24; color: #fff; }
+
+    /* New Features Glow Card */
+    .feature-card {
+      background: radial-gradient(circle at 100% 0%, rgba(6, 182, 212, 0.22) 0%, rgba(16, 185, 129, 0.08) 50%, rgba(20, 20, 26, 0.95) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.3);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .feature-card-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      color: #e2e2ec;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+    .feature-item:hover { color: #fff; }
+
+    /* Nav Sections */
+    .nav-section { display: flex; flex-direction: column; gap: 4px; }
+    .nav-title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      padding: 4px 10px;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .nav-link:hover { color: #fff; background: #15151c; }
+    .nav-link.active {
+      background: #1c1c25;
+      color: #fff;
+      font-weight: 600;
+      border: 1px solid #282836;
+    }
+
+    .nav-left { display: flex; align-items: center; gap: 10px; }
+
+    .badge-hot {
+      background: rgba(249, 115, 22, 0.2);
+      color: var(--accent-orange);
+      border: 1px solid rgba(249, 115, 22, 0.35);
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .badge-new {
+      background: rgba(6, 182, 212, 0.2);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(6, 182, 212, 0.35);
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .sidebar-bottom {
+      padding: 14px;
+      border-top: 1px solid #16161e;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .social-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 8px 12px;
+      color: var(--text-dim);
+    }
+    .social-row span, .social-row svg { cursor: pointer; transition: color 0.15s; }
+    .social-row span:hover, .social-row svg:hover { color: #fff; }
+
+    /* MAIN VIEWPORT */
+    .main-viewport {
+      flex: 1;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      background: var(--bg-black);
+      overflow: hidden;
+    }
+
+    /* TOP HEADER */
+    .top-header {
+      height: 56px;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 16px;
+      z-index: 30;
+      flex-shrink: 0;
+    }
+
+    .header-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.15s;
+      cursor: pointer;
+    }
+    .header-link:hover { color: #fff; }
+
+    .pricing-wrap {
+      position: relative;
+    }
+    .pricing-tag {
+      position: absolute;
+      top: -11px;
+      right: -10px;
+      background: var(--accent-green);
+      color: #000;
+      font-size: 8.5px;
+      font-weight: 800;
+      padding: 1px 5px;
+      border-radius: 10px;
+    }
+
+    .btn-login {
+      background: var(--accent-cyan);
+      color: #000;
+      border: none;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .btn-login:hover { opacity: 0.9; }
+
+    .header-pills {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-left: 12px;
+      border-left: 1px solid #1c1c24;
+    }
+
+    .header-pill {
+      background: var(--bg-pill);
+      color: #d1d1dc;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 11.5px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .header-pill:hover { background: var(--bg-pill-hover); color: #fff; }
+
+    /* CENTER WORKSPACE */
+    .center-workspace {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px 180px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-title-box {
+      margin: auto 0;
+      text-align: center;
+      user-select: none;
+    }
+
+    .hero-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+      font-size: 13px;
+      color: var(--text-dim);
+      font-family: monospace;
+    }
+
+    /* FEED */
+    .feed-container {
+      width: 100%;
+      max-width: 820px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      padding-top: 10px;
+    }
+
+    .user-msg-card {
+      align-self: flex-end;
+      background: #141419;
+      border: 1px solid #23232c;
+      border-radius: 18px;
+      padding: 14px 18px;
+      max-width: 540px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .user-msg-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: monospace;
+    }
+    .user-msg-body {
+      font-size: 13.5px;
+      color: #ececf2;
+      line-height: 1.5;
+    }
+    .user-msg-img {
+      width: 100px;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #2b2b38;
+      margin-top: 4px;
+    }
+
+    .ai-msg-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .ai-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: var(--accent-green);
+      font-weight: 800;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .ai-card {
+      flex: 1;
+      background: var(--bg-dock);
+      border: 1px solid var(--border-dock);
+      border-radius: 18px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .ai-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #1f1f28;
+      padding-bottom: 12px;
+    }
+    .ai-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+    }
+    .ai-card-meta {
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: monospace;
+      margin-top: 2px;
+    }
+
+    .btn-fullscreen {
+      background: #1b1b24;
+      border: 1px solid #2c2c3a;
+      color: #d1d1dc;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-family: monospace;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .btn-fullscreen:hover { background: #262634; color: #fff; }
+
+    /* Video Player Canvas Frame */
+    .video-viewport-frame {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #08080b;
+      border: 1px solid #202029;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+    }
+    .video-viewport-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* 6 Shots Grid */
+    .shots-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    @media (max-width: 600px) {
+      .shots-grid { grid-template-columns: 1fr; }
+    }
+
+    .shot-card {
+      background: #0b0b0e;
+      border: 1px solid #1c1c24;
+      border-radius: 10px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .shot-img {
+      width: 60px;
+      height: 42px;
+      object-fit: cover;
+      border-radius: 6px;
+      background: #181822;
+      flex-shrink: 0;
+    }
+    .shot-info { overflow: hidden; }
+    .shot-name { font-size: 11.5px; font-weight: 700; color: #e1e1ea; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .shot-cam { font-size: 10px; color: var(--text-dim); font-family: monospace; margin-top: 2px; }
+
+    /* Command snippet */
+    .cmd-box {
+      background: #09090c;
+      border: 1px solid #1d1d26;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-family: monospace;
+      font-size: 10.5px;
+      color: #9d9db0;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+
+    /* FLOATING BOTTOM DOCK */
+    .floating-dock-container {
+      position: absolute;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 740px;
+      padding: 0 16px;
+      z-index: 40;
+    }
+
+    .dock {
+      background: var(--bg-dock);
+      border: 1px solid var(--border-dock);
+      border-radius: 18px;
+      padding: 12px 14px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .dock-top-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .material-slot {
+      width: 64px;
+      height: 64px;
+      border-radius: 12px;
+      background: var(--bg-inner);
+      border: 1px dashed #32323f;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      flex-shrink: 0;
+      transition: border-color 0.15s, background 0.15s;
+      overflow: hidden;
+    }
+    .material-slot:hover { border-color: var(--accent-green); background: #20202a; }
+
+    .material-plus { font-size: 18px; color: #a1a1b0; line-height: 1; }
+    .material-text { font-size: 9.5px; font-family: monospace; color: var(--text-dim); font-weight: 600; margin-top: 2px; }
+    .material-thumb { width: 100%; height: 100%; object-fit: cover; }
+    .btn-del-material {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.85);
+      color: #fff;
+      border: none;
+      font-size: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    .dock-textarea-wrap {
+      flex: 1;
+      position: relative;
+    }
+
+    .dock-textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 13.5px;
+      font-family: inherit;
+      line-height: 1.5;
+      resize: none;
+      padding-top: 4px;
+      padding-right: 24px;
+      outline: none;
+    }
+    .dock-textarea::placeholder { color: #5a5a6c; }
+
+    .btn-expand-textarea {
+      position: absolute;
+      top: 4px;
+      right: 0;
+      background: transparent;
+      border: none;
+      color: #5a5a6c;
+      cursor: pointer;
+      padding: 2px;
+      transition: color 0.15s;
+    }
+    .btn-expand-textarea:hover { color: #fff; }
+
+    /* Dock Bottom Row */
+    .dock-bottom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid #1c1c24;
+      padding-top: 8px;
+    }
+
+    .dock-controls-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      overflow-x: auto;
+    }
+
+    .dock-pill {
+      background: var(--bg-pill);
+      border: none;
+      color: #c7c7d4;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-family: monospace;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.15s, color 0.15s;
+      position: relative;
+    }
+    .dock-pill:hover { background: var(--bg-pill-hover); color: #fff; }
+
+    .pill-dropdown-menu {
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 0;
+      background: #15151c;
+      border: 1px solid #282834;
+      border-radius: 12px;
+      padding: 4px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 60;
+      min-width: 160px;
+      max-height: 240px;
+      overflow-y: auto;
+    }
+    .pill-dropdown-menu.hidden { display: none; }
+
+    .dropdown-opt {
+      background: transparent;
+      border: none;
+      color: #c1c1cf;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-family: monospace;
+      text-align: left;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .dropdown-opt:hover { background: #22222d; color: #fff; }
+
+    .draft-mode-toggle {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: #7a7a8e;
+      user-select: none;
+    }
+
+    .toggle-switch {
+      width: 28px;
+      height: 16px;
+      background: #252530;
+      border-radius: 20px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .toggle-switch.on { background: var(--accent-green); }
+
+    .toggle-knob {
+      width: 12px;
+      height: 12px;
+      background: #8e8e9f;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.2s, background 0.2s;
+    }
+    .toggle-switch.on .toggle-knob {
+      transform: translateX(12px);
+      background: #000;
+    }
+
+    .btn-submit-generate {
+      background: var(--accent-green);
+      color: #000;
+      border: none;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: background 0.15s, transform 0.1s;
+      flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
+    }
+    .btn-submit-generate:hover { background: var(--accent-green-hover); }
+    .btn-submit-generate:active { transform: scale(0.97); }
+
+    /* MODAL */
+    .modal-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 100;
+      display: flex;
+      justify-content: flex-end;
+    }
+    .modal-drawer.hidden { display: none; }
+
+    .modal-pane {
+      width: 100%;
+      max-width: 420px;
+      height: 100%;
+      background: #111116;
+      border-left: 1px solid #23232e;
+      display: flex;
+      flex-direction: column;
+    }
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid #1c1c24;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .modal-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
   </style>
 </head>
-<body class="bg-black text-zinc-100 min-h-screen flex font-sans antialiased selection:bg-brand-accent/30 selection:text-white overflow-hidden">
+<body>
 
   <!-- ========================================== -->
-  <!-- 1. LEFT SIDEBAR (EXACT LUMINA RECREATION) -->
+  <!-- 1. LEFT SIDEBAR (LUMINA UI)               -->
   <!-- ========================================== -->
-  <aside id="sidebar" class="w-60 bg-brand-sidebar border-r border-zinc-800/80 flex flex-col justify-between flex-shrink-0 z-40 transition-all duration-300 select-none">
-    
-    <!-- Top Brand & Navigation -->
-    <div class="p-4 space-y-5">
-      <!-- Logo & Collapse Toggle -->
-      <div class="flex items-center justify-between">
-        <div class="flex items-center space-x-2.5 cursor-pointer" onclick="resetToHome()">
-          <!-- Lumina Starburst Icon -->
-          <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07L19.07 4.93"/>
+  <aside id="sidebar">
+    <div class="sidebar-top">
+      
+      <!-- Brand Logo -->
+      <div class="brand-row">
+        <div class="brand-logo" onclick="resetToHome()">
+          <!-- Lumina Starburst Icon (Fixed Dimensions 22x22) -->
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07L19.07 4.93"/>
           </svg>
-          <span class="text-lg font-bold tracking-tight text-white font-sans">Lumina</span>
+          <span>Lumina</span>
         </div>
-        <button onclick="toggleSidebar()" class="text-zinc-400 hover:text-white p-1 rounded hover:bg-zinc-800 transition">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"/></svg>
+        <button class="icon-btn" onclick="toggleSidebar()" title="Toggle Sidebar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
         </button>
       </div>
 
-      <!-- Home Nav -->
-      <a href="#" onclick="resetToHome()" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-semibold text-zinc-300 hover:text-white hover:bg-zinc-850/80 transition">
-        <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-        <span>Home</span>
-      </a>
+      <!-- Home Nav Item -->
+      <div class="nav-link" onclick="resetToHome()" style="cursor: pointer;">
+        <div class="nav-left">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span>Home</span>
+        </div>
+      </div>
 
-      <!-- NEW FEATURES HIGHLIGHT CARD -->
-      <div class="glow-feature-card rounded-2xl p-3.5 space-y-2 relative overflow-hidden">
-        <div class="text-[10px] font-mono text-zinc-400 uppercase tracking-wider font-semibold">New Features</div>
-        <div class="space-y-1.5 text-xs">
-          <div class="flex items-center space-x-2 text-zinc-200 hover:text-white cursor-pointer transition">
-            <span class="text-cyan-400 text-xs">❖</span>
-            <span class="font-medium">Canvas Agent</span>
-          </div>
-          <div class="flex items-center space-x-2 text-zinc-200 hover:text-white cursor-pointer transition">
-            <span class="text-emerald-400 text-xs">⊞</span>
-            <span class="font-medium">Layer Separation</span>
-          </div>
+      <!-- New Features Glow Card -->
+      <div class="feature-card">
+        <div class="feature-card-title">New Features</div>
+        <div class="feature-item">
+          <span style="color: var(--accent-cyan); font-size: 13px;">❖</span>
+          <span>Canvas Agent</span>
+        </div>
+        <div class="feature-item">
+          <span style="color: var(--accent-green); font-size: 13px;">⊞</span>
+          <span>Layer Separation</span>
         </div>
       </div>
 
       <!-- CREATION SECTION -->
-      <div class="space-y-1 pt-1">
-        <div class="text-[10px] font-mono text-zinc-500 uppercase tracking-wider px-3 font-semibold mb-1.5">CREATION</div>
-        
-        <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900 transition">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-          <span>Image</span>
+      <div class="nav-section">
+        <div class="nav-title">CREATION</div>
+        <a href="#" class="nav-link">
+          <div class="nav-left">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>
+            <span>Image</span>
+          </div>
         </a>
-
-        <!-- Video (Hot - Active) -->
-        <a href="#" class="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-white bg-zinc-850/90 border border-zinc-800 transition">
-          <div class="flex items-center space-x-3">
-            <svg class="w-4 h-4 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+        <a href="#" class="nav-link active">
+          <div class="nav-left">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--accent-orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg>
             <span>Video</span>
           </div>
-          <span class="text-[9px] bg-brand-orange/20 text-brand-orange border border-brand-orange/30 px-1.5 py-0.5 rounded font-mono font-bold">Hot</span>
+          <span class="badge-hot">Hot</span>
         </a>
-
-        <!-- Agent (New) -->
-        <a href="#" class="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900 transition">
-          <div class="flex items-center space-x-3">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+        <a href="#" class="nav-link">
+          <div class="nav-left">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16"></line><line x1="16" y1="16" x2="16" y2="16"></line></svg>
             <span>Agent</span>
           </div>
-          <span class="text-[9px] bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 px-1.5 py-0.5 rounded font-mono font-bold">New</span>
+          <span class="badge-new">New</span>
         </a>
-
-        <!-- Audio -->
-        <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900 transition">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
-          <span>Audio</span>
+        <a href="#" class="nav-link">
+          <div class="nav-left">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="18" cy="16" r="3"></circle></svg>
+            <span>Audio</span>
+          </div>
         </a>
       </div>
 
       <!-- TOOLS SECTION -->
-      <div class="space-y-1 pt-1">
-        <div class="text-[10px] font-mono text-zinc-500 uppercase tracking-wider px-3 font-semibold mb-1.5">TOOLS</div>
-
-        <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900 transition">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
-          <span>AI Apps</span>
+      <div class="nav-section">
+        <div class="nav-title">TOOLS</div>
+        <a href="#" class="nav-link">
+          <div class="nav-left">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+            <span>AI Apps</span>
+          </div>
         </a>
-
-        <!-- Canvas (New) -->
-        <a href="#" class="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900 transition">
-          <div class="flex items-center space-x-3">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/></svg>
+        <a href="#" class="nav-link">
+          <div class="nav-left">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"></path><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="M2 2l7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>
             <span>Canvas</span>
           </div>
-          <span class="text-[9px] bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 px-1.5 py-0.5 rounded font-mono font-bold">New</span>
+          <span class="badge-new">New</span>
         </a>
       </div>
 
     </div>
 
     <!-- Bottom Sidebar (Assets, Affiliate, Socials) -->
-    <div class="p-4 border-t border-zinc-800/80 space-y-3">
-      <a href="#" class="flex items-center space-x-3 px-3 py-1.5 rounded-xl text-xs text-zinc-400 hover:text-white transition">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
-        <span>Assets</span>
+    <div class="sidebar-bottom">
+      <a href="#" class="nav-link">
+        <div class="nav-left">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"></path></svg>
+          <span>Assets</span>
+        </div>
       </a>
-
-      <a href="#" class="flex items-center space-x-3 px-3 py-1.5 rounded-xl text-xs text-zinc-400 hover:text-white transition">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        <span>Affiliate</span>
+      <a href="#" class="nav-link">
+        <div class="nav-left">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><line x1="12" y1="18" x2="12" y2="6"></line></svg>
+          <span>Affiliate</span>
+        </div>
       </a>
-
-      <!-- Social Icons -->
-      <div class="flex items-center space-x-3 px-3 pt-2 text-zinc-500">
-        <svg class="w-4 h-4 hover:text-white cursor-pointer transition" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-        <span class="font-bold text-xs hover:text-white cursor-pointer transition">𝕏</span>
-        <svg class="w-4 h-4 hover:text-white cursor-pointer transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+      <div class="social-row">
+        <span>💬</span>
+        <span style="font-weight: 800; font-family: sans-serif;">𝕏</span>
+        <span>🌐</span>
       </div>
     </div>
   </aside>
@@ -180,183 +891,156 @@
   <!-- ========================================== -->
   <!-- 2. MAIN CENTER WORKSPACE                  -->
   <!-- ========================================== -->
-  <div class="flex-1 flex flex-col h-screen relative bg-black overflow-hidden">
+  <main class="main-viewport">
 
     <!-- TOP HEADER -->
-    <header class="h-14 px-6 flex items-center justify-between z-30 flex-shrink-0">
-      <!-- Left spacer -->
-      <div></div>
+    <header class="top-header">
+      <a href="#" class="header-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+        <span>Help</span>
+      </a>
+      <div class="header-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+      </div>
+      <div class="header-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 12 20 22 4 22 4 12"></polyline><rect x="2" y="7" width="20" height="5"></rect><line x1="12" y1="22" x2="12" y2="7"></line><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>
+      </div>
+      <div class="pricing-wrap header-link">
+        <span class="pricing-tag">66% OFF</span>
+        <span>Pricing</span>
+      </div>
+      <button class="btn-login">Login</button>
 
-      <!-- Right Header Controls -->
-      <div class="flex items-center space-x-4 text-xs font-medium text-zinc-400">
-        <a href="#" class="flex items-center space-x-1.5 hover:text-zinc-200 transition">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-          <span>Help</span>
-        </a>
-
-        <!-- Language Icon -->
-        <button class="hover:text-zinc-200 transition">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+      <div class="header-pills">
+        <button class="header-pill" onclick="showExploreAlert()">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon></svg>
+          <span>Explore</span>
         </button>
-
-        <!-- Gift Icon -->
-        <button class="hover:text-zinc-200 transition">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg>
+        <button class="header-pill" onclick="toggleHistoryModal(true)">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          <span>History</span>
         </button>
-
-        <!-- Pricing Badge (66% OFF) -->
-        <div class="relative">
-          <span class="absolute -top-2.5 right-0 bg-emerald-500 text-black text-[9px] font-bold px-1.5 py-0.2 rounded-full font-mono">66% OFF</span>
-          <a href="#" class="hover:text-zinc-200 transition">Pricing</a>
-        </div>
-
-        <!-- Login Button -->
-        <button class="px-3.5 py-1.5 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black font-semibold text-xs transition shadow-sm">
-          Login
-        </button>
-
-        <!-- Explore & History Pills -->
-        <div class="flex items-center space-x-1.5 pl-3 border-l border-zinc-800">
-          <button onclick="showExploreModal()" class="px-3 py-1.5 rounded-full bg-brand-pill hover:bg-brand-pillHover text-zinc-300 flex items-center space-x-1.5 transition">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"/></svg>
-            <span>Explore</span>
-          </button>
-          <button onclick="toggleHistoryModal(true)" class="px-3 py-1.5 rounded-full bg-brand-pill hover:bg-brand-pillHover text-zinc-300 flex items-center space-x-1.5 transition">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            <span>History</span>
-          </button>
-        </div>
       </div>
     </header>
 
-    <!-- CENTER CHAT & GENERATION VIEWPORT (Scrollable Area) -->
-    <div id="center-viewport" class="flex-1 overflow-y-auto px-4 sm:px-8 pb-48 flex flex-col items-center justify-center transition-all">
+    <!-- CENTER VIEWPORT (Scrollable) -->
+    <div id="center-viewport" class="center-workspace">
 
-      <!-- HERO STATE (Empty Workspace) -->
-      <div id="hero-empty-state" class="text-center space-y-4 my-auto select-none max-w-xl">
-        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-100 font-sans">
-          Light Up Your Creation With Lumina
-        </h1>
-        <p class="text-xs sm:text-sm text-zinc-500 font-mono">
-          Engineered with Lemo-OpusCar 99 Film Styles & Gemini CLI Pipeline
-        </p>
+      <!-- HERO EMPTY STATE -->
+      <div id="hero-empty-state" class="hero-title-box">
+        <h1 class="hero-title">Light Up Your Creation With Lumina</h1>
+        <p class="hero-subtitle">Lemo-OpusCar 99 Film Styles Engine &bull; Gemini CLI Video Pipeline</p>
       </div>
 
-      <!-- GENERATION FEED (Appears when video is being generated) -->
-      <div id="generation-feed" class="w-full max-w-4xl space-y-6 hidden pt-4">
-        <!-- Rendered by app.js -->
+      <!-- CHAT / GENERATION FEED (Shown when generating) -->
+      <div id="generation-feed" class="feed-container" style="display: none;">
+        <!-- Dynamically injected cards -->
       </div>
 
     </div>
 
     <!-- ============================================================== -->
-    <!-- 3. THE FLOATING BOTTOM DOCK (EXACT LUMINA RECREATION)          -->
+    <!-- 3. FLOATING BOTTOM DOCK (EXACT LUMINA RECREATION)              -->
     <!-- ============================================================== -->
-    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-full max-w-3xl px-4 z-40">
-      <div class="bg-brand-dock border border-brand-dockBorder rounded-2xl p-3 shadow-2xl space-y-2 backdrop-blur-xl">
+    <div class="floating-dock-container">
+      <div class="dock">
 
         <!-- Top Input & Material Row -->
-        <div class="flex items-start gap-3">
+        <div class="dock-top-row">
 
-          <!-- + material Slot (Drag & Drop or Click Upload) -->
-          <div onclick="document.getElementById('file-material-input').click()" class="relative w-16 h-16 rounded-xl bg-brand-inner border border-dashed border-zinc-700/80 hover:border-brand-accent flex flex-col items-center justify-center cursor-pointer flex-shrink-0 transition group overflow-hidden">
-            <input type="file" id="file-material-input" class="hidden" accept="image/*" onchange="handleMaterialUpload(event)">
+          <!-- + material Slot -->
+          <div class="material-slot" onclick="document.getElementById('file-material-input').click()">
+            <input type="file" id="file-material-input" style="display: none;" accept="image/*" onchange="handleMaterialUpload(event)">
             
-            <div id="material-placeholder" class="text-center space-y-0.5">
-              <span class="text-base text-zinc-400 group-hover:scale-110 block transition-transform">+</span>
-              <span class="text-[10px] font-mono text-zinc-500 font-medium block">material</span>
+            <div id="material-placeholder" style="text-align: center;">
+              <span class="material-plus">+</span>
+              <span class="material-text">material</span>
             </div>
 
             <!-- Thumbnail Preview Image -->
-            <img id="material-preview-img" src="" alt="Material" class="w-full h-full object-cover hidden">
-            
-            <!-- Remove Button -->
-            <button onclick="removeMaterial(event)" id="btn-remove-material" class="absolute top-1 right-1 bg-black/80 rounded-full w-4 h-4 text-[9px] text-zinc-300 hover:text-red-400 flex items-center justify-center hidden">✕</button>
+            <img id="material-preview-img" src="" alt="Material" class="material-thumb" style="display: none;">
+            <button onclick="removeMaterial(event)" id="btn-del-material" class="btn-del-material" style="display: none;">✕</button>
           </div>
 
           <!-- Prompt Textarea -->
-          <div class="flex-1 relative">
-            <textarea id="dock-prompt-input" rows="2" class="w-full bg-transparent text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none resize-none font-sans leading-relaxed pt-1 pr-6" placeholder="Describe the video scene you want to generate" onkeydown="handleInputKeydown(event)"></textarea>
-            
-            <!-- Expand Button (⤢) -->
-            <button onclick="toggleExpandPrompt()" class="absolute top-1 right-0 text-zinc-500 hover:text-white p-1 rounded transition" title="Expand Prompt">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+          <div class="dock-textarea-wrap">
+            <textarea id="dock-prompt-input" rows="2" class="dock-textarea" placeholder="Describe the video scene you want to generate" onkeydown="handleInputKeydown(event)"></textarea>
+            <button class="btn-expand-textarea" onclick="toggleExpandPrompt()" title="Expand Prompt">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
             </button>
           </div>
 
         </div>
 
         <!-- Bottom Controls Row inside Dock -->
-        <div class="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-zinc-800/60 text-xs font-mono">
-          
-          <!-- Left Options Group -->
-          <div class="flex items-center space-x-2 overflow-x-auto">
-            
-            <!-- AI Video Mode Dropdown -->
-            <div class="relative">
-              <button onclick="toggleDropdown('dropdown-mode')" class="px-2.5 py-1 rounded-lg bg-brand-pill hover:bg-brand-pillHover text-zinc-300 flex items-center space-x-1.5 transition">
+        <div class="dock-bottom-row">
+
+          <!-- Left Pill Buttons -->
+          <div class="dock-controls-left">
+
+            <!-- AI Video Mode -->
+            <div style="position: relative;">
+              <button class="dock-pill" onclick="toggleDropdown('menu-mode', event)">
                 <span>🎥</span>
-                <span id="current-mode-label">AI Video</span>
-                <span class="text-[10px] text-zinc-500">▾</span>
+                <span id="label-mode">AI Video</span>
+                <span style="font-size: 8px; color: #777;">▾</span>
               </button>
-              <div id="dropdown-mode" class="absolute bottom-8 left-0 w-36 bg-zinc-900 border border-zinc-800 rounded-xl p-1 shadow-xl hidden z-50">
-                <button onclick="selectMode('AI Video')" class="w-full text-left px-2 py-1 text-xs text-zinc-300 hover:text-white hover:bg-zinc-800 rounded">🎥 AI Video</button>
-                <button onclick="selectMode('Market Intel')" class="w-full text-left px-2 py-1 text-xs text-zinc-300 hover:text-white hover:bg-zinc-800 rounded">📊 Market Intel</button>
-                <button onclick="selectMode('Script Agent')" class="w-full text-left px-2 py-1 text-xs text-zinc-300 hover:text-white hover:bg-zinc-800 rounded">✍️ Script Agent</button>
+              <div id="menu-mode" class="pill-dropdown-menu hidden">
+                <button class="dropdown-opt" onclick="selectMode('AI Video')">🎥 AI Video</button>
+                <button class="dropdown-opt" onclick="selectMode('Market Intel')">📊 Market Intel</button>
+                <button class="dropdown-opt" onclick="selectMode('Script Agent')">✍️ Script Agent</button>
               </div>
             </div>
 
-            <!-- Seedance 2.5 / 99 Lemo-OpusCar Styles Dropdown -->
-            <div class="relative">
-              <button onclick="toggleDropdown('dropdown-styles')" class="px-2.5 py-1 rounded-lg bg-brand-pill hover:bg-brand-pillHover text-zinc-300 flex items-center space-x-1.5 transition">
+            <!-- 99 Lemo-OpusCar Styles -->
+            <div style="position: relative;">
+              <button class="dock-pill" onclick="toggleDropdown('menu-styles', event)">
                 <span>🌐</span>
-                <span id="current-style-label" class="truncate max-w-[110px]">brick-toy</span>
-                <span class="text-[10px] text-zinc-500">▾</span>
+                <span id="label-style" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis;">brick-toy</span>
+                <span style="font-size: 8px; color: #777;">▾</span>
               </button>
-              <div id="dropdown-styles" class="absolute bottom-8 left-0 w-64 max-h-60 overflow-y-auto bg-zinc-900 border border-zinc-800 rounded-xl p-1 shadow-2xl hidden z-50 custom-scrollbar">
-                <div class="text-[10px] text-zinc-500 px-2 py-1 font-bold">99 LEMO-OPUSCAR STYLES:</div>
-                <div id="styles-dropdown-list">
+              <div id="menu-styles" class="pill-dropdown-menu hidden" style="width: 230px;">
+                <div style="font-size: 9.5px; color: #666; padding: 4px 8px; font-weight: 700;">99 LEMO-OPUSCAR STYLES:</div>
+                <div id="styles-list-container">
                   <!-- Rendered by JS -->
                 </div>
               </div>
             </div>
 
-            <!-- Adaptive 480p 4s / Aspect & Duration Dropdown -->
-            <div class="relative">
-              <button onclick="toggleDropdown('dropdown-aspect')" class="px-2.5 py-1 rounded-lg bg-brand-pill hover:bg-brand-pillHover text-zinc-300 flex items-center space-x-1.5 transition">
+            <!-- Aspect & Duration -->
+            <div style="position: relative;">
+              <button class="dock-pill" onclick="toggleDropdown('menu-aspect', event)">
                 <span>⊞</span>
-                <span id="current-aspect-label">Adaptive 16:9 30s</span>
-                <span class="text-[10px] text-zinc-500">▾</span>
+                <span id="label-aspect">Adaptive 16:9 30s</span>
+                <span style="font-size: 8px; color: #777;">▾</span>
               </button>
-              <div id="dropdown-aspect" class="absolute bottom-8 left-0 w-48 bg-zinc-900 border border-zinc-800 rounded-xl p-1 shadow-xl hidden z-50">
-                <button onclick="selectAspect('16:9', 30, 'Adaptive 16:9 30s')" class="w-full text-left px-2 py-1 text-xs text-zinc-300 hover:text-white hover:bg-zinc-800 rounded">16:9 1080p (30s TVC)</button>
-                <button onclick="selectAspect('9:16', 15, 'Vertical 9:16 15s')" class="w-full text-left px-2 py-1 text-xs text-zinc-300 hover:text-white hover:bg-zinc-800 rounded">9:16 (TikTok 15s)</button>
-                <button onclick="selectAspect('1:1', 15, 'Square 1:1 15s')" class="w-full text-left px-2 py-1 text-xs text-zinc-300 hover:text-white hover:bg-zinc-800 rounded">1:1 (Instagram 15s)</button>
+              <div id="menu-aspect" class="pill-dropdown-menu hidden" style="width: 180px;">
+                <button class="dropdown-opt" onclick="selectAspect('16:9', 30, 'Adaptive 16:9 30s')">16:9 1080p (30s TVC)</button>
+                <button class="dropdown-opt" onclick="selectAspect('9:16', 15, 'Vertical 9:16 15s')">9:16 (TikTok 15s)</button>
+                <button class="dropdown-opt" onclick="selectAspect('1:1', 15, 'Square 1:1 15s')">1:1 (Instagram 15s)</button>
               </div>
             </div>
 
             <!-- Draft Mode Toggle -->
-            <div class="flex items-center space-x-1.5 px-2 py-1">
-              <span class="text-zinc-500 text-[11px]">Draft mode</span>
-              <button onclick="toggleDraftMode()" id="draft-toggle-btn" class="w-7 h-4 bg-zinc-800 rounded-full relative transition">
-                <span id="draft-toggle-dot" class="w-3 h-3 bg-zinc-400 rounded-full absolute top-0.5 left-0.5 transition-all"></span>
-              </button>
+            <div class="draft-mode-toggle" onclick="toggleDraftMode()">
+              <span>Draft mode</span>
+              <div class="toggle-switch" id="draft-toggle-switch">
+                <div class="toggle-knob"></div>
+              </div>
             </div>
 
-            <!-- Batch Dropdown -->
-            <div class="relative">
-              <button class="px-2 py-1 rounded-lg bg-brand-pill hover:bg-brand-pillHover text-zinc-400 flex items-center space-x-1 transition">
-                <span>Batch 1</span>
-                <span class="text-[10px] text-zinc-600">▾</span>
-              </button>
-            </div>
+            <!-- Batch 1 -->
+            <button class="dock-pill">
+              <span>Batch 1</span>
+              <span style="font-size: 8px; color: #777;">▾</span>
+            </button>
 
           </div>
 
-          <!-- Right Submit Generate Button (+ 84) -->
-          <button onclick="submitGenerateVideo()" id="btn-dock-submit" class="px-3.5 py-1 rounded-full bg-brand-accent hover:bg-brand-accentHover text-zinc-950 font-bold flex items-center space-x-1.5 transition shadow-lg shadow-emerald-500/20 flex-shrink-0">
+          <!-- Right Submit Generate Button -->
+          <button class="btn-submit-generate" id="btn-submit-generate" onclick="submitGenerateVideo()">
             <span>✨</span>
-            <span id="btn-submit-text">+ 84</span>
+            <span id="btn-submit-label">+ 84</span>
           </button>
 
         </div>
@@ -364,20 +1048,18 @@
       </div>
     </div>
 
-  </div>
+  </main>
 
   <!-- ========================================== -->
-  <!-- 4. MODAL: HISTORY DRAWER                   -->
+  <!-- 4. HISTORY DRAWER MODAL                    -->
   <!-- ========================================== -->
-  <div id="history-modal" class="fixed inset-0 z-50 flex items-center justify-end p-0 bg-black/70 modal-backdrop-blur hidden">
-    <div class="bg-zinc-900 border-l border-zinc-800 w-full max-w-md h-full flex flex-col shadow-2xl">
-      <div class="p-4 border-b border-zinc-800 flex items-center justify-between">
-        <div class="flex items-center space-x-2 text-sm font-bold text-white font-mono">
-          <span>🕒 Lịch Sử Tạo Video</span>
-        </div>
-        <button onclick="toggleHistoryModal(false)" class="text-zinc-400 hover:text-white p-1 rounded hover:bg-zinc-800 transition">✕</button>
+  <div id="history-modal" class="modal-drawer hidden" onclick="toggleHistoryModal(false)">
+    <div class="modal-pane" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <span style="font-size: 14px; font-weight: 700; color: #fff;">🕒 Lịch Sử Video Đã Tạo</span>
+        <button class="icon-btn" onclick="toggleHistoryModal(false)">✕</button>
       </div>
-      <div id="history-items-list" class="flex-1 overflow-y-auto p-4 space-y-3">
+      <div class="modal-body" id="history-items-list">
         <!-- Rendered by JS -->
       </div>
     </div>
