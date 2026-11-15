@@ -1,13 +1,13 @@
 @echo off
-title Lemo OpusCar Studio - 99 Film Styles Video Generator
+title Lumina AI Studio - Lemo-OpusCar & Gemini CLI Backend
 echo ========================================================
-echo       LEMO OPUSCAR STUDIO - 99 FILM STYLES GENERATOR
-echo       Thiet ke theo tieu chuan Unslop Craft
+echo       LUMINA AI VIDEO STUDIO - OPUSCAR BACKEND
+echo       API Gemini CLI & Lemo-OpusCar 99 Styles
 echo ========================================================
 echo.
-echo Dang khoi dong may chu noi bo tai cong 8086...
+echo Dang khoi dong Backend Python tai cong 8086...
 echo Truy cap tai: http://localhost:8086
 echo.
 start http://localhost:8086
-python -m http.server 8086 --directory tools/opuscar-studio
+python tools/opuscar-studio/server.py
 pause

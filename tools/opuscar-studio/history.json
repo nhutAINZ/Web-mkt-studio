@@ -1,0 +1,71 @@
+[
+  {
+    "id": "film_1794720808_c206d0",
+    "title": "Xe dua bien hinh robot lego",
+    "prompt": "Xe dua bien hinh robot lego",
+    "style": "brick-toy",
+    "aspect": "16:9",
+    "duration": 30,
+    "draft": false,
+    "material": "",
+    "filmUrl": "/generated_films/film_1794720808_c206d0/index.html",
+    "renderCmd": "cd ~/lemo-opuscar\nnode core/render/still.mjs \"films/film_1794720808_c206d0\" 1.5 3 --style \"brick-toy\" --ar \"16:9\"\n./build.sh --fps 30 --crf 18 --output \"films/film_1794720808_c206d0/output_brick-toy_16x9.mp4\"",
+    "shots": [
+      {
+        "num": 1,
+        "title": "Shot 1: Mở Đầu Đại Cảnh (Establishing Shot)",
+        "time": "00:00 - 00:05",
+        "camera": "Dolly In 4K",
+        "desc": "Bối cảnh rực rỡ ánh sáng, Xe dua bien hinh robot lego... xuất hiện ấn tượng.",
+        "vo": "Nữ truyền cảm: Mỗi buổi sáng là một cuộc phiêu lưu kỳ thú...",
+        "img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "num": 2,
+        "title": "Shot 2: Cơ Chế Cơ Khí & Biến Hình (Mechanism)",
+        "time": "00:05 - 00:10",
+        "camera": "Orbit 360° Macro",
+        "desc": "Các mảnh ghép chuyển động nổ tung, tự động lắp ghép ăn khớp nhịp giật stop-motion.",
+        "vo": "Nữ truyền cảm: Tự động bung cánh lượn biến hình thành chiến binh...",
+        "img": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "num": 3,
+        "title": "Shot 3: Hành Động Tốc Độ (Dynamic Action)",
+        "time": "00:10 - 00:18",
+        "camera": "Dutch Tilt 124 BPM",
+        "desc": "Lướt qua các chướng ngại vật mạo hiểm, ánh đèn LED rực rỡ xé toạc màn sương.",
+        "vo": "Âm thanh: Tiếng động cơ phản lực dồn dập, tiếng vút gió sinh động.",
+        "img": "https://images.unsplash.com/photo-1594787318286-3d835c1d207f?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "num": 4,
+        "title": "Shot 4: Biểu Cảm Em Bé & Phụ Huynh (Emotion Reaction)",
+        "time": "00:18 - 00:22",
+        "camera": "Medium Close-up Warm",
+        "desc": "Bé 6 tuổi reo hò vỗ tay mừng rỡ, ánh mắt lấp lánh nụ cười rạng rỡ.",
+        "vo": "Nữ truyền cảm: Kích hoạt trí tưởng tượng vô hạn của con bạn.",
+        "img": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "num": 5,
+        "title": "Shot 5: Chi Tiết Sản Phẩm & An Toàn (Safety Showcase)",
+        "time": "00:22 - 00:26",
+        "camera": "Top-down Flatlay",
+        "desc": "Vật liệu nhựa nguyên sinh ABS chứng nhận CARU & COPPA an toàn 100%.",
+        "vo": "Nữ tự tin: Tiêu chuẩn an toàn Châu Âu và Mỹ nghiêm ngặt nhất.",
+        "img": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=600&q=80"
+      },
+      {
+        "num": 6,
+        "title": "Shot 6: Kêu Gọi Mua Hàng & Affiliate (Call To Action)",
+        "time": "00:26 - 00:30",
+        "camera": "Hero Center Glow",
+        "desc": "Sản phẩm tạo dáng anh hùng, logo và đường link mua hàng giảm giá 30%.",
+        "vo": "Nữ tự tin: Khám phá ngay trên TikTok Shop & Amazon với ưu đãi hôm nay!",
+        "img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=600&q=80"
+      }
+    ],
+    "timestamp": "2026-11-15 12:33:28"
+  }
+]

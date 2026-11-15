@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lemo OpusCar Studio - Xưởng Sản Xuất Video AI & Khảo Sát Thị Trường</title>
+  <title>Lumina - AI Video Production Studio (Lemo-OpusCar & Gemini CLI)</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts: Inter & JetBrains Mono (Unslop Standard) -->
+  <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -18,30 +18,20 @@
           fontFamily: {
             sans: ['Inter', 'sans-serif'],
             mono: ['"JetBrains Mono"', 'monospace'],
-            editorial: ['Newsreader', 'serif'],
           },
           colors: {
-            zinc: {
-              950: '#070709',
-              900: '#0f0f13',
-              850: '#16161c',
-              800: '#22222a',
-              700: '#383844',
-              600: '#4e4e5c',
-              400: '#9b9ba8',
-              300: '#cfcfe0',
-              200: '#e5e5f0',
-              100: '#f4f4fa',
-            },
-            accent: {
-              DEFAULT: '#f59e0b',
-              hover: '#d97706',
-              subtle: 'rgba(245, 158, 11, 0.08)',
-              border: 'rgba(245, 158, 11, 0.25)',
-            },
-            cyan: {
-              DEFAULT: '#06b6d4',
-              dim: 'rgba(6, 182, 212, 0.12)'
+            brand: {
+              bg: '#000000',
+              sidebar: '#070709',
+              dock: '#131318',
+              dockBorder: '#26262e',
+              dockInner: '#1a1a22',
+              pill: '#1e1e26',
+              pillHover: '#2a2a36',
+              accent: '#10b981', // Lumina teal/green
+              accentHover: '#059669',
+              orange: '#f97316',
+              cyan: '#06b6d4'
             }
           }
         }
@@ -49,487 +39,349 @@
     }
   </script>
   <style>
-    /* Custom clean scrollbar */
-    ::-webkit-scrollbar { width: 6px; height: 6px; }
-    ::-webkit-scrollbar-track { background: #070709; }
+    /* Custom clean dark scrollbar */
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #000000; }
     ::-webkit-scrollbar-thumb { background: #22222a; border-radius: 3px; }
-    ::-webkit-scrollbar-thumb:hover { background: #383844; }
+    ::-webkit-scrollbar-thumb:hover { background: #33333f; }
 
-    /* Studio Background Canvas */
-    #studio-bg-canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 0;
-      pointer-events: none;
-      opacity: 0.85;
-    }
-
-    /* Studio Floor Vignette */
-    .studio-vignette {
-      background: radial-gradient(circle at 50% 20%, rgba(245, 158, 11, 0.03) 0%, rgba(7, 7, 9, 0.82) 65%, #070709 100%);
-    }
-
-    /* Ambient Workshop Scanline Effect */
-    .studio-scanline {
-      background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.015), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.015));
-      background-size: 100% 3px, 6px 100%;
+    /* New feature gradient card */
+    .glow-feature-card {
+      background: radial-gradient(circle at 100% 0%, rgba(6, 182, 212, 0.25) 0%, rgba(16, 185, 129, 0.08) 50%, rgba(19, 19, 24, 0.95) 100%);
+      border: 1px solid rgba(6, 182, 212, 0.35);
     }
 
     .modal-backdrop-blur {
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
   </style>
 </head>
-<body class="bg-zinc-950 text-zinc-100 min-h-screen flex flex-col font-sans antialiased selection:bg-amber-500/30 selection:text-amber-200 relative overflow-x-hidden">
+<body class="bg-black text-zinc-100 min-h-screen flex font-sans antialiased selection:bg-brand-accent/30 selection:text-white overflow-hidden">
 
-  <!-- 1. BACKGROUND: XƯỞNG SẢN XUẤT VIDEO AI (Interactive Ambient Canvas) -->
-  <canvas id="studio-bg-canvas"></canvas>
-  <div class="fixed inset-0 studio-vignette pointer-events-none z-0"></div>
-
-  <!-- 2. STUDIO TELEMETRY HEADER (Quiet Chrome) -->
-  <header class="relative z-30 border-b border-zinc-800/80 bg-zinc-900/90 backdrop-blur-md sticky top-0">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
-      <!-- Studio Brand & Node Status -->
-      <div class="flex items-center space-x-3.5">
-        <div class="w-8 h-8 rounded-lg bg-zinc-850 border border-zinc-700/80 flex items-center justify-center text-amber-400 font-mono text-sm font-bold shadow-inner">
-          ⚡
+  <!-- ========================================== -->
+  <!-- 1. LEFT SIDEBAR (EXACT LUMINA RECREATION) -->
+  <!-- ========================================== -->
+  <aside id="sidebar" class="w-60 bg-brand-sidebar border-r border-zinc-800/80 flex flex-col justify-between flex-shrink-0 z-40 transition-all duration-300 select-none">
+    
+    <!-- Top Brand & Navigation -->
+    <div class="p-4 space-y-5">
+      <!-- Logo & Collapse Toggle -->
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2.5 cursor-pointer" onclick="resetToHome()">
+          <!-- Lumina Starburst Icon -->
+          <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07L19.07 4.93"/>
+          </svg>
+          <span class="text-lg font-bold tracking-tight text-white font-sans">Lumina</span>
         </div>
-        <div>
-          <div class="flex items-center space-x-2">
-            <span class="text-sm font-bold tracking-tight text-white font-mono">OPUSCAR STUDIO</span>
-            <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-400">v2.4 Pro</span>
-          </div>
-          <p class="text-[11px] text-zinc-400">Xưởng Sản Xuất Phim Hoạt Hình AI Đồ Chơi</p>
-        </div>
-      </div>
-
-      <!-- Workshop Telemetry (Node Racks, Three.js 60FPS, Child Safety) -->
-      <div class="hidden md:flex items-center space-x-5 text-xs font-mono">
-        <div class="flex items-center space-x-1.5 text-zinc-400">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span>GPU Render Farm: <strong class="text-zinc-200">RTX 4090x4 (Online)</strong></span>
-        </div>
-        <div class="flex items-center space-x-1.5 text-zinc-400">
-          <span class="w-2 h-2 rounded-full bg-cyan"></span>
-          <span>Lemo Engine: <strong class="text-zinc-200">99 Styles Loaded</strong></span>
-        </div>
-        <div class="flex items-center space-x-1.5 text-amber-400/90 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded">
-          <span>🛡️ CARU / COPPA: <strong class="text-amber-300">Certified</strong></span>
-        </div>
-      </div>
-
-      <!-- Quick Actions -->
-      <div class="flex items-center space-x-2.5">
-        <button onclick="toggleMarketModal(true)" class="px-3 py-1.5 text-xs font-semibold rounded-lg bg-cyan-dim hover:bg-cyan/20 border border-cyan/30 text-cyan flex items-center space-x-1.5 transition font-mono">
-          <span>📊</span>
-          <span>Tìm Thị Trường</span>
+        <button onclick="toggleSidebar()" class="text-zinc-400 hover:text-white p-1 rounded hover:bg-zinc-800 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"/></svg>
         </button>
-        <a href="../toy-studio-hub/index.html" class="px-3 py-1.5 text-xs font-medium rounded-lg bg-zinc-800 hover:bg-zinc-700/80 border border-zinc-700 text-zinc-300 transition font-mono">
-          Hub Điều Hành &rarr;
+      </div>
+
+      <!-- Home Nav -->
+      <a href="#" onclick="resetToHome()" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-semibold text-zinc-300 hover:text-white hover:bg-zinc-850/80 transition">
+        <svg class="w-4 h-4 text-zinc-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+        <span>Home</span>
+      </a>
+
+      <!-- NEW FEATURES HIGHLIGHT CARD -->
+      <div class="glow-feature-card rounded-2xl p-3.5 space-y-2 relative overflow-hidden">
+        <div class="text-[10px] font-mono text-zinc-400 uppercase tracking-wider font-semibold">New Features</div>
+        <div class="space-y-1.5 text-xs">
+          <div class="flex items-center space-x-2 text-zinc-200 hover:text-white cursor-pointer transition">
+            <span class="text-cyan-400 text-xs">❖</span>
+            <span class="font-medium">Canvas Agent</span>
+          </div>
+          <div class="flex items-center space-x-2 text-zinc-200 hover:text-white cursor-pointer transition">
+            <span class="text-emerald-400 text-xs">⊞</span>
+            <span class="font-medium">Layer Separation</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CREATION SECTION -->
+      <div class="space-y-1 pt-1">
+        <div class="text-[10px] font-mono text-zinc-500 uppercase tracking-wider px-3 font-semibold mb-1.5">CREATION</div>
+        
+        <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <span>Image</span>
+        </a>
+
+        <!-- Video (Hot - Active) -->
+        <a href="#" class="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold text-white bg-zinc-850/90 border border-zinc-800 transition">
+          <div class="flex items-center space-x-3">
+            <svg class="w-4 h-4 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+            <span>Video</span>
+          </div>
+          <span class="text-[9px] bg-brand-orange/20 text-brand-orange border border-brand-orange/30 px-1.5 py-0.5 rounded font-mono font-bold">Hot</span>
+        </a>
+
+        <!-- Agent (New) -->
+        <a href="#" class="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900 transition">
+          <div class="flex items-center space-x-3">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+            <span>Agent</span>
+          </div>
+          <span class="text-[9px] bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 px-1.5 py-0.5 rounded font-mono font-bold">New</span>
+        </a>
+
+        <!-- Audio -->
+        <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+          <span>Audio</span>
         </a>
       </div>
-    </div>
-  </header>
 
-  <!-- 3. MAIN WORKSPACE -->
-  <main class="relative z-20 flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 space-y-7">
+      <!-- TOOLS SECTION -->
+      <div class="space-y-1 pt-1">
+        <div class="text-[10px] font-mono text-zinc-500 uppercase tracking-wider px-3 font-semibold mb-1.5">TOOLS</div>
 
-    <!-- ============================================================== -->
-    <!-- HERO COMPONENT: 1 THANH CÔNG CỤ NHẬP Ý TƯỞNG (AI COMMAND BAR) -->
-    <!-- ============================================================== -->
-    <section class="bg-zinc-900/95 border border-zinc-700/80 rounded-2xl p-4 sm:p-5 shadow-2xl backdrop-blur-xl relative overflow-hidden">
-      <!-- Glow ambient top accent -->
-      <div class="absolute top-0 left-1/4 right-1/4 h-[2px] bg-gradient-to-r from-transparent via-amber-400/80 to-transparent"></div>
+        <a href="#" class="flex items-center space-x-3 px-3 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+          <span>AI Apps</span>
+        </a>
 
-      <div class="space-y-4">
-        <!-- Top Toolbar Header -->
-        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-zinc-800 pb-3">
-          <div class="flex items-center space-x-2 text-xs font-mono text-zinc-400">
-            <span class="text-amber-400 font-bold">PROMPT COMMAND BAR</span>
-            <span class="text-zinc-600">&bull;</span>
-            <span>Nhập ý tưởng cốt truyện hoặc tải ảnh đồ chơi để xưởng AI bắt đầu dựng phim</span>
-          </div>
-
-          <!-- Quick Market Tag Badge -->
-          <div id="active-market-tag" class="hidden sm:flex items-center space-x-1.5 text-xs font-mono bg-zinc-800/80 px-2.5 py-1 rounded-md border border-zinc-700">
-            <span class="text-zinc-500">Mục tiêu:</span>
-            <span class="text-amber-400 font-semibold" id="market-tag-name">Thị trường Mỹ (US) &bull; LEGO / Robot</span>
-          </div>
-        </div>
-
-        <!-- THE MAIN INPUT BAR -->
-        <div class="relative flex flex-col md:flex-row items-stretch gap-2.5">
-          <!-- Text Prompt Field -->
-          <div class="relative flex-1">
-            <div class="absolute top-3.5 left-3.5 text-zinc-500 pointer-events-none">
-              <svg class="w-5 h-5 text-amber-400/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-            </div>
-            <textarea id="hero-prompt-input" rows="2" class="w-full bg-zinc-950/90 border border-zinc-700/90 hover:border-zinc-600 focus:border-amber-400/90 text-sm sm:text-base text-zinc-100 pl-11 pr-4 py-3 rounded-xl focus:outline-none transition leading-relaxed placeholder:text-zinc-600 font-mono resize-none shadow-inner" placeholder="Nhập ý tưởng video AI... Ví dụ: Siêu xe đua lego biến hình mini tự bung cánh lượn, lướt qua tháp lâu đài và biến thành robot chiến binh chào em bé..."></textarea>
-          </div>
-
-          <!-- Action Buttons Group -->
-          <div class="flex items-stretch space-x-2">
-            <!-- Add Image Button -->
-            <button onclick="triggerImageUploadModal()" class="px-3.5 py-2.5 bg-zinc-850 hover:bg-zinc-800 border border-zinc-700 text-zinc-200 hover:text-white rounded-xl text-xs font-mono flex flex-col items-center justify-center space-y-1 transition group">
-              <span class="text-base group-hover:scale-110 transition-transform">🖼️</span>
-              <span class="whitespace-nowrap font-medium text-[11px]" id="btn-add-img-label">+ Thêm Hình</span>
-            </button>
-
-            <!-- Market Finder Button -->
-            <button onclick="toggleMarketModal(true)" class="px-3.5 py-2.5 bg-zinc-850 hover:bg-zinc-800 border border-zinc-700 text-cyan hover:text-cyan-200 rounded-xl text-xs font-mono flex flex-col items-center justify-center space-y-1 transition group">
-              <span class="text-base group-hover:scale-110 transition-transform">📊</span>
-              <span class="whitespace-nowrap font-medium text-[11px]">Tìm Thị Trường</span>
-            </button>
-
-            <!-- Primary Generate Button -->
-            <button onclick="generateFromHeroBar()" id="btn-hero-generate" class="px-5 py-2.5 bg-amber-400 hover:bg-amber-300 active:bg-amber-500 text-zinc-950 font-mono font-bold rounded-xl text-sm flex flex-col items-center justify-center transition shadow-lg shadow-amber-500/20 whitespace-nowrap">
-              <div class="flex items-center space-x-1.5">
-                <span>🚀</span>
-                <span>SẢN XUẤT VIDEO</span>
-              </div>
-              <span class="text-[10px] text-zinc-900 font-semibold tracking-wider opacity-80 uppercase mt-0.5">Render AI Pipeline</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Quick Parameter Selectors & Chips Bar -->
-        <div class="flex flex-wrap items-center justify-between gap-3 pt-1 text-xs">
-          <!-- Parameter Dropdowns -->
-          <div class="flex flex-wrap items-center gap-2">
-            <!-- Style Selector -->
-            <div class="flex items-center space-x-1.5 bg-zinc-950 border border-zinc-800 px-2.5 py-1.5 rounded-lg">
-              <span class="text-zinc-500 font-mono text-[11px]">Phong Cách:</span>
-              <select id="hero-style-select" onchange="onStyleDropdownChange(this.value)" class="bg-transparent text-amber-400 font-mono font-semibold text-xs focus:outline-none cursor-pointer">
-                <optgroup label="Đồ Chơi & Stop-Motion (Toy & Craft)">
-                  <option value="brick-toy" selected>brick-toy (Lego Stop-Motion)</option>
-                  <option value="teardown">teardown (Bản vẽ CAD nổ tách)</option>
-                  <option value="claymation">claymation (Đất nặn thủ công)</option>
-                  <option value="paper-popup">paper-popup (Sách 3D mở ra)</option>
-                  <option value="tilt-shift">tilt-shift (Thế giới đồ chơi tí hon)</option>
-                  <option value="crayon-world">crayon-world (Thế giới sáp màu)</option>
-                </optgroup>
-                <optgroup label="Hội Họa & Mỹ Thuật (Art & Paint)">
-                  <option value="watercolor">watercolor (Màu nước thủy mặc)</option>
-                  <option value="impasto">impasto (Sơn dầu đắp nổi Van Gogh)</option>
-                  <option value="ukiyoe">ukiyoe (Tranh khắc gỗ Phù Thế Họa)</option>
-                </optgroup>
-                <optgroup label="Kỹ Thuật & CAD (Tech & Blueprint)">
-                  <option value="blueprint">blueprint (Bản vẽ kỹ thuật xanh)</option>
-                  <option value="cyberpunk-hud">cyberpunk-hud (Giao diện Hologram)</option>
-                  <option value="wireframe">wireframe (Lưới 3D đa giác xoay)</option>
-                </optgroup>
-                <optgroup label="Retro & Hoạt Hình Cổ Điển">
-                  <option value="rubber-hose">rubber-hose (Hoạt hình 1930s)</option>
-                  <option value="pixel-art">pixel-art (Game 16-bit hoài niệm)</option>
-                  <option value="anime-cel">anime-cel (Cel-shading Nhật Bản)</option>
-                </optgroup>
-              </select>
-            </div>
-
-            <!-- Aspect Ratio Selector -->
-            <div class="flex items-center space-x-1.5 bg-zinc-950 border border-zinc-800 px-2.5 py-1.5 rounded-lg">
-              <span class="text-zinc-500 font-mono text-[11px]">Tỷ Lệ:</span>
-              <select id="hero-aspect-select" onchange="onHeroAspectChange(this.value)" class="bg-transparent text-zinc-200 font-mono text-xs focus:outline-none cursor-pointer">
-                <option value="16:9" selected>16:9 Ngang (TVC / YouTube)</option>
-                <option value="9:16">9:16 Dọc (TikTok / Reels / Shorts)</option>
-                <option value="1:1">1:1 Vuông (Instagram Feed)</option>
-              </select>
-            </div>
-
-            <!-- Duration Selector -->
-            <div class="flex items-center space-x-1.5 bg-zinc-950 border border-zinc-800 px-2.5 py-1.5 rounded-lg">
-              <span class="text-zinc-500 font-mono text-[11px]">Thời Lượng:</span>
-              <select id="hero-duration-select" onchange="onHeroDurationChange(this.value)" class="bg-transparent text-zinc-200 font-mono text-xs focus:outline-none cursor-pointer">
-                <option value="15">15s (TikTok Hook)</option>
-                <option value="30" selected>30s (TVC Chuẩn)</option>
-                <option value="45">45s (Chiến Dịch Mùa Vụ)</option>
-                <option value="60">60s (Phim Ngắn Cốt Truyện)</option>
-              </select>
-            </div>
-
-            <!-- Pacing Selector -->
-            <div class="flex items-center space-x-1.5 bg-zinc-950 border border-zinc-800 px-2.5 py-1.5 rounded-lg">
-              <span class="text-zinc-500 font-mono text-[11px]">Nhịp:</span>
-              <select id="hero-pacing-select" class="bg-transparent text-zinc-200 font-mono text-xs focus:outline-none cursor-pointer">
-                <option value="snappy" selected>124 BPM (Sôi Nổi)</option>
-                <option value="playful">110 BPM (Vui Nhộn)</option>
-                <option value="cinematic">90 BPM (Điện Ảnh)</option>
-                <option value="asmr">Chillout (ASMR)</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Quick Idea Suggestion Chips -->
-          <div class="flex items-center space-x-1.5 overflow-x-auto pb-0.5">
-            <span class="text-zinc-500 font-mono text-[11px]">Gợi ý:</span>
-            <button onclick="applyPresetPrompt('lego-mecha')" class="px-2 py-1 rounded bg-zinc-850 hover:bg-zinc-800 text-zinc-300 text-[11px] font-mono border border-zinc-700/60 whitespace-nowrap transition">⚡ Xe Lego Mecha</button>
-            <button onclick="applyPresetPrompt('stem-puzzle')" class="px-2 py-1 rounded bg-zinc-850 hover:bg-zinc-800 text-zinc-300 text-[11px] font-mono border border-zinc-700/60 whitespace-nowrap transition">🧩 Robot STEM Giáo Dục</button>
-            <button onclick="applyPresetPrompt('clay-dino')" class="px-2 py-1 rounded bg-zinc-850 hover:bg-zinc-800 text-zinc-300 text-[11px] font-mono border border-zinc-700/60 whitespace-nowrap transition">🦖 Khủng Long Đất Nặn</button>
-            <button onclick="applyPresetPrompt('rc-drift')" class="px-2 py-1 rounded bg-zinc-850 hover:bg-zinc-800 text-zinc-300 text-[11px] font-mono border border-zinc-700/60 whitespace-nowrap transition">🏎️ Xe Đua RC Tốc Độ</button>
-          </div>
-        </div>
-
-        <!-- Active Reference Image Preview Bar (Appears when image uploaded) -->
-        <div id="hero-image-preview-container" class="hidden p-3 bg-zinc-950/90 rounded-xl border border-amber-500/30 flex items-center justify-between">
+        <!-- Canvas (New) -->
+        <a href="#" class="flex items-center justify-between px-3 py-2 rounded-xl text-xs font-medium text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900 transition">
           <div class="flex items-center space-x-3">
-            <img id="hero-image-thumbnail" src="" alt="Toy Reference" class="w-12 h-12 rounded-lg object-cover border border-amber-400">
-            <div>
-              <div class="flex items-center space-x-1.5">
-                <span class="text-xs font-bold font-mono text-amber-400" id="hero-image-title">Ảnh Mẫu Đồ Chơi</span>
-                <span class="text-[10px] bg-amber-500/10 text-amber-300 border border-amber-500/20 px-1.5 py-0.2 rounded font-mono">Reference Active</span>
-              </div>
-              <p class="text-[11px] text-zinc-400" id="hero-image-desc">Hình ảnh này sẽ làm mẫu chuẩn hóa tạo hình nhân vật xuyên suốt 6 phân cảnh.</p>
-            </div>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"/></svg>
+            <span>Canvas</span>
           </div>
-          <button onclick="removeReferenceImage()" class="text-xs font-mono text-zinc-500 hover:text-red-400 px-2.5 py-1 rounded hover:bg-zinc-900 transition">
-            ✕ Bỏ hình
+          <span class="text-[9px] bg-cyan-500/20 text-cyan-400 border border-cyan-500/30 px-1.5 py-0.5 rounded font-mono font-bold">New</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Bottom Sidebar (Assets, Affiliate, Socials) -->
+    <div class="p-4 border-t border-zinc-800/80 space-y-3">
+      <a href="#" class="flex items-center space-x-3 px-3 py-1.5 rounded-xl text-xs text-zinc-400 hover:text-white transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+        <span>Assets</span>
+      </a>
+
+      <a href="#" class="flex items-center space-x-3 px-3 py-1.5 rounded-xl text-xs text-zinc-400 hover:text-white transition">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span>Affiliate</span>
+      </a>
+
+      <!-- Social Icons -->
+      <div class="flex items-center space-x-3 px-3 pt-2 text-zinc-500">
+        <svg class="w-4 h-4 hover:text-white cursor-pointer transition" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028c.462-.63.874-1.295 1.226-1.994.021-.041.001-.09-.041-.106a13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.929 1.793 8.18 1.793 12.061 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.894.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+        <span class="font-bold text-xs hover:text-white cursor-pointer transition">𝕏</span>
+        <svg class="w-4 h-4 hover:text-white cursor-pointer transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ========================================== -->
+  <!-- 2. MAIN CENTER WORKSPACE                  -->
+  <!-- ========================================== -->
+  <div class="flex-1 flex flex-col h-screen relative bg-black overflow-hidden">
+
+    <!-- TOP HEADER -->
+    <header class="h-14 px-6 flex items-center justify-between z-30 flex-shrink-0">
+      <!-- Left spacer -->
+      <div></div>
+
+      <!-- Right Header Controls -->
+      <div class="flex items-center space-x-4 text-xs font-medium text-zinc-400">
+        <a href="#" class="flex items-center space-x-1.5 hover:text-zinc-200 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          <span>Help</span>
+        </a>
+
+        <!-- Language Icon -->
+        <button class="hover:text-zinc-200 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+        </button>
+
+        <!-- Gift Icon -->
+        <button class="hover:text-zinc-200 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg>
+        </button>
+
+        <!-- Pricing Badge (66% OFF) -->
+        <div class="relative">
+          <span class="absolute -top-2.5 right-0 bg-emerald-500 text-black text-[9px] font-bold px-1.5 py-0.2 rounded-full font-mono">66% OFF</span>
+          <a href="#" class="hover:text-zinc-200 transition">Pricing</a>
+        </div>
+
+        <!-- Login Button -->
+        <button class="px-3.5 py-1.5 rounded-full bg-cyan-400 hover:bg-cyan-300 text-black font-semibold text-xs transition shadow-sm">
+          Login
+        </button>
+
+        <!-- Explore & History Pills -->
+        <div class="flex items-center space-x-1.5 pl-3 border-l border-zinc-800">
+          <button onclick="showExploreModal()" class="px-3 py-1.5 rounded-full bg-brand-pill hover:bg-brand-pillHover text-zinc-300 flex items-center space-x-1.5 transition">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5"/></svg>
+            <span>Explore</span>
+          </button>
+          <button onclick="toggleHistoryModal(true)" class="px-3 py-1.5 rounded-full bg-brand-pill hover:bg-brand-pillHover text-zinc-300 flex items-center space-x-1.5 transition">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>History</span>
           </button>
         </div>
-
       </div>
-    </section>
+    </header>
 
-    <!-- ============================================================== -->
-    <!-- WORKSPACE SPLIT: STORYBOARD WITH IMAGES vs REALTIME MONITOR   -->
-    <!-- ============================================================== -->
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+    <!-- CENTER CHAT & GENERATION VIEWPORT (Scrollable Area) -->
+    <div id="center-viewport" class="flex-1 overflow-y-auto px-4 sm:px-8 pb-48 flex flex-col items-center justify-center transition-all">
 
-      <!-- LEFT COLUMN: VISUAL STORYBOARD & SHOT FRAMES (7 Cols) -->
-      <div class="lg:col-span-7 space-y-6">
-
-        <!-- Storyboard Header with Active Style Overview -->
-        <div class="bg-zinc-900/90 border border-zinc-800 rounded-xl p-4 sm:p-5 space-y-4">
-          <div class="flex items-center justify-between pb-3 border-b border-zinc-800">
-            <div class="flex items-center space-x-2.5">
-              <span class="text-lg">🎬</span>
-              <div>
-                <h2 class="text-sm font-bold text-zinc-100 tracking-tight">Kịch Bản Phân Cảnh & Hình Ảnh Trực Quan (Visual Storyboard)</h2>
-                <p class="text-xs text-zinc-400 mt-0.5">Hình ảnh mẫu chụp thực tế & bản vẽ kết xuất cho từng phân cảnh</p>
-              </div>
-            </div>
-            <span class="text-xs font-mono text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-md" id="storyboard-shot-count">6 Phân Cảnh Kỹ Thuật</span>
-          </div>
-
-          <!-- SHOT CARDS CONTAINER WITH RICH IMAGES -->
-          <div class="space-y-3.5" id="storyboard-shots-list">
-            <!-- Dynamically Rendered by app.js with High-Res Image Previews -->
-          </div>
-
-          <!-- Bottom Storyboard Control -->
-          <div class="flex items-center justify-between pt-2 border-t border-zinc-800/80 text-xs text-zinc-400 font-mono">
-            <span>🛡️ CARU / COPPA Child Safety: <strong class="text-emerald-400">Đã kiểm duyệt</strong></span>
-            <button onclick="exportTreatment()" class="text-amber-400 hover:text-amber-300 transition">
-              Xuất TREATMENT.md &rarr;
-            </button>
-          </div>
-        </div>
-
+      <!-- HERO STATE (Empty Workspace) -->
+      <div id="hero-empty-state" class="text-center space-y-4 my-auto select-none max-w-xl">
+        <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-zinc-100 font-sans">
+          Light Up Your Creation With Lumina
+        </h1>
+        <p class="text-xs sm:text-sm text-zinc-500 font-mono">
+          Engineered with Lemo-OpusCar 99 Film Styles & Gemini CLI Pipeline
+        </p>
       </div>
 
-      <!-- RIGHT COLUMN: REALTIME CANVAS MONITOR & CLI CODE (5 Cols) -->
-      <div class="lg:col-span-5 space-y-6">
-
-        <!-- REALTIME FILM CANVAS MONITOR -->
-        <div class="bg-zinc-900/90 border border-zinc-800 rounded-xl p-4 sm:p-5 space-y-4 sticky top-20">
-          <div class="flex items-center justify-between pb-2.5 border-b border-zinc-800">
-            <div class="flex items-center space-x-2">
-              <span class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
-              <span class="text-xs font-bold text-zinc-100 tracking-tight font-mono">STUDIO CANVAS MONITOR</span>
-            </div>
-            <span class="text-[11px] font-mono text-zinc-500" id="current-frame-info">Frame 120 / 30fps</span>
-          </div>
-
-          <!-- Visual Canvas Viewport -->
-          <div class="relative bg-zinc-950 rounded-xl overflow-hidden border border-zinc-800 flex items-center justify-center aspect-video shadow-2xl" id="monitor-wrapper">
-            <canvas id="film-canvas" width="640" height="360" class="w-full h-full object-contain"></canvas>
-
-            <!-- Timecode Overlay -->
-            <div class="absolute top-3 left-3 bg-zinc-950/85 backdrop-blur-md border border-zinc-800 px-2.5 py-1 rounded-md text-[11px] font-mono text-amber-400 font-bold">
-              TC: <span id="timecode-display">00:04.20</span>
-            </div>
-
-            <!-- Camera Badge -->
-            <div class="absolute top-3 right-3 bg-zinc-950/85 backdrop-blur-md border border-zinc-800 px-2.5 py-1 rounded-md text-[10px] font-mono text-zinc-300">
-              CAM: <span id="camera-movement-display" class="text-amber-300 font-semibold">Orbit 360 &deg;</span>
-            </div>
-
-            <!-- Active Shot Overlay Label -->
-            <div class="absolute bottom-3 left-3 right-3 bg-zinc-950/90 backdrop-blur-md border border-zinc-800 p-2.5 rounded-lg flex items-center justify-between">
-              <div class="truncate mr-2">
-                <div class="text-[10px] font-mono uppercase text-amber-400 font-bold" id="active-scene-title">Shot 2: Biến Hình & Bung Cánh Lượn</div>
-                <div class="text-[11px] text-zinc-300 truncate" id="active-scene-prompt">Mảnh ghép cơ khí tháo rời, ánh sáng phản chiếu nhựa ABS...</div>
-              </div>
-              <span class="text-[10px] font-mono bg-zinc-800 text-zinc-400 px-2 py-0.5 rounded whitespace-nowrap" id="active-scene-duration">5.0s</span>
-            </div>
-          </div>
-
-          <!-- Transport Scrubber Controls -->
-          <div class="space-y-2 pt-1">
-            <input type="range" id="film-scrubber" min="0" max="30" step="0.1" value="4.2" oninput="onScrub(this.value)" class="w-full accent-amber-400 cursor-pointer h-1.5 bg-zinc-800 rounded">
-            <div class="flex items-center justify-between text-xs text-zinc-400 font-mono">
-              <div class="flex items-center space-x-1.5">
-                <button onclick="togglePlayback()" id="btn-transport-play" class="px-3 py-1 bg-amber-400 text-zinc-950 rounded text-xs font-bold hover:bg-amber-300 transition">
-                  Phát ▶
-                </button>
-                <button onclick="stepFrame(-1)" class="px-2 py-1 bg-zinc-800 hover:bg-zinc-700 rounded text-xs">-1s</button>
-                <button onclick="stepFrame(1)" class="px-2 py-1 bg-zinc-800 hover:bg-zinc-700 rounded text-xs">+1s</button>
-              </div>
-              <div>
-                <span id="current-scrub-time">00:04.20</span> / <span id="total-duration-display">00:30.00</span>
-              </div>
-            </div>
-          </div>
-
-          <!-- Render Command Generator Box -->
-          <div class="pt-3 border-t border-zinc-800 space-y-2">
-            <div class="flex items-center justify-between text-xs">
-              <span class="font-mono text-zinc-400 font-semibold">Mã Render Lemo-OpusCar CLI:</span>
-              <button onclick="copyRenderCode()" class="text-amber-400 hover:text-amber-300 font-mono font-medium">
-                Copy Lệnh
-              </button>
-            </div>
-            <pre class="bg-zinc-950 p-3 rounded-lg border border-zinc-800 text-[11px] font-mono text-zinc-300 overflow-x-auto leading-relaxed" id="code-snippet-box">
-cd ~/lemo-opuscar
-node core/render/still.mjs "films/turbo-bot" 1.5 3 --style brick-toy --ar 16:9
-./build.sh --fps 30 --crf 18 --output "films/turbo-bot/output.mp4"
-            </pre>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </main>
-
-  <!-- ============================================================== -->
-  <!-- MODAL 1: TÍNH NĂNG TÌM THỊ TRƯỜNG (MARKET INTELLIGENCE FINDER)  -->
-  <!-- ============================================================== -->
-  <div id="market-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 modal-backdrop-blur hidden">
-    <div class="bg-zinc-900 border border-zinc-700 rounded-2xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
-      <!-- Modal Header -->
-      <div class="p-5 border-b border-zinc-800 flex items-center justify-between bg-zinc-950">
-        <div class="flex items-center space-x-3">
-          <div class="w-9 h-9 rounded-lg bg-cyan-dim border border-cyan/30 flex items-center justify-center text-cyan text-lg">
-            📊
-          </div>
-          <div>
-            <h3 class="text-base font-bold text-white font-mono">TÌM KIẾM & KHẢO SÁT THỊ TRƯỜNG ĐỒ CHƠI</h3>
-            <p class="text-xs text-zinc-400">Dữ liệu quy mô ngành, đối tượng mục tiêu, công thức video triệu view & hoa hồng Affiliate</p>
-          </div>
-        </div>
-        <button onclick="toggleMarketModal(false)" class="text-zinc-400 hover:text-white p-2 rounded-lg hover:bg-zinc-800 transition">
-          ✕
-        </button>
-      </div>
-
-      <!-- Search & Region Filters -->
-      <div class="p-4 bg-zinc-900/90 border-b border-zinc-800 space-y-3">
-        <div class="grid grid-cols-1 sm:grid-cols-12 gap-3">
-          <!-- Keyword Search Input -->
-          <div class="sm:col-span-8 relative">
-            <input type="text" id="market-search-input" oninput="filterMarketData()" placeholder="Tìm từ khóa thị trường... (vd: lego, robot, stem, xe đua, đất nặn, gỗ)" class="w-full bg-zinc-950 border border-zinc-700 rounded-xl px-4 py-2.5 text-xs sm:text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-cyan font-mono">
-          </div>
-          <!-- Region Dropdown -->
-          <div class="sm:col-span-4">
-            <select id="market-region-select" onchange="filterMarketData()" class="w-full bg-zinc-950 border border-zinc-700 rounded-xl px-3 py-2.5 text-xs sm:text-sm text-cyan font-mono font-semibold focus:outline-none cursor-pointer">
-              <option value="us" selected>🇺🇸 Thị trường Mỹ (US Market)</option>
-              <option value="eu">🇪🇺 Châu Âu (Đức, Anh, Pháp)</option>
-              <option value="sea">🇻🇳 Đông Nam Á & Việt Nam</option>
-              <option value="global">🌐 Toàn Cầu (Global Overview)</option>
-            </select>
-          </div>
-        </div>
-
-        <!-- Category Tags -->
-        <div class="flex items-center space-x-1.5 overflow-x-auto pb-1 text-xs font-mono">
-          <span class="text-zinc-500">Ngành hàng:</span>
-          <button onclick="setMarketCategory('all')" class="market-cat-btn px-2.5 py-1 rounded bg-zinc-800 text-white border border-zinc-700">Tất cả</button>
-          <button onclick="setMarketCategory('lego')" class="market-cat-btn px-2.5 py-1 rounded bg-zinc-950 text-zinc-400 border border-zinc-800 hover:text-white">LEGO & Khối Lắp Ghép</button>
-          <button onclick="setMarketCategory('robot')" class="market-cat-btn px-2.5 py-1 rounded bg-zinc-950 text-zinc-400 border border-zinc-800 hover:text-white">Robot STEM & AI</button>
-          <button onclick="setMarketCategory('rc')" class="market-cat-btn px-2.5 py-1 rounded bg-zinc-950 text-zinc-400 border border-zinc-800 hover:text-white">Xe Đua & RC</button>
-          <button onclick="setMarketCategory('craft')" class="market-cat-btn px-2.5 py-1 rounded bg-zinc-950 text-zinc-400 border border-zinc-800 hover:text-white">Đất Nặn & Mỹ Thuật</button>
-        </div>
-      </div>
-
-      <!-- Market Results Content Body -->
-      <div class="flex-1 overflow-y-auto p-5 space-y-5" id="market-results-container">
+      <!-- GENERATION FEED (Appears when video is being generated) -->
+      <div id="generation-feed" class="w-full max-w-4xl space-y-6 hidden pt-4">
         <!-- Rendered by app.js -->
       </div>
 
-      <!-- Modal Footer -->
-      <div class="p-4 border-t border-zinc-800 bg-zinc-950 flex items-center justify-between text-xs font-mono">
-        <span class="text-zinc-500">Nguồn dữ liệu: Euromonitor & Toy Association Report 2026</span>
-        <button onclick="toggleMarketModal(false)" class="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 rounded-lg transition">
-          Đóng Cửa Sổ
-        </button>
+    </div>
+
+    <!-- ============================================================== -->
+    <!-- 3. THE FLOATING BOTTOM DOCK (EXACT LUMINA RECREATION)          -->
+    <!-- ============================================================== -->
+    <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-full max-w-3xl px-4 z-40">
+      <div class="bg-brand-dock border border-brand-dockBorder rounded-2xl p-3 shadow-2xl space-y-2 backdrop-blur-xl">
+
+        <!-- Top Input & Material Row -->
+        <div class="flex items-start gap-3">
+
+          <!-- + material Slot (Drag & Drop or Click Upload) -->
+          <div onclick="document.getElementById('file-material-input').click()" class="relative w-16 h-16 rounded-xl bg-brand-inner border border-dashed border-zinc-700/80 hover:border-brand-accent flex flex-col items-center justify-center cursor-pointer flex-shrink-0 transition group overflow-hidden">
+            <input type="file" id="file-material-input" class="hidden" accept="image/*" onchange="handleMaterialUpload(event)">
+            
+            <div id="material-placeholder" class="text-center space-y-0.5">
+              <span class="text-base text-zinc-400 group-hover:scale-110 block transition-transform">+</span>
+              <span class="text-[10px] font-mono text-zinc-500 font-medium block">material</span>
+            </div>
+
+            <!-- Thumbnail Preview Image -->
+            <img id="material-preview-img" src="" alt="Material" class="w-full h-full object-cover hidden">
+            
+            <!-- Remove Button -->
+            <button onclick="removeMaterial(event)" id="btn-remove-material" class="absolute top-1 right-1 bg-black/80 rounded-full w-4 h-4 text-[9px] text-zinc-300 hover:text-red-400 flex items-center justify-center hidden">✕</button>
+          </div>
+
+          <!-- Prompt Textarea -->
+          <div class="flex-1 relative">
+            <textarea id="dock-prompt-input" rows="2" class="w-full bg-transparent text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none resize-none font-sans leading-relaxed pt-1 pr-6" placeholder="Describe the video scene you want to generate" onkeydown="handleInputKeydown(event)"></textarea>
+            
+            <!-- Expand Button (⤢) -->
+            <button onclick="toggleExpandPrompt()" class="absolute top-1 right-0 text-zinc-500 hover:text-white p-1 rounded transition" title="Expand Prompt">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4"/></svg>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Bottom Controls Row inside Dock -->
+        <div class="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-zinc-800/60 text-xs font-mono">
+          
+          <!-- Left Options Group -->
+          <div class="flex items-center space-x-2 overflow-x-auto">
+            
+            <!-- AI Video Mode Dropdown -->
+            <div class="relative">
+              <button onclick="toggleDropdown('dropdown-mode')" class="px-2.5 py-1 rounded-lg bg-brand-pill hover:bg-brand-pillHover text-zinc-300 flex items-center space-x-1.5 transition">
+                <span>🎥</span>
+                <span id="current-mode-label">AI Video</span>
+                <span class="text-[10px] text-zinc-500">▾</span>
+              </button>
+              <div id="dropdown-mode" class="absolute bottom-8 left-0 w-36 bg-zinc-900 border border-zinc-800 rounded-xl p-1 shadow-xl hidden z-50">
+                <button onclick="selectMode('AI Video')" class="w-full text-left px-2 py-1 text-xs text-zinc-300 hover:text-white hover:bg-zinc-800 rounded">🎥 AI Video</button>
+                <button onclick="selectMode('Market Intel')" class="w-full text-left px-2 py-1 text-xs text-zinc-300 hover:text-white hover:bg-zinc-800 rounded">📊 Market Intel</button>
+                <button onclick="selectMode('Script Agent')" class="w-full text-left px-2 py-1 text-xs text-zinc-300 hover:text-white hover:bg-zinc-800 rounded">✍️ Script Agent</button>
+              </div>
+            </div>
+
+            <!-- Seedance 2.5 / 99 Lemo-OpusCar Styles Dropdown -->
+            <div class="relative">
+              <button onclick="toggleDropdown('dropdown-styles')" class="px-2.5 py-1 rounded-lg bg-brand-pill hover:bg-brand-pillHover text-zinc-300 flex items-center space-x-1.5 transition">
+                <span>🌐</span>
+                <span id="current-style-label" class="truncate max-w-[110px]">brick-toy</span>
+                <span class="text-[10px] text-zinc-500">▾</span>
+              </button>
+              <div id="dropdown-styles" class="absolute bottom-8 left-0 w-64 max-h-60 overflow-y-auto bg-zinc-900 border border-zinc-800 rounded-xl p-1 shadow-2xl hidden z-50 custom-scrollbar">
+                <div class="text-[10px] text-zinc-500 px-2 py-1 font-bold">99 LEMO-OPUSCAR STYLES:</div>
+                <div id="styles-dropdown-list">
+                  <!-- Rendered by JS -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Adaptive 480p 4s / Aspect & Duration Dropdown -->
+            <div class="relative">
+              <button onclick="toggleDropdown('dropdown-aspect')" class="px-2.5 py-1 rounded-lg bg-brand-pill hover:bg-brand-pillHover text-zinc-300 flex items-center space-x-1.5 transition">
+                <span>⊞</span>
+                <span id="current-aspect-label">Adaptive 16:9 30s</span>
+                <span class="text-[10px] text-zinc-500">▾</span>
+              </button>
+              <div id="dropdown-aspect" class="absolute bottom-8 left-0 w-48 bg-zinc-900 border border-zinc-800 rounded-xl p-1 shadow-xl hidden z-50">
+                <button onclick="selectAspect('16:9', 30, 'Adaptive 16:9 30s')" class="w-full text-left px-2 py-1 text-xs text-zinc-300 hover:text-white hover:bg-zinc-800 rounded">16:9 1080p (30s TVC)</button>
+                <button onclick="selectAspect('9:16', 15, 'Vertical 9:16 15s')" class="w-full text-left px-2 py-1 text-xs text-zinc-300 hover:text-white hover:bg-zinc-800 rounded">9:16 (TikTok 15s)</button>
+                <button onclick="selectAspect('1:1', 15, 'Square 1:1 15s')" class="w-full text-left px-2 py-1 text-xs text-zinc-300 hover:text-white hover:bg-zinc-800 rounded">1:1 (Instagram 15s)</button>
+              </div>
+            </div>
+
+            <!-- Draft Mode Toggle -->
+            <div class="flex items-center space-x-1.5 px-2 py-1">
+              <span class="text-zinc-500 text-[11px]">Draft mode</span>
+              <button onclick="toggleDraftMode()" id="draft-toggle-btn" class="w-7 h-4 bg-zinc-800 rounded-full relative transition">
+                <span id="draft-toggle-dot" class="w-3 h-3 bg-zinc-400 rounded-full absolute top-0.5 left-0.5 transition-all"></span>
+              </button>
+            </div>
+
+            <!-- Batch Dropdown -->
+            <div class="relative">
+              <button class="px-2 py-1 rounded-lg bg-brand-pill hover:bg-brand-pillHover text-zinc-400 flex items-center space-x-1 transition">
+                <span>Batch 1</span>
+                <span class="text-[10px] text-zinc-600">▾</span>
+              </button>
+            </div>
+
+          </div>
+
+          <!-- Right Submit Generate Button (+ 84) -->
+          <button onclick="submitGenerateVideo()" id="btn-dock-submit" class="px-3.5 py-1 rounded-full bg-brand-accent hover:bg-brand-accentHover text-zinc-950 font-bold flex items-center space-x-1.5 transition shadow-lg shadow-emerald-500/20 flex-shrink-0">
+            <span>✨</span>
+            <span id="btn-submit-text">+ 84</span>
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ========================================== -->
+  <!-- 4. MODAL: HISTORY DRAWER                   -->
+  <!-- ========================================== -->
+  <div id="history-modal" class="fixed inset-0 z-50 flex items-center justify-end p-0 bg-black/70 modal-backdrop-blur hidden">
+    <div class="bg-zinc-900 border-l border-zinc-800 w-full max-w-md h-full flex flex-col shadow-2xl">
+      <div class="p-4 border-b border-zinc-800 flex items-center justify-between">
+        <div class="flex items-center space-x-2 text-sm font-bold text-white font-mono">
+          <span>🕒 Lịch Sử Tạo Video</span>
+        </div>
+        <button onclick="toggleHistoryModal(false)" class="text-zinc-400 hover:text-white p-1 rounded hover:bg-zinc-800 transition">✕</button>
+      </div>
+      <div id="history-items-list" class="flex-1 overflow-y-auto p-4 space-y-3">
+        <!-- Rendered by JS -->
       </div>
     </div>
   </div>
-
-  <!-- ============================================================== -->
-  <!-- MODAL 2: TẢI HÌNH & CHỌN ẢNH ĐỒ CHƠI MẪU (IMAGE REFERENCE)     -->
-  <!-- ============================================================== -->
-  <div id="image-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-black/80 modal-backdrop-blur hidden">
-    <div class="bg-zinc-900 border border-zinc-700 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
-      <!-- Modal Header -->
-      <div class="p-5 border-b border-zinc-800 flex items-center justify-between bg-zinc-950">
-        <div class="flex items-center space-x-3">
-          <div class="w-9 h-9 rounded-lg bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 text-lg">
-            🖼️
-          </div>
-          <div>
-            <h3 class="text-base font-bold text-white font-mono">THÊM HÌNH ẢNH ĐỒ CHƠI LÀM MẪU DỰNG VIDEO</h3>
-            <p class="text-xs text-zinc-400">Tải ảnh chụp sản phẩm hoặc chọn nhanh từ bộ sưu tập mẫu có sẵn</p>
-          </div>
-        </div>
-        <button onclick="triggerImageUploadModal(false)" class="text-zinc-400 hover:text-white p-2 rounded-lg hover:bg-zinc-800 transition">
-          ✕
-        </button>
-      </div>
-
-      <!-- Upload Zone & Presets -->
-      <div class="p-6 overflow-y-auto space-y-6">
-
-        <!-- Drag & Drop Uploader -->
-        <div class="border-2 border-dashed border-zinc-700 hover:border-amber-400/80 rounded-2xl p-6 text-center bg-zinc-950/80 transition cursor-pointer group" onclick="document.getElementById('file-toy-upload').click()">
-          <input type="file" id="file-toy-upload" class="hidden" accept="image/*" onchange="handleUserImageUpload(event)">
-          <div class="space-y-2">
-            <span class="text-3xl block group-hover:scale-110 transition-transform">📤</span>
-            <div class="text-sm font-semibold text-zinc-200">Kéo thả ảnh đồ chơi vào đây, hoặc <span class="text-amber-400 underline">chọn từ máy tính</span></div>
-            <p class="text-xs text-zinc-500">Hỗ trợ định dạng JPG, PNG, WebP (Tối đa 15MB)</p>
-          </div>
-        </div>
-
-        <!-- Presets Toy Models Gallery -->
-        <div class="space-y-3">
-          <h4 class="text-xs font-bold text-zinc-400 font-mono uppercase tracking-wider">Hoặc chọn nhanh từ bộ sưu tập đồ chơi có sẵn:</h4>
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3" id="preset-toys-grid">
-            <!-- Rendered by app.js -->
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Modal Footer -->
-      <div class="p-4 border-t border-zinc-800 bg-zinc-950 flex items-center justify-between text-xs font-mono">
-        <span class="text-zinc-500">Ảnh mẫu sẽ được nạp vào toàn bộ 6 phân cảnh kỹ thuật</span>
-        <button onclick="triggerImageUploadModal(false)" class="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-200 rounded-lg transition">
-          Đóng
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer class="relative z-20 border-t border-zinc-800/80 bg-zinc-950 py-5 text-center text-xs text-zinc-500 font-mono">
-    Lemo OpusCar Studio &bull; Xưởng Sản Xuất Video AI & Khảo Sát Thị Trường Đồ Chơi &bull; Thiết Kế Chuẩn Mực Unslopped
-  </footer>
 
   <script src="app.js"></script>
 </body>

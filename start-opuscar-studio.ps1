@@ -1,12 +1,12 @@
-# PowerShell Launcher for Lemo OpusCar Studio
+# PowerShell Launcher for Lumina AI Video Studio
 Write-Host "========================================================" -ForegroundColor Cyan
-Write-Host "      LEMO OPUSCAR STUDIO - 99 FILM STYLES GENERATOR" -ForegroundColor Yellow
-Write-Host "      Thiet ke theo tieu chuan Unslop Craft" -ForegroundColor Gray
+Write-Host "      LUMINA AI VIDEO STUDIO - OPUSCAR BACKEND" -ForegroundColor Yellow
+Write-Host "      API Gemini CLI & Lemo-OpusCar 99 Styles" -ForegroundColor Gray
 Write-Host "========================================================" -ForegroundColor Cyan
 Write-Host ""
-Write-Host "Dang khoi dong may chu noi bo tai cong 8086..." -ForegroundColor Green
+Write-Host "Dang khoi dong Backend Python tai cong 8086..." -ForegroundColor Green
 Write-Host "Truy cap tai: http://localhost:8086" -ForegroundColor Cyan
 Write-Host ""
 
 Start-Process "http://localhost:8086"
-python -m http.server 8086 --directory tools/opuscar-studio
+python tools/opuscar-studio/server.py
