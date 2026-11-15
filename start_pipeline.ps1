@@ -1,4 +1,4 @@
-﻿# Khởi động đồng thời cả Backend và Frontend Lumina AI Video Studio
+# Khởi động đồng thời cả Backend và Frontend Lumina AI Video Studio
 Write-Host "========================================================" -ForegroundColor Cyan
 Write-Host "  LUMINA - END-TO-END AI VIDEO GENERATION PIPELINE" -ForegroundColor Cyan
 Write-Host "========================================================" -ForegroundColor Cyan
