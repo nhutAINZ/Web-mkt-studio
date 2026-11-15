@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <title>video cậu bé lắp ráp lego - Lumina Video Pipeline</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #000;
+      color: #fff;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100vw;
+      height: 100vh;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, monospace;
+    }
+    #stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #050508;
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+    #hud-top {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      right: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .badge {
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-family: monospace;
+      font-weight: 600;
+    }
+    #controls-bar {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      z-index: 20;
+    }
+    .btn-action {
+      border: none;
+      padding: 7px 16px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: opacity 0.15s, transform 0.1s;
+    }
+    .btn-action:hover { opacity: 0.9; transform: scale(1.02); }
+    #btn-preview {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      backdrop-filter: blur(8px);
+    }
+    #btn-download-video {
+      background: #f59e0b;
+      color: #000;
+    }
+    #render-progress-box {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      background: rgba(10, 10, 15, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 10px 16px;
+      display: none;
+      z-index: 30;
+      backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body>
+  <div id="stage">
+    <div id="hud-top">
+      <div class="badge" style="color: #f59e0b;">
+        ⚡ LUMINA PIPELINE • BRICK-TOY
+      </div>
+      <div class="badge" id="hud-tc">
+        TC: 00:00.00 / 30s
+      </div>
+    </div>
+
+    <div id="controls-bar">
+      <button class="btn-action" id="btn-preview" onclick="restartPreview()">
+        <span>▶</span>
+        <span>Xem trước</span>
+      </button>
+      <button class="btn-action" id="btn-download-video" onclick="recordAndDownloadVideo()">
+        <span>💾</span>
+        <span id="btn-download-text">Tải Video MP4</span>
+      </button>
+    </div>
+
+    <div id="render-progress-box">
+      <div style="display: flex; justify-content: space-between; font-size: 11px; font-family: monospace; color: #fff; margin-bottom: 6px;">
+        <span id="render-status-text">Đang xuất video MP4 (H.264 + Audio)...</span>
+        <span id="render-pct-text">0%</span>
+      </div>
+      <div style="width: 100%; height: 6px; background: #222; border-radius: 3px; overflow: hidden;">
+        <div id="render-bar-fill" style="width: 0%; height: 100%; background: #f59e0b; transition: width 0.15s linear;"></div>
+      </div>
+    </div>
+
+    <canvas id="c" width="1280" height="720"></canvas>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('c');
+    const ctx = canvas.getContext('2d');
+    const hudTc = document.getElementById('hud-tc');
+
+    window.DUR = 30;
+    window.READY = false;
+
+    const SHOTS = [{"id": "shot_1", "num": 1, "title": "Shot 1: Mở Đầu Đại Cảnh (Establishing Shot)", "start": 0, "end": 5, "time": "00:00 - 00:05", "camera": {"type": "dolly_in", "from": {"scale": 1}, "to": {"scale": 1.25}, "easing": "easeInOutCubic"}, "imagePrompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 1: wide establishing macro shot of video cậu bé lắp ráp lego, boy sitting at bright studio table full of colorful Lego brick pieces, warm sunlight", "visual_prompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 1: wide establishing macro shot of video cậu bé lắp ráp lego, boy sitting at bright studio table full of colorful Lego brick pieces, warm sunlight", "vo": "Mỗi buổi sáng, một thế giới diệu kỳ mở ra từ những khối gạch nhỏ bé...", "voiceover": "Mỗi buổi sáng, một thế giới diệu kỳ mở ra từ những khối gạch nhỏ bé...", "subtitle": "Mỗi buổi sáng, một thế giới diệu kỳ mở ra từ những khối gạch nhỏ bé...", "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20high-end%20ABS%20plastic%20bricks%20with%20authentic%20Lego%20studs%2C%20miniature%20macro%20studio%20lighting%2C%20depth%20of%20field%2C%2012fps%20aesthetic%2C%20rich%20primary%20Lego%20colors%20red%20blue%20yellow%2C%20glossy%20plastic%20finish%2C%20sharp%20rim%20lighting%208k.%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng.%20Locked%20traits%3A%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%5D.%20Shot%201%3A%20wide%20establishing%20macro%20shot%20of%20video%20c%E1%BA%ADu%20b%C3%A9%20l%E1%BA%AFp%20r%C3%A1p%20lego%2C%20boy%20sitting%20at%20bright%20studio%20table%20full%20of%20colorful%20Lego%20brick%20pieces%2C%20warm%20sunlight?width=1280&height=720&nologo=true&seed=181697", "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80", "transitionOut": {"type": "whip_pan", "duration": 0.4}, "status": "ready"}, {"id": "shot_2", "num": 2, "title": "Shot 2: Cơ Chế Cơ Khí & Lắp Ráp (Mechanism)", "start": 5, "end": 10, "time": "00:05 - 00:10", "camera": {"type": "orbit_pan", "from": {"x": -40, "rot": -0.052}, "to": {"x": 40, "rot": 0.052}, "easing": "easeInOutCubic"}, "imagePrompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 2: extreme macro close-up, small hands precisely snapping Lego gears, hinges and cockpit transforming into futuristic mechanism", "visual_prompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 2: extreme macro close-up, small hands precisely snapping Lego gears, hinges and cockpit transforming into futuristic mechanism", "vo": "Từng chi tiết cơ khí ăn khớp hoàn hảo, tháo lắp thông minh và chuẩn xác...", "voiceover": "Từng chi tiết cơ khí ăn khớp hoàn hảo, tháo lắp thông minh và chuẩn xác...", "subtitle": "Từng chi tiết cơ khí ăn khớp hoàn hảo, tháo lắp thông minh và chuẩn xác...", "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20high-end%20ABS%20plastic%20bricks%20with%20authentic%20Lego%20studs%2C%20miniature%20macro%20studio%20lighting%2C%20depth%20of%20field%2C%2012fps%20aesthetic%2C%20rich%20primary%20Lego%20colors%20red%20blue%20yellow%2C%20glossy%20plastic%20finish%2C%20sharp%20rim%20lighting%208k.%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng.%20Locked%20traits%3A%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%5D.%20Shot%202%3A%20extreme%20macro%20close-up%2C%20small%20hands%20precisely%20snapping%20Lego%20gears%2C%20hinges%20and%20cockpit%20transforming%20into%20futuristic%20mechanism?width=1280&height=720&nologo=true&seed=181697", "fallback_img": "https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=1280&q=80", "transitionOut": {"type": "zoom_through", "duration": 0.5}, "status": "ready"}, {"id": "shot_3", "num": 3, "title": "Shot 3: cậu bé lắp ráp cánh tay robot ", "start": 10, "end": 18, "time": "00:10 - 00:18", "camera": {"type": "dutch_tilt", "easing": "easeInOutCubic"}, "imagePrompt": "Lego stop-motion brickfilm style, high-end ABS plastic toy bricks with authentic Lego studs, miniature macro studio lighting, depth of field 12fps aesthetic, rich primary colors, glossy finish, sharp rim lighting 8k, [Style Lock: brick-toy], cậu bé lắp ráp cánh tay robot khổng lồ phát sáng laser, 8k cinematic shot", "visual_prompt": "Lego stop-motion brickfilm style, high-end ABS plastic toy bricks with authentic Lego studs, miniature macro studio lighting, depth of field 12fps aesthetic, rich primary colors, glossy finish, sharp rim lighting 8k, [Style Lock: brick-toy], cậu bé lắp ráp cánh tay robot khổng lồ phát sáng laser, 8k cinematic shot", "vo": "Khởi động động cơ phản lực, cùng bứt phá tốc độ và giải cứu thành phố nào!", "voiceover": "cậu bé lắp ráp cánh tay robot khổng lồ phát sáng laser...", "subtitle": "cậu bé lắp ráp cánh tay robot khổng lồ phát sáng laser...", "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20high-end%20ABS%20plastic%20toy%20bricks%20with%20authentic%20Lego%20studs%2C%20miniature%20macro%20studio%20lighting%2C%20depth%20of%20field%2012fps%20aesthetic%2C%20rich%20primary%20colors%2C%20glossy%20finish%2C%20sharp%20rim%20lighting%208k%2C%20%5BStyle%20Lock%3A%20brick-toy%5D%2C%20c%E1%BA%ADu%20b%C3%A9%20l%E1%BA%AFp%20r%C3%A1p%20c%C3%A1nh%20tay%20robot%20kh%E1%BB%95ng%20l%E1%BB%93%20ph%C3%A1t%20s%C3%A1ng%20laser%2C%208k%20cinematic%20shot?width=1280&height=720&nologo=true&seed=181697", "fallback_img": "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=1280&q=80", "transitionOut": {"type": "glitch_cut", "duration": 0.35}, "status": "ready"}, {"id": "shot_4", "num": 4, "title": "Shot 4: Cảm Xúc & Tự Hào (Emotion Reaction)", "start": 18, "end": 22, "time": "00:18 - 00:22", "camera": {"type": "dolly_out", "from": {"scale": 1.25}, "to": {"scale": 1}, "easing": "easeInOutCubic"}, "imagePrompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 4: medium close-up, boy smiling with proud joyful eyes holding his finished Lego masterpiece, warm golden hour studio rim light", "visual_prompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 4: medium close-up, boy smiling with proud joyful eyes holding his finished Lego masterpiece, warm golden hour studio rim light", "vo": "Nuôi dưỡng tư duy logic, sự kiên trì và niềm vui sáng tạo bất tận trong bé.", "voiceover": "Nuôi dưỡng tư duy logic, sự kiên trì và niềm vui sáng tạo bất tận trong bé.", "subtitle": "Nuôi dưỡng tư duy logic, sự kiên trì và niềm vui sáng tạo bất tận trong bé.", "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20high-end%20ABS%20plastic%20bricks%20with%20authentic%20Lego%20studs%2C%20miniature%20macro%20studio%20lighting%2C%20depth%20of%20field%2C%2012fps%20aesthetic%2C%20rich%20primary%20Lego%20colors%20red%20blue%20yellow%2C%20glossy%20plastic%20finish%2C%20sharp%20rim%20lighting%208k.%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng.%20Locked%20traits%3A%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%5D.%20Shot%204%3A%20medium%20close-up%2C%20boy%20smiling%20with%20proud%20joyful%20eyes%20holding%20his%20finished%20Lego%20masterpiece%2C%20warm%20golden%20hour%20studio%20rim%20light?width=1280&height=720&nologo=true&seed=181697", "fallback_img": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=1280&q=80", "transitionOut": {"type": "crossfade", "duration": 0.5}, "status": "ready"}, {"id": "shot_5", "num": 5, "title": "Shot 5: Chi Tiết Phụ Kiện & An Toàn (Showcase)", "start": 22, "end": 26, "time": "00:22 - 00:26", "camera": {"type": "orbit_pan", "from": {"x": 30, "rot": 0.03}, "to": {"x": -30, "rot": -0.03}, "easing": "easeInOutCubic"}, "imagePrompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 5: top-down flatlay layout, packaging box, certified 100% virgin ABS plastic badge, clean rounded non-toxic corners", "visual_prompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 5: top-down flatlay layout, packaging box, certified 100% virgin ABS plastic badge, clean rounded non-toxic corners", "vo": "Nhựa nguyên sinh ABS an toàn tuyệt đối, đạt chứng chỉ tiêu chuẩn an toàn quốc tế.", "voiceover": "Nhựa nguyên sinh ABS an toàn tuyệt đối, đạt chứng chỉ tiêu chuẩn an toàn quốc tế.", "subtitle": "Nhựa nguyên sinh ABS an toàn tuyệt đối, đạt chứng chỉ tiêu chuẩn an toàn quốc tế.", "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20high-end%20ABS%20plastic%20bricks%20with%20authentic%20Lego%20studs%2C%20miniature%20macro%20studio%20lighting%2C%20depth%20of%20field%2C%2012fps%20aesthetic%2C%20rich%20primary%20Lego%20colors%20red%20blue%20yellow%2C%20glossy%20plastic%20finish%2C%20sharp%20rim%20lighting%208k.%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng.%20Locked%20traits%3A%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%5D.%20Shot%205%3A%20top-down%20flatlay%20layout%2C%20packaging%20box%2C%20certified%20100%25%20virgin%20ABS%20plastic%20badge%2C%20clean%20rounded%20non-toxic%20corners?width=1280&height=720&nologo=true&seed=181697", "fallback_img": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1280&q=80", "transitionOut": {"type": "match_cut", "duration": 0.3}, "status": "ready"}, {"id": "shot_6", "num": 6, "title": "Shot 6: Kêu Gọi Mua Hàng & Khuyến Mãi (Hero CTA)", "start": 26, "end": 30, "time": "00:26 - 00:30", "camera": {"type": "static_punchy", "easing": "easeOutBounce"}, "imagePrompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 6: hero product showcase on glowing glass pedestal, sparkling Lego logo, gift boxes and limited discount banner", "visual_prompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 6: hero product showcase on glowing glass pedestal, sparkling Lego logo, gift boxes and limited discount banner", "vo": "Sở hữu ngay hôm nay trên các sàn thương mại điện tử để nhận trọn bộ quà tặng!", "voiceover": "Sở hữu ngay hôm nay trên các sàn thương mại điện tử để nhận trọn bộ quà tặng!", "subtitle": "Sở hữu ngay hôm nay trên các sàn thương mại điện tử để nhận trọn bộ quà tặng!", "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20high-end%20ABS%20plastic%20bricks%20with%20authentic%20Lego%20studs%2C%20miniature%20macro%20studio%20lighting%2C%20depth%20of%20field%2C%2012fps%20aesthetic%2C%20rich%20primary%20Lego%20colors%20red%20blue%20yellow%2C%20glossy%20plastic%20finish%2C%20sharp%20rim%20lighting%208k.%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng.%20Locked%20traits%3A%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%5D.%20Shot%206%3A%20hero%20product%20showcase%20on%20glowing%20glass%20pedestal%2C%20sparkling%20Lego%20logo%2C%20gift%20boxes%20and%20limited%20discount%20banner?width=1280&height=720&nologo=true&seed=181697", "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80", "transitionOut": {"type": "none", "duration": 0}, "status": "ready"}];
+    const loadedImages = [];
+    let imagesLoadedCount = 0;
+
+    // YÊU CẦU 1: Preload images with strict placeholder / error detection
+    SHOTS.forEach((shot, index) => {
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      img.src = shot.img;
+      img.onload = () => {
+        // Verify natural dimensions: placeholder has small width or fails
+        if (img.naturalWidth < 300) {
+          img.src = shot.fallback_img;
+        }
+        imagesLoadedCount++;
+        if (imagesLoadedCount >= SHOTS.length) window.READY = true;
+      };
+      img.onerror = () => {
+        img.src = shot.fallback_img;
+        imagesLoadedCount++;
+        if (imagesLoadedCount >= SHOTS.length) window.READY = true;
+      };
+      loadedImages.push(img);
+    });
+
+    // YÊU CẦU 3: EASING FUNCTIONS
+    function easeInOutCubic(x) {
+      return x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+    }
+
+    function easeOutBounce(x) {
+      const n1 = 7.5625, d1 = 2.75;
+      if (x < 1 / d1) return n1 * x * x;
+      else if (x < 2 / d1) return n1 * (x -= 1.5 / d1) * x + 0.75;
+      else if (x < 2.5 / d1) return n1 * (x -= 2.25 / d1) * x + 0.9375;
+      else return n1 * (x -= 2.625 / d1) * x + 0.984375;
+    }
+
+    // YÊU CẦU 5: AUDIO ENGINE (PROCEDURAL CINEMATIC BGM + TTS + DUCKING)
+    let audioCtx = null;
+    let musicGain = null;
+    let voiceGain = null;
+    let audioDestNode = null;
+    let isAudioStarted = false;
+    let lastSpokenShotIndex = -1;
+
+    function initAudio() {
+      if (isAudioStarted) return;
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        audioCtx = new AudioContext();
+        audioDestNode = audioCtx.createMediaStreamDestination();
+
+        musicGain = audioCtx.createGain();
+        musicGain.gain.setValueAtTime(0.35, audioCtx.currentTime);
+
+        voiceGain = audioCtx.createGain();
+        voiceGain.gain.setValueAtTime(1.0, audioCtx.currentTime);
+
+        musicGain.connect(audioCtx.destination);
+        musicGain.connect(audioDestNode);
+
+        voiceGain.connect(audioCtx.destination);
+        voiceGain.connect(audioDestNode);
+
+        startCinematicMusicLoop();
+        isAudioStarted = true;
+      } catch(e) {
+        console.warn('Web Audio error:', e);
+      }
+    }
+
+    function startCinematicMusicLoop() {
+      if (!audioCtx) return;
+      // Uplifting Cinematic chord progression (C - G - Am - F)
+      const chords = [
+        [130.81, 164.81, 196.00], // C Maj
+        [98.00, 123.47, 146.83],  // G Maj
+        [110.00, 130.81, 164.81], // A Min
+        [87.31, 110.00, 130.81]   // F Maj
+      ];
+
+      function scheduleBeat(time, chordIdx) {
+        const chord = chords[chordIdx % chords.length];
+        chord.forEach(freq => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, time);
+
+          gain.gain.setValueAtTime(0.001, time);
+          gain.gain.linearRampToValueAtTime(0.18, time + 0.3);
+          gain.gain.exponentialRampToValueAtTime(0.001, time + 1.8);
+
+          osc.connect(gain);
+          gain.connect(musicGain);
+          osc.start(time);
+          osc.stop(time + 1.8);
+        });
+
+        // Rhythmic Pulse / Bass drum
+        const kickOsc = audioCtx.createOscillator();
+        const kickGain = audioCtx.createGain();
+        kickOsc.frequency.setValueAtTime(95, time);
+        kickOsc.frequency.exponentialRampToValueAtTime(35, time + 0.25);
+        kickGain.gain.setValueAtTime(0.25, time);
+        kickGain.gain.exponentialRampToValueAtTime(0.001, time + 0.25);
+        kickOsc.connect(kickGain);
+        kickGain.connect(musicGain);
+        kickOsc.start(time);
+        kickOsc.stop(time + 0.25);
+      }
+
+      let beatTime = audioCtx.currentTime + 0.1;
+      for (let i = 0; i < 40; i++) {
+        scheduleBeat(beatTime + i * 0.9, i);
+      }
+    }
+
+    function triggerTTS(shotIndex) {
+      if (shotIndex === lastSpokenShotIndex) return;
+      lastSpokenShotIndex = shotIndex;
+      const shot = SHOTS[shotIndex];
+      const text = shot.voiceover || shot.vo || shot.subtitle;
+      if (!text || !window.speechSynthesis) return;
+
+      window.speechSynthesis.cancel();
+      const clean = text.replace(/^[^:]+:\s*/, '').trim();
+      const utter = new SpeechSynthesisUtterance(clean);
+      utter.lang = 'vi-VN';
+      utter.rate = 1.12;
+
+      // Auto-ducking
+      utter.onstart = () => {
+        if (musicGain && audioCtx) musicGain.gain.setTargetAtTime(0.10, audioCtx.currentTime, 0.15);
+      };
+      utter.onend = utter.onerror = () => {
+        if (musicGain && audioCtx) musicGain.gain.setTargetAtTime(0.35, audioCtx.currentTime, 0.25);
+      };
+
+      window.speechSynthesis.speak(utter);
+    }
+
+    // YÊU CẦU 3: MOTION ENGINE RENDER PER SHOT
+    function renderShotMotion(shot, img, shotProgress, t, w, h) {
+      if (!img || !img.complete) {
+        ctx.fillStyle = '#0f0f15';
+        ctx.fillRect(-w/2, -h/2, w, h);
+        return;
+      }
+
+      const camType = (typeof shot.camera === 'object' ? shot.camera.type : shot.camera) || 'dolly_in';
+
+      ctx.save();
+
+      if (camType === 'dolly_in') {
+        const e = easeInOutCubic(shotProgress);
+        const scale = 1.0 + e * 0.25;
+        const panX = (e - 0.5) * 20;
+        const panY = (e - 0.5) * 10;
+        ctx.translate(panX, panY);
+        ctx.scale(scale, scale);
+      }
+      else if (camType === 'dolly_out') {
+        const e = easeInOutCubic(shotProgress);
+        const scale = 1.25 - e * 0.25;
+        const panX = (0.5 - e) * 20;
+        const panY = (0.5 - e) * 10;
+        ctx.translate(panX, panY);
+        ctx.scale(scale, scale);
+      }
+      else if (camType === 'orbit_pan') {
+        const e = easeInOutCubic(shotProgress);
+        const panX = (e - 0.5) * 80;
+        const rot = Math.sin(shotProgress * Math.PI) * (3 * Math.PI / 180);
+        const scale = 1.10 + Math.sin(shotProgress * Math.PI) * 0.04;
+        ctx.translate(panX, 0);
+        ctx.rotate(rot);
+        ctx.scale(scale, scale);
+      }
+      else if (camType === 'dutch_tilt') {
+        const baseAngle = 10 * Math.PI / 180;
+        const rhythmicShake = Math.sin(t * 18) * (0.8 * Math.PI / 180);
+        const shakeY = Math.sin(t * 22) * 3;
+        const rot = baseAngle + rhythmicShake;
+        const scale = 1.16 + shotProgress * 0.06;
+        ctx.translate(Math.cos(t * 16) * 4, shakeY);
+        ctx.rotate(rot);
+        ctx.scale(scale, scale);
+      }
+      else if (camType === 'static_punchy') {
+        const punchP = Math.min(1.0, shotProgress * 4.0);
+        const bounce = easeOutBounce(punchP);
+        const scale = 1.20 - bounce * 0.12 + Math.sin(t * 3) * 0.015;
+        ctx.scale(scale, scale);
+      }
+      else {
+        const scale = 1.0 + shotProgress * 0.15;
+        ctx.scale(scale, scale);
+      }
+
+      ctx.drawImage(img, -w / 2, -h / 2, w, h);
+      ctx.restore();
+    }
+
+    // MASTER TIME-BASED RENDER AT 30FPS
+    window.render = function(t) {
+      const w = canvas.width;
+      const h = canvas.height;
+      ctx.clearRect(0, 0, w, h);
+
+      // Identify active shot by precise timeline start/end
+      let currentShotIndex = 0;
+      for (let i = 0; i < SHOTS.length; i++) {
+        if (t >= SHOTS[i].start && t < SHOTS[i].end) {
+          currentShotIndex = i;
+          break;
+        }
+        if (i === SHOTS.length - 1 && t >= SHOTS[i].end) {
+          currentShotIndex = SHOTS.length - 1;
+        }
+      }
+
+      const currentShot = SHOTS[currentShotIndex];
+      const shotDur = currentShot.end - currentShot.start;
+      const shotProgress = Math.max(0, Math.min(1.0, (t - currentShot.start) / shotDur));
+
+      // Trigger TTS voiceover
+      triggerTTS(currentShotIndex);
+
+      // YÊU CẦU 4: TRANSITION OVERLAP (0.3s - 0.6s)
+      const transDur = (currentShot.transitionOut && currentShot.transitionOut.duration) || 0.45;
+      const timeUntilEnd = currentShot.end - t;
+      const isTransitioning = (timeUntilEnd < transDur && currentShotIndex < SHOTS.length - 1);
+      const nextShotIndex = currentShotIndex + 1;
+      const transType = (currentShot.transitionOut && currentShot.transitionOut.type) || 'crossfade';
+
+      if (!isTransitioning) {
+        // Normal single-shot render
+        ctx.save();
+        ctx.translate(w / 2, h / 2);
+        renderShotMotion(currentShot, loadedImages[currentShotIndex], shotProgress, t, w, h);
+        ctx.restore();
+      } else {
+        const transProgress = Math.max(0, Math.min(1.0, (transDur - timeUntilEnd) / transDur));
+        const nextShot = SHOTS[nextShotIndex];
+
+        if (transType === 'crossfade') {
+          ctx.save();
+          ctx.translate(w / 2, h / 2);
+          renderShotMotion(currentShot, loadedImages[currentShotIndex], shotProgress, t, w, h);
+          ctx.restore();
+
+          ctx.save();
+          ctx.globalAlpha = transProgress;
+          ctx.translate(w / 2, h / 2);
+          renderShotMotion(nextShot, loadedImages[nextShotIndex], 0.05 * transProgress, t, w, h);
+          ctx.restore();
+        }
+        else if (transType === 'whip_pan') {
+          // Rapid horizontal slide with speed streaks
+          ctx.save();
+          ctx.translate(w / 2 - transProgress * w * 1.15, h / 2);
+          renderShotMotion(currentShot, loadedImages[currentShotIndex], shotProgress, t, w, h);
+          ctx.restore();
+
+          // Motion streak lines
+          ctx.fillStyle = 'rgba(255, 255, 255, 0.12)';
+          for (let s = 0; s < 5; s++) {
+            ctx.fillRect(0, s * (h / 5), w, 8);
+          }
+
+          ctx.save();
+          ctx.translate(w / 2 + (1 - transProgress) * w * 1.15, h / 2);
+          renderShotMotion(nextShot, loadedImages[nextShotIndex], 0.02, t, w, h);
+          ctx.restore();
+        }
+        else if (transType === 'zoom_through') {
+          // Shot A zooms to infinity, Shot B zooms in from center
+          ctx.save();
+          ctx.globalAlpha = 1 - transProgress;
+          ctx.translate(w / 2, h / 2);
+          ctx.scale(1.0 + transProgress * 2.2, 1.0 + transProgress * 2.2);
+          renderShotMotion(currentShot, loadedImages[currentShotIndex], shotProgress, t, w, h);
+          ctx.restore();
+
+          ctx.save();
+          ctx.globalAlpha = transProgress;
+          ctx.translate(w / 2, h / 2);
+          ctx.scale(0.4 + transProgress * 0.6, 0.4 + transProgress * 0.6);
+          renderShotMotion(nextShot, loadedImages[nextShotIndex], 0.02, t, w, h);
+          ctx.restore();
+        }
+        else if (transType === 'glitch_cut') {
+          // RGB chromatic aberration & slice displacement
+          const glitchX = (Math.random() - 0.5) * 25;
+          ctx.save();
+          ctx.translate(w / 2 + glitchX, h / 2);
+          renderShotMotion(transProgress < 0.5 ? currentShot : nextShot, loadedImages[transProgress < 0.5 ? currentShotIndex : nextShotIndex], shotProgress, t, w, h);
+          ctx.restore();
+
+          // Scanline glitch slices
+          ctx.fillStyle = 'rgba(255, 0, 80, 0.22)';
+          ctx.fillRect(0, Math.random() * h, w, 14);
+          ctx.fillStyle = 'rgba(0, 220, 255, 0.22)';
+          ctx.fillRect(0, Math.random() * h, w, 14);
+        }
+        else if (transType === 'match_cut') {
+          // Instant beat snap with soft white flash
+          ctx.save();
+          ctx.translate(w / 2, h / 2);
+          renderShotMotion(nextShot, loadedImages[nextShotIndex], 0.02, t, w, h);
+          ctx.restore();
+
+          ctx.fillStyle = `rgba(255, 255, 255, ${0.45 * (1 - transProgress)})`;
+          ctx.fillRect(0, 0, w, h);
+        }
+      }
+
+      // Cinematic Vignette
+      const grad = ctx.createRadialGradient(w/2, h/2, h * 0.45, w/2, h/2, w * 0.7);
+      grad.addColorStop(0, 'rgba(0,0,0,0)');
+      grad.addColorStop(1, 'rgba(0,0,0,0.65)');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, w, h);
+
+      // YÊU CẦU 5: BURNT-IN SUBTITLES (ĐỒNG BỘ THEO SHOT)
+      const subText = (currentShot.subtitle || currentShot.voiceover || currentShot.vo || '').replace(/^[^:]+:\s*/, '').trim();
+      if (subText) {
+        ctx.save();
+        ctx.font = 'bold 22px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif';
+        const textMetrics = ctx.measureText(subText);
+        const padX = 24, padY = 12;
+        const boxW = Math.min(w * 0.88, textMetrics.width + padX * 2);
+        const boxH = 46;
+        const boxX = (w - boxW) / 2;
+        const boxY = h - 68;
+
+        // Translucent pill backdrop
+        ctx.fillStyle = 'rgba(7, 7, 12, 0.82)';
+        ctx.beginPath();
+        ctx.roundRect(boxX, boxY, boxW, boxH, 14);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
+        // Subtitle text with shadow
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillStyle = '#ffffff';
+        ctx.shadowColor = 'rgba(0,0,0,0.8)';
+        ctx.shadowBlur = 6;
+        ctx.fillText(subText, w / 2, boxY + boxH / 2, boxW - padX * 2);
+        ctx.restore();
+      }
+
+      // Timecode & HUD
+      const m = Math.floor(t / 60);
+      const s = Math.floor(t % 60);
+      const ms = Math.floor((t % 1) * 100);
+      hudTc.innerText = `TC: ${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}.${String(ms).padStart(2,'0')} / 30s`;
+    };
+
+    let startTime = performance.now();
+    function animate() {
+      const now = performance.now();
+      const elapsed = ((now - startTime) / 1000) % window.DUR;
+      window.render(elapsed);
+      requestAnimationFrame(animate);
+    }
+    animate();
+
+    function restartPreview() {
+      initAudio();
+      startTime = performance.now();
+      lastSpokenShotIndex = -1;
+    }
+
+    // YÊU CẦU 6: RENDER & XUẤT MP4 HOÀN CHỈNH (CANVAS + AUDIO VIA MEDIARECORDER)
+    let isRecording = false;
+    let mediaRecorder = null;
+    let recordedChunks = [];
+
+    function recordAndDownloadVideo() {
+      initAudio();
+      const btn = document.getElementById('btn-download-video');
+      const btnText = document.getElementById('btn-download-text');
+      const progressBox = document.getElementById('render-progress-box');
+      const barFill = document.getElementById('render-bar-fill');
+      const pctText = document.getElementById('render-pct-text');
+      const statusText = document.getElementById('render-status-text');
+
+      if (isRecording) return;
+      isRecording = true;
+      btnText.innerText = 'Đang render MP4...';
+      btn.style.background = '#ef4444';
+      progressBox.style.display = 'block';
+      recordedChunks = [];
+
+      const canvasStream = canvas.captureStream(30);
+      const tracks = [...canvasStream.getVideoTracks()];
+      if (audioDestNode && audioDestNode.stream) {
+        tracks.push(...audioDestNode.stream.getAudioTracks());
+      }
+      const combinedStream = new MediaStream(tracks);
+
+      let mime = 'video/mp4;codecs=avc1,mp4a.40.2';
+      if (!MediaRecorder.isTypeSupported(mime)) {
+        mime = 'video/webm;codecs=vp9,opus';
+        if (!MediaRecorder.isTypeSupported(mime)) mime = 'video/webm';
+      }
+
+      mediaRecorder = new MediaRecorder(combinedStream, { mimeType: mime, videoBitsPerSecond: 6000000 });
+      mediaRecorder.ondataavailable = (e) => {
+        if (e.data.size > 0) recordedChunks.push(e.data);
+      };
+
+      mediaRecorder.onstop = () => {
+        const blob = new Blob(recordedChunks, { type: mime.includes('mp4') ? 'video/mp4' : 'video/webm' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'film_1794730324_31d84c_lumina_animation.mp4';
+        a.click();
+        URL.revokeObjectURL(url);
+
+        isRecording = false;
+        btnText.innerText = 'Tải Video MP4';
+        btn.style.background = '#f59e0b';
+        progressBox.style.display = 'none';
+      };
+
+      startTime = performance.now();
+      lastSpokenShotIndex = -1;
+      mediaRecorder.start();
+
+      const renderInterval = setInterval(() => {
+        if (!isRecording) { clearInterval(renderInterval); return; }
+        const now = performance.now();
+        const elapsed = (now - startTime) / 1000;
+        const pct = Math.min(100, Math.floor((elapsed / window.DUR) * 100));
+        barFill.style.width = pct + '%';
+        pctText.innerText = pct + '%';
+        statusText.innerText = `Đang render MP4: ${pct}% (${Math.floor(elapsed)}s/${window.DUR}s)...`;
+        if (elapsed >= window.DUR) {
+          clearInterval(renderInterval);
+          if (mediaRecorder.state !== 'inactive') mediaRecorder.stop();
+        }
+      }, 200);
+    }
+  </script>
+</body>
+</html>

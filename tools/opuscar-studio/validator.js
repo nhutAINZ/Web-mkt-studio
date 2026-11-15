@@ -3,15 +3,37 @@
 
 const { z } = require('zod');
 
+const CameraSchema = z.union([
+  z.string(),
+  z.object({
+    type: z.string(),
+    from: z.any().optional(),
+    to: z.any().optional(),
+    easing: z.string().optional()
+  })
+]);
+
+const TransitionSchema = z.object({
+  type: z.string().default('crossfade'),
+  duration: z.number().default(0.4)
+}).optional();
+
 const ShotSchema = z.object({
+  id: z.string().optional(),
   num: z.number().int().min(1).max(6),
   title: z.string().min(3),
-  time: z.string(),
-  camera: z.string(),
-  visual_prompt: z.string().min(5),
-  vo: z.string(),
+  start: z.number().optional(),
+  end: z.number().optional(),
+  time: z.string().optional(),
+  camera: CameraSchema,
+  imagePrompt: z.string().optional(),
+  visual_prompt: z.string().optional(),
+  vo: z.string().optional(),
+  voiceover: z.string().optional(),
+  subtitle: z.string().optional(),
   img: z.string(),
   fallback_img: z.string().optional(),
+  transitionOut: TransitionSchema,
   status: z.enum(['loading', 'ready', 'error']).optional()
 });
 
@@ -26,6 +48,7 @@ const StoryboardSchema = z.object({
   id: z.string(),
   title: z.string().min(2),
   prompt: z.string().default(''),
+  seed: z.number().optional(),
   style_lock: z.string().default('brick-toy'),
   aspect: z.string().default('16:9'),
   duration: z.number().default(30),

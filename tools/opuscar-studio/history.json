@@ -1,5 +1,390 @@
 [
   {
+    "id": "film_1794730324_31d84c",
+    "title": "video cậu bé lắp ráp lego",
+    "prompt": "video cậu bé lắp ráp lego",
+    "seed": 181697,
+    "style_lock": "brick-toy",
+    "style": "brick-toy",
+    "aspect": "16:9",
+    "duration": 30,
+    "character_bible": {
+      "name": "Robo-X Max",
+      "description": "Người máy chiến binh màu xanh dương viền vàng",
+      "reference_image": "https://image.pollinations.ai/prompt/blue%20gold%20toy%20robot?width=512&height=512",
+      "locked_traits": [
+        "Màu xanh viền vàng",
+        "Biểu tượng ngôi sao ở ngực"
+      ]
+    },
+    "shots": [
+      {
+        "id": "shot_1",
+        "num": 1,
+        "title": "Shot 1: Mở Đầu Đại Cảnh (Establishing Shot)",
+        "start": 0,
+        "end": 5,
+        "time": "00:00 - 00:05",
+        "camera": {
+          "type": "dolly_in",
+          "from": {
+            "scale": 1
+          },
+          "to": {
+            "scale": 1.25
+          },
+          "easing": "easeInOutCubic"
+        },
+        "imagePrompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 1: wide establishing macro shot of video cậu bé lắp ráp lego, boy sitting at bright studio table full of colorful Lego brick pieces, warm sunlight",
+        "visual_prompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 1: wide establishing macro shot of video cậu bé lắp ráp lego, boy sitting at bright studio table full of colorful Lego brick pieces, warm sunlight",
+        "vo": "Mỗi buổi sáng, một thế giới diệu kỳ mở ra từ những khối gạch nhỏ bé...",
+        "voiceover": "Mỗi buổi sáng, một thế giới diệu kỳ mở ra từ những khối gạch nhỏ bé...",
+        "subtitle": "Mỗi buổi sáng, một thế giới diệu kỳ mở ra từ những khối gạch nhỏ bé...",
+        "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20high-end%20ABS%20plastic%20bricks%20with%20authentic%20Lego%20studs%2C%20miniature%20macro%20studio%20lighting%2C%20depth%20of%20field%2C%2012fps%20aesthetic%2C%20rich%20primary%20Lego%20colors%20red%20blue%20yellow%2C%20glossy%20plastic%20finish%2C%20sharp%20rim%20lighting%208k.%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng.%20Locked%20traits%3A%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%5D.%20Shot%201%3A%20wide%20establishing%20macro%20shot%20of%20video%20c%E1%BA%ADu%20b%C3%A9%20l%E1%BA%AFp%20r%C3%A1p%20lego%2C%20boy%20sitting%20at%20bright%20studio%20table%20full%20of%20colorful%20Lego%20brick%20pieces%2C%20warm%20sunlight?width=1280&height=720&nologo=true&seed=181697",
+        "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80",
+        "transitionOut": {
+          "type": "whip_pan",
+          "duration": 0.4
+        },
+        "status": "ready"
+      },
+      {
+        "id": "shot_2",
+        "num": 2,
+        "title": "Shot 2: Cơ Chế Cơ Khí & Lắp Ráp (Mechanism)",
+        "start": 5,
+        "end": 10,
+        "time": "00:05 - 00:10",
+        "camera": {
+          "type": "orbit_pan",
+          "from": {
+            "x": -40,
+            "rot": -0.052
+          },
+          "to": {
+            "x": 40,
+            "rot": 0.052
+          },
+          "easing": "easeInOutCubic"
+        },
+        "imagePrompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 2: extreme macro close-up, small hands precisely snapping Lego gears, hinges and cockpit transforming into futuristic mechanism",
+        "visual_prompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 2: extreme macro close-up, small hands precisely snapping Lego gears, hinges and cockpit transforming into futuristic mechanism",
+        "vo": "Từng chi tiết cơ khí ăn khớp hoàn hảo, tháo lắp thông minh và chuẩn xác...",
+        "voiceover": "Từng chi tiết cơ khí ăn khớp hoàn hảo, tháo lắp thông minh và chuẩn xác...",
+        "subtitle": "Từng chi tiết cơ khí ăn khớp hoàn hảo, tháo lắp thông minh và chuẩn xác...",
+        "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20high-end%20ABS%20plastic%20bricks%20with%20authentic%20Lego%20studs%2C%20miniature%20macro%20studio%20lighting%2C%20depth%20of%20field%2C%2012fps%20aesthetic%2C%20rich%20primary%20Lego%20colors%20red%20blue%20yellow%2C%20glossy%20plastic%20finish%2C%20sharp%20rim%20lighting%208k.%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng.%20Locked%20traits%3A%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%5D.%20Shot%202%3A%20extreme%20macro%20close-up%2C%20small%20hands%20precisely%20snapping%20Lego%20gears%2C%20hinges%20and%20cockpit%20transforming%20into%20futuristic%20mechanism?width=1280&height=720&nologo=true&seed=181697",
+        "fallback_img": "https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=1280&q=80",
+        "transitionOut": {
+          "type": "zoom_through",
+          "duration": 0.5
+        },
+        "status": "ready"
+      },
+      {
+        "id": "shot_3",
+        "num": 3,
+        "title": "Shot 3: cậu bé lắp ráp cánh tay robot ",
+        "start": 10,
+        "end": 18,
+        "time": "00:10 - 00:18",
+        "camera": {
+          "type": "dutch_tilt",
+          "easing": "easeInOutCubic"
+        },
+        "imagePrompt": "Lego stop-motion brickfilm style, high-end ABS plastic toy bricks with authentic Lego studs, miniature macro studio lighting, depth of field 12fps aesthetic, rich primary colors, glossy finish, sharp rim lighting 8k, [Style Lock: brick-toy], cậu bé lắp ráp cánh tay robot khổng lồ phát sáng laser, 8k cinematic shot",
+        "visual_prompt": "Lego stop-motion brickfilm style, high-end ABS plastic toy bricks with authentic Lego studs, miniature macro studio lighting, depth of field 12fps aesthetic, rich primary colors, glossy finish, sharp rim lighting 8k, [Style Lock: brick-toy], cậu bé lắp ráp cánh tay robot khổng lồ phát sáng laser, 8k cinematic shot",
+        "vo": "Khởi động động cơ phản lực, cùng bứt phá tốc độ và giải cứu thành phố nào!",
+        "voiceover": "cậu bé lắp ráp cánh tay robot khổng lồ phát sáng laser...",
+        "subtitle": "cậu bé lắp ráp cánh tay robot khổng lồ phát sáng laser...",
+        "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20high-end%20ABS%20plastic%20toy%20bricks%20with%20authentic%20Lego%20studs%2C%20miniature%20macro%20studio%20lighting%2C%20depth%20of%20field%2012fps%20aesthetic%2C%20rich%20primary%20colors%2C%20glossy%20finish%2C%20sharp%20rim%20lighting%208k%2C%20%5BStyle%20Lock%3A%20brick-toy%5D%2C%20c%E1%BA%ADu%20b%C3%A9%20l%E1%BA%AFp%20r%C3%A1p%20c%C3%A1nh%20tay%20robot%20kh%E1%BB%95ng%20l%E1%BB%93%20ph%C3%A1t%20s%C3%A1ng%20laser%2C%208k%20cinematic%20shot?width=1280&height=720&nologo=true&seed=181697",
+        "fallback_img": "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=1280&q=80",
+        "transitionOut": {
+          "type": "glitch_cut",
+          "duration": 0.35
+        },
+        "status": "ready"
+      },
+      {
+        "id": "shot_4",
+        "num": 4,
+        "title": "Shot 4: Cảm Xúc & Tự Hào (Emotion Reaction)",
+        "start": 18,
+        "end": 22,
+        "time": "00:18 - 00:22",
+        "camera": {
+          "type": "dolly_out",
+          "from": {
+            "scale": 1.25
+          },
+          "to": {
+            "scale": 1
+          },
+          "easing": "easeInOutCubic"
+        },
+        "imagePrompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 4: medium close-up, boy smiling with proud joyful eyes holding his finished Lego masterpiece, warm golden hour studio rim light",
+        "visual_prompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 4: medium close-up, boy smiling with proud joyful eyes holding his finished Lego masterpiece, warm golden hour studio rim light",
+        "vo": "Nuôi dưỡng tư duy logic, sự kiên trì và niềm vui sáng tạo bất tận trong bé.",
+        "voiceover": "Nuôi dưỡng tư duy logic, sự kiên trì và niềm vui sáng tạo bất tận trong bé.",
+        "subtitle": "Nuôi dưỡng tư duy logic, sự kiên trì và niềm vui sáng tạo bất tận trong bé.",
+        "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20high-end%20ABS%20plastic%20bricks%20with%20authentic%20Lego%20studs%2C%20miniature%20macro%20studio%20lighting%2C%20depth%20of%20field%2C%2012fps%20aesthetic%2C%20rich%20primary%20Lego%20colors%20red%20blue%20yellow%2C%20glossy%20plastic%20finish%2C%20sharp%20rim%20lighting%208k.%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng.%20Locked%20traits%3A%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%5D.%20Shot%204%3A%20medium%20close-up%2C%20boy%20smiling%20with%20proud%20joyful%20eyes%20holding%20his%20finished%20Lego%20masterpiece%2C%20warm%20golden%20hour%20studio%20rim%20light?width=1280&height=720&nologo=true&seed=181697",
+        "fallback_img": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=1280&q=80",
+        "transitionOut": {
+          "type": "crossfade",
+          "duration": 0.5
+        },
+        "status": "ready"
+      },
+      {
+        "id": "shot_5",
+        "num": 5,
+        "title": "Shot 5: Chi Tiết Phụ Kiện & An Toàn (Showcase)",
+        "start": 22,
+        "end": 26,
+        "time": "00:22 - 00:26",
+        "camera": {
+          "type": "orbit_pan",
+          "from": {
+            "x": 30,
+            "rot": 0.03
+          },
+          "to": {
+            "x": -30,
+            "rot": -0.03
+          },
+          "easing": "easeInOutCubic"
+        },
+        "imagePrompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 5: top-down flatlay layout, packaging box, certified 100% virgin ABS plastic badge, clean rounded non-toxic corners",
+        "visual_prompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 5: top-down flatlay layout, packaging box, certified 100% virgin ABS plastic badge, clean rounded non-toxic corners",
+        "vo": "Nhựa nguyên sinh ABS an toàn tuyệt đối, đạt chứng chỉ tiêu chuẩn an toàn quốc tế.",
+        "voiceover": "Nhựa nguyên sinh ABS an toàn tuyệt đối, đạt chứng chỉ tiêu chuẩn an toàn quốc tế.",
+        "subtitle": "Nhựa nguyên sinh ABS an toàn tuyệt đối, đạt chứng chỉ tiêu chuẩn an toàn quốc tế.",
+        "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20high-end%20ABS%20plastic%20bricks%20with%20authentic%20Lego%20studs%2C%20miniature%20macro%20studio%20lighting%2C%20depth%20of%20field%2C%2012fps%20aesthetic%2C%20rich%20primary%20Lego%20colors%20red%20blue%20yellow%2C%20glossy%20plastic%20finish%2C%20sharp%20rim%20lighting%208k.%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng.%20Locked%20traits%3A%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%5D.%20Shot%205%3A%20top-down%20flatlay%20layout%2C%20packaging%20box%2C%20certified%20100%25%20virgin%20ABS%20plastic%20badge%2C%20clean%20rounded%20non-toxic%20corners?width=1280&height=720&nologo=true&seed=181697",
+        "fallback_img": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1280&q=80",
+        "transitionOut": {
+          "type": "match_cut",
+          "duration": 0.3
+        },
+        "status": "ready"
+      },
+      {
+        "id": "shot_6",
+        "num": 6,
+        "title": "Shot 6: Kêu Gọi Mua Hàng & Khuyến Mãi (Hero CTA)",
+        "start": 26,
+        "end": 30,
+        "time": "00:26 - 00:30",
+        "camera": {
+          "type": "static_punchy",
+          "easing": "easeOutBounce"
+        },
+        "imagePrompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 6: hero product showcase on glowing glass pedestal, sparkling Lego logo, gift boxes and limited discount banner",
+        "visual_prompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 6: hero product showcase on glowing glass pedestal, sparkling Lego logo, gift boxes and limited discount banner",
+        "vo": "Sở hữu ngay hôm nay trên các sàn thương mại điện tử để nhận trọn bộ quà tặng!",
+        "voiceover": "Sở hữu ngay hôm nay trên các sàn thương mại điện tử để nhận trọn bộ quà tặng!",
+        "subtitle": "Sở hữu ngay hôm nay trên các sàn thương mại điện tử để nhận trọn bộ quà tặng!",
+        "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20high-end%20ABS%20plastic%20bricks%20with%20authentic%20Lego%20studs%2C%20miniature%20macro%20studio%20lighting%2C%20depth%20of%20field%2C%2012fps%20aesthetic%2C%20rich%20primary%20Lego%20colors%20red%20blue%20yellow%2C%20glossy%20plastic%20finish%2C%20sharp%20rim%20lighting%208k.%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng.%20Locked%20traits%3A%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%5D.%20Shot%206%3A%20hero%20product%20showcase%20on%20glowing%20glass%20pedestal%2C%20sparkling%20Lego%20logo%2C%20gift%20boxes%20and%20limited%20discount%20banner?width=1280&height=720&nologo=true&seed=181697",
+        "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80",
+        "transitionOut": {
+          "type": "none",
+          "duration": 0
+        },
+        "status": "ready"
+      }
+    ],
+    "filmUrl": "/generated_films/film_1794730324_31d84c/index.html",
+    "renderCmd": "# Lemo-OpusCar Automation Script\npython -m lemo_opuscar.cli render \\\n  --style \"brick-toy\" \\\n  --prompt \"video cậu bé lắp ráp lego\" \\\n  --duration 30 \\\n  --aspect \"16:9\" \\\n  --shots 6 \\\n  --fps 30 \\\n  --output \"./dist/film_1794730324_31d84c.mp4\"",
+    "version": 2,
+    "history": [
+      {
+        "version": 1,
+        "shots": [
+          {
+            "id": "shot_1",
+            "num": 1,
+            "title": "Shot 1: Mở Đầu Đại Cảnh (Establishing Shot)",
+            "start": 0,
+            "end": 5,
+            "time": "00:00 - 00:05",
+            "camera": {
+              "type": "dolly_in",
+              "from": {
+                "scale": 1
+              },
+              "to": {
+                "scale": 1.25
+              },
+              "easing": "easeInOutCubic"
+            },
+            "imagePrompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 1: wide establishing macro shot of video cậu bé lắp ráp lego, boy sitting at bright studio table full of colorful Lego brick pieces, warm sunlight",
+            "visual_prompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 1: wide establishing macro shot of video cậu bé lắp ráp lego, boy sitting at bright studio table full of colorful Lego brick pieces, warm sunlight",
+            "vo": "Mỗi buổi sáng, một thế giới diệu kỳ mở ra từ những khối gạch nhỏ bé...",
+            "voiceover": "Mỗi buổi sáng, một thế giới diệu kỳ mở ra từ những khối gạch nhỏ bé...",
+            "subtitle": "Mỗi buổi sáng, một thế giới diệu kỳ mở ra từ những khối gạch nhỏ bé...",
+            "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20high-end%20ABS%20plastic%20bricks%20with%20authentic%20Lego%20studs%2C%20miniature%20macro%20studio%20lighting%2C%20depth%20of%20field%2C%2012fps%20aesthetic%2C%20rich%20primary%20Lego%20colors%20red%20blue%20yellow%2C%20glossy%20plastic%20finish%2C%20sharp%20rim%20lighting%208k.%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng.%20Locked%20traits%3A%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%5D.%20Shot%201%3A%20wide%20establishing%20macro%20shot%20of%20video%20c%E1%BA%ADu%20b%C3%A9%20l%E1%BA%AFp%20r%C3%A1p%20lego%2C%20boy%20sitting%20at%20bright%20studio%20table%20full%20of%20colorful%20Lego%20brick%20pieces%2C%20warm%20sunlight?width=1280&height=720&nologo=true&seed=181697",
+            "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80",
+            "transitionOut": {
+              "type": "whip_pan",
+              "duration": 0.4
+            },
+            "status": "ready"
+          },
+          {
+            "id": "shot_2",
+            "num": 2,
+            "title": "Shot 2: Cơ Chế Cơ Khí & Lắp Ráp (Mechanism)",
+            "start": 5,
+            "end": 10,
+            "time": "00:05 - 00:10",
+            "camera": {
+              "type": "orbit_pan",
+              "from": {
+                "x": -40,
+                "rot": -0.052
+              },
+              "to": {
+                "x": 40,
+                "rot": 0.052
+              },
+              "easing": "easeInOutCubic"
+            },
+            "imagePrompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 2: extreme macro close-up, small hands precisely snapping Lego gears, hinges and cockpit transforming into futuristic mechanism",
+            "visual_prompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 2: extreme macro close-up, small hands precisely snapping Lego gears, hinges and cockpit transforming into futuristic mechanism",
+            "vo": "Từng chi tiết cơ khí ăn khớp hoàn hảo, tháo lắp thông minh và chuẩn xác...",
+            "voiceover": "Từng chi tiết cơ khí ăn khớp hoàn hảo, tháo lắp thông minh và chuẩn xác...",
+            "subtitle": "Từng chi tiết cơ khí ăn khớp hoàn hảo, tháo lắp thông minh và chuẩn xác...",
+            "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20high-end%20ABS%20plastic%20bricks%20with%20authentic%20Lego%20studs%2C%20miniature%20macro%20studio%20lighting%2C%20depth%20of%20field%2C%2012fps%20aesthetic%2C%20rich%20primary%20Lego%20colors%20red%20blue%20yellow%2C%20glossy%20plastic%20finish%2C%20sharp%20rim%20lighting%208k.%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng.%20Locked%20traits%3A%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%5D.%20Shot%202%3A%20extreme%20macro%20close-up%2C%20small%20hands%20precisely%20snapping%20Lego%20gears%2C%20hinges%20and%20cockpit%20transforming%20into%20futuristic%20mechanism?width=1280&height=720&nologo=true&seed=181697",
+            "fallback_img": "https://images.unsplash.com/photo-1560969184-10fe8719e047?auto=format&fit=crop&w=1280&q=80",
+            "transitionOut": {
+              "type": "zoom_through",
+              "duration": 0.5
+            },
+            "status": "ready"
+          },
+          {
+            "id": "shot_3",
+            "num": 3,
+            "title": "Shot 3: Hành Động Kịch Tính (Dynamic Action)",
+            "start": 10,
+            "end": 18,
+            "time": "00:10 - 00:18",
+            "camera": {
+              "type": "dutch_tilt",
+              "easing": "easeInOutCubic"
+            },
+            "imagePrompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 3: high-speed dynamic motion shot, completed Lego build speeding across obstacle track, glowing LED beams, sparks and motion streaks",
+            "visual_prompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 3: high-speed dynamic motion shot, completed Lego build speeding across obstacle track, glowing LED beams, sparks and motion streaks",
+            "vo": "Khởi động động cơ phản lực, cùng bứt phá tốc độ và giải cứu thành phố nào!",
+            "voiceover": "Khởi động động cơ phản lực, cùng bứt phá tốc độ và giải cứu thành phố nào!",
+            "subtitle": "Khởi động động cơ phản lực, cùng bứt phá tốc độ và giải cứu thành phố nào!",
+            "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20high-end%20ABS%20plastic%20bricks%20with%20authentic%20Lego%20studs%2C%20miniature%20macro%20studio%20lighting%2C%20depth%20of%20field%2C%2012fps%20aesthetic%2C%20rich%20primary%20Lego%20colors%20red%20blue%20yellow%2C%20glossy%20plastic%20finish%2C%20sharp%20rim%20lighting%208k.%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng.%20Locked%20traits%3A%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%5D.%20Shot%203%3A%20high-speed%20dynamic%20motion%20shot%2C%20completed%20Lego%20build%20speeding%20across%20obstacle%20track%2C%20glowing%20LED%20beams%2C%20sparks%20and%20motion%20streaks?width=1280&height=720&nologo=true&seed=181697",
+            "fallback_img": "https://images.unsplash.com/photo-1587654780291-39c9404d746b?auto=format&fit=crop&w=1280&q=80",
+            "transitionOut": {
+              "type": "glitch_cut",
+              "duration": 0.35
+            },
+            "status": "ready"
+          },
+          {
+            "id": "shot_4",
+            "num": 4,
+            "title": "Shot 4: Cảm Xúc & Tự Hào (Emotion Reaction)",
+            "start": 18,
+            "end": 22,
+            "time": "00:18 - 00:22",
+            "camera": {
+              "type": "dolly_out",
+              "from": {
+                "scale": 1.25
+              },
+              "to": {
+                "scale": 1
+              },
+              "easing": "easeInOutCubic"
+            },
+            "imagePrompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 4: medium close-up, boy smiling with proud joyful eyes holding his finished Lego masterpiece, warm golden hour studio rim light",
+            "visual_prompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 4: medium close-up, boy smiling with proud joyful eyes holding his finished Lego masterpiece, warm golden hour studio rim light",
+            "vo": "Nuôi dưỡng tư duy logic, sự kiên trì và niềm vui sáng tạo bất tận trong bé.",
+            "voiceover": "Nuôi dưỡng tư duy logic, sự kiên trì và niềm vui sáng tạo bất tận trong bé.",
+            "subtitle": "Nuôi dưỡng tư duy logic, sự kiên trì và niềm vui sáng tạo bất tận trong bé.",
+            "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20high-end%20ABS%20plastic%20bricks%20with%20authentic%20Lego%20studs%2C%20miniature%20macro%20studio%20lighting%2C%20depth%20of%20field%2C%2012fps%20aesthetic%2C%20rich%20primary%20Lego%20colors%20red%20blue%20yellow%2C%20glossy%20plastic%20finish%2C%20sharp%20rim%20lighting%208k.%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng.%20Locked%20traits%3A%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%5D.%20Shot%204%3A%20medium%20close-up%2C%20boy%20smiling%20with%20proud%20joyful%20eyes%20holding%20his%20finished%20Lego%20masterpiece%2C%20warm%20golden%20hour%20studio%20rim%20light?width=1280&height=720&nologo=true&seed=181697",
+            "fallback_img": "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634?auto=format&fit=crop&w=1280&q=80",
+            "transitionOut": {
+              "type": "crossfade",
+              "duration": 0.5
+            },
+            "status": "ready"
+          },
+          {
+            "id": "shot_5",
+            "num": 5,
+            "title": "Shot 5: Chi Tiết Phụ Kiện & An Toàn (Showcase)",
+            "start": 22,
+            "end": 26,
+            "time": "00:22 - 00:26",
+            "camera": {
+              "type": "orbit_pan",
+              "from": {
+                "x": 30,
+                "rot": 0.03
+              },
+              "to": {
+                "x": -30,
+                "rot": -0.03
+              },
+              "easing": "easeInOutCubic"
+            },
+            "imagePrompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 5: top-down flatlay layout, packaging box, certified 100% virgin ABS plastic badge, clean rounded non-toxic corners",
+            "visual_prompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 5: top-down flatlay layout, packaging box, certified 100% virgin ABS plastic badge, clean rounded non-toxic corners",
+            "vo": "Nhựa nguyên sinh ABS an toàn tuyệt đối, đạt chứng chỉ tiêu chuẩn an toàn quốc tế.",
+            "voiceover": "Nhựa nguyên sinh ABS an toàn tuyệt đối, đạt chứng chỉ tiêu chuẩn an toàn quốc tế.",
+            "subtitle": "Nhựa nguyên sinh ABS an toàn tuyệt đối, đạt chứng chỉ tiêu chuẩn an toàn quốc tế.",
+            "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20high-end%20ABS%20plastic%20bricks%20with%20authentic%20Lego%20studs%2C%20miniature%20macro%20studio%20lighting%2C%20depth%20of%20field%2C%2012fps%20aesthetic%2C%20rich%20primary%20Lego%20colors%20red%20blue%20yellow%2C%20glossy%20plastic%20finish%2C%20sharp%20rim%20lighting%208k.%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng.%20Locked%20traits%3A%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%5D.%20Shot%205%3A%20top-down%20flatlay%20layout%2C%20packaging%20box%2C%20certified%20100%25%20virgin%20ABS%20plastic%20badge%2C%20clean%20rounded%20non-toxic%20corners?width=1280&height=720&nologo=true&seed=181697",
+            "fallback_img": "https://images.unsplash.com/photo-1509198397868-475647b2a1e5?auto=format&fit=crop&w=1280&q=80",
+            "transitionOut": {
+              "type": "match_cut",
+              "duration": 0.3
+            },
+            "status": "ready"
+          },
+          {
+            "id": "shot_6",
+            "num": 6,
+            "title": "Shot 6: Kêu Gọi Mua Hàng & Khuyến Mãi (Hero CTA)",
+            "start": 26,
+            "end": 30,
+            "time": "00:26 - 00:30",
+            "camera": {
+              "type": "static_punchy",
+              "easing": "easeOutBounce"
+            },
+            "imagePrompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 6: hero product showcase on glowing glass pedestal, sparkling Lego logo, gift boxes and limited discount banner",
+            "visual_prompt": "Lego stop-motion brickfilm style, high-end ABS plastic bricks with authentic Lego studs, miniature macro studio lighting, depth of field, 12fps aesthetic, rich primary Lego colors red blue yellow, glossy plastic finish, sharp rim lighting 8k. [Character: Robo-X Max, Người máy chiến binh màu xanh dương viền vàng. Locked traits: Màu xanh viền vàng, Biểu tượng ngôi sao ở ngực]. Shot 6: hero product showcase on glowing glass pedestal, sparkling Lego logo, gift boxes and limited discount banner",
+            "vo": "Sở hữu ngay hôm nay trên các sàn thương mại điện tử để nhận trọn bộ quà tặng!",
+            "voiceover": "Sở hữu ngay hôm nay trên các sàn thương mại điện tử để nhận trọn bộ quà tặng!",
+            "subtitle": "Sở hữu ngay hôm nay trên các sàn thương mại điện tử để nhận trọn bộ quà tặng!",
+            "img": "https://image.pollinations.ai/prompt/Lego%20stop-motion%20brickfilm%20style%2C%20high-end%20ABS%20plastic%20bricks%20with%20authentic%20Lego%20studs%2C%20miniature%20macro%20studio%20lighting%2C%20depth%20of%20field%2C%2012fps%20aesthetic%2C%20rich%20primary%20Lego%20colors%20red%20blue%20yellow%2C%20glossy%20plastic%20finish%2C%20sharp%20rim%20lighting%208k.%20%5BCharacter%3A%20Robo-X%20Max%2C%20Ng%C6%B0%E1%BB%9Di%20m%C3%A1y%20chi%E1%BA%BFn%20binh%20m%C3%A0u%20xanh%20d%C6%B0%C6%A1ng%20vi%E1%BB%81n%20v%C3%A0ng.%20Locked%20traits%3A%20M%C3%A0u%20xanh%20vi%E1%BB%81n%20v%C3%A0ng%2C%20Bi%E1%BB%83u%20t%C6%B0%E1%BB%A3ng%20ng%C3%B4i%20sao%20%E1%BB%9F%20ng%E1%BB%B1c%5D.%20Shot%206%3A%20hero%20product%20showcase%20on%20glowing%20glass%20pedestal%2C%20sparkling%20Lego%20logo%2C%20gift%20boxes%20and%20limited%20discount%20banner?width=1280&height=720&nologo=true&seed=181697",
+            "fallback_img": "https://images.unsplash.com/photo-1585366119957-e9730b6d0f60?auto=format&fit=crop&w=1280&q=80",
+            "transitionOut": {
+              "type": "none",
+              "duration": 0
+            },
+            "status": "ready"
+          }
+        ],
+        "character_bible": {
+          "name": "Robo-X Max",
+          "description": "Người máy chiến binh màu xanh dương viền vàng",
+          "reference_image": "https://image.pollinations.ai/prompt/blue%20gold%20toy%20robot?width=512&height=512",
+          "locked_traits": [
+            "Màu xanh viền vàng",
+            "Biểu tượng ngôi sao ở ngực"
+          ]
+        }
+      }
+    ],
+    "timestamp": "15:12 - 15/11/2026"
+  },
+  {
     "id": "film_1794724311_1ca3f9",
     "title": "Tạo video 30s hoạt hình 3D về siêu nhân ",
     "prompt": "Tạo video 30s hoạt hình 3D về siêu nhân robot giải cứu thành phố lego đồ chơi",
